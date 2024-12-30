@@ -5,7 +5,7 @@ import { Dialog } from '@headlessui/react';
 import { AlignJustify, X } from 'react-feather';
 
 interface LoginPageProps {
-  // Add props here if needed in the future
+  
 }
 
 const LoginPage: React.FC<LoginPageProps> = () => {
