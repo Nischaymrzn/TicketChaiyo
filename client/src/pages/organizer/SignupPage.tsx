@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import OrganizerSignupForm from './_components/SignupForm';
 
 interface OrganizerSignupPageProps {
-  // Add props here if needed in the future
+  
 }
 
 const OrganizerSignupPage: React.FC<OrganizerSignupPageProps> = () => {

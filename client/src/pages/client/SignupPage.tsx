@@ -5,7 +5,7 @@ import { AlignJustify, X } from "react-feather";
 import SignupForm from "./_components/SignupForm";
 
 interface SignupPageProps {
-  // Add props here if needed in the future
+ 
 }
 
 const SignupPage: React.FC<SignupPageProps> = () => {
