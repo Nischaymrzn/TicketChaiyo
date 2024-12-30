@@ -6,7 +6,6 @@ import { Input } from "./ui/input";
 import { Link, useNavigate } from "react-router";
 import { z } from "zod";
 
-// Infer the type from the zod schema
 type FormValues = z.infer<typeof formSchema>;
 
 // Interface for the test data structure

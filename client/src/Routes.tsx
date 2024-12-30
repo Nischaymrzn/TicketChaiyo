@@ -11,20 +11,10 @@ const AppRoutes=()=>{
 return(
     <BrowserRouter>
         <Routes>
-             <Route path="/" element={<LandingPage />}/>
+            <Route path="/" element={<LandingPage />}/>
             <Route path="/login" element={<LoginPage />}/>
             <Route path="/signup" element={<SignupPage />}></Route>
             <Route path="/organizer-signup" element={<OrganizerSignupPage />}  />
-            {/*
-            <Route path="/home" element={<HomePage />} />
-            <Route path="/event" element={<EventsPage />} />
-            <Route path="/voting" element={<VotingPage />} />
-            <Route path="/voting/details" element={<VotingDetailsPage />} />
-            <Route path="/event-detail" element={<EventDetailPage  /> }/>
-            <Route path="/account">
-                <Route path="profile" element={<ClientProfile />}/>
-                <Route path="my-booking" element={<Booking />}/>
-            </Route> */}
         </Routes>
   </BrowserRouter>
     )

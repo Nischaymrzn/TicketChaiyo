@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import { z } from "zod";
 import { organizerSignupFormSchema } from "../_schema";
 
-// Infer the type from the zod schema
 type FormValues = z.infer<typeof organizerSignupFormSchema>;
 
 const OrganizerSignupForm: React.FC = () => {
