@@ -7,7 +7,7 @@ import demoImage from "@/assets/Demo.png";
 import { AlignJustify, Minus, Plus, X } from "lucide-react";
 const navigations = [
     { name: "About Us", href: "#about-us" },
-    { name: "FAQs", href: "#faq" },
+    { name: "Faqs", href: "#faq" },
     {
       name: "Community",
       // href: "https://www.facebook.com/groups/846181496988189/",
