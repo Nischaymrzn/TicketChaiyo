@@ -3,6 +3,7 @@ import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/client/SignupPage";
 import OrganizerSignupPage from "./pages/organizer/SignupPage";
+import HomePage from "./pages/client/HomePage";
 
 
 
@@ -15,6 +16,7 @@ return(
             <Route path="/login" element={<LoginPage />}/>
             <Route path="/signup" element={<SignupPage />}></Route>
             <Route path="/organizer-signup" element={<OrganizerSignupPage />}  />
+            <Route path="/home" element={<HomePage/>}/>
         </Routes>
   </BrowserRouter>
     )

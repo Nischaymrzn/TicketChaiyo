@@ -8,20 +8,20 @@ interface OrganizerSignupPageProps {
 
 const OrganizerSignupPage: React.FC<OrganizerSignupPageProps> = () => {
   return (
-    <div className='bg-[#F7F2EA] w-[100vw] h-[100vh] text-oufit'>
-      <img 
+    <div className='bg-[#F7F2EA] w-[100vw] min-h-[100vh] text-oufit'>
+      {/* <img 
         src="https://images.pexels.com/photos/18413963/pexels-photo-18413963/free-photo-of-vintage-camera-and-typewriter.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
         className='w-full h-full z-0 absolute'
         alt="background"
-      />
+      /> */}
       <div className='flex py-6 flex-col gap-6 relative z-10'>
-        <nav className='flex justify-between items-center border-b-[0.25px] border-gray-100 pb-4'>
-          <h1 className="text-xl font-semibold pl-4 text-[#FFB89F] sm:text-3xl sm:pl-10">
+        <nav className='flex justify-between items-center border-b-[0.25px] border-gray-800 pb-4'>
+          <h1 className="text-xl font-semibold pl-4  sm:text-3xl sm:pl-10">
             Ticket Chayo
           </h1>
           <div className='flex gap-5 pr-10'>
             <Link to="/login">
-              <button className='p-2 rounded-xl px-4 font-medium border-[#FFC987] border text-white'>
+              <button className='p-2 rounded-xl px-4 font-medium border-[#FFC987] border'>
                 Login here
               </button>
             </Link>

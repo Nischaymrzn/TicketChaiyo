@@ -35,7 +35,7 @@ const LandingPage = () => {
         >
           <div className="flex lg:flex-1">
             <div className="-m-1.5 p-1.5">
-              <span className="sr-only ">Chalchitra</span>
+              <span className="sr-only ">Ticket Chayo</span>
 
               <h1 className="text-xl font-semibold pl-4 text-[#FFB89F] sm:text-3xl sm:pl-10">Ticket Chayo</h1>
             </div>

@@ -1,9 +1,22 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
     darkMode: ["class"],
     content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
   theme: {
+	screens: {
+		'xs':'530px',
+		'sm': '680px',
+      	'md': '768px',
+		'ml' : '898px',
+      	'lg': '1024px',
+		'llg':'1240px',
+      	'xl': '1280px',
+      	'2xl': '1536px',
+	  },
   	extend: {
+  		fontFamily: {
+			outfit : ['Outfit', 'sans-serif'],
+  		},
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
@@ -12,6 +25,12 @@ export default {
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
+			  primary: "#FFC987",
+			  
+			  error: "#F43362",
+			  success: "#7ACC19",
+			  warning: "#FFD607",
+			  info: "#4790E5",
   			card: {
   				DEFAULT: 'hsl(var(--card))',
   				foreground: 'hsl(var(--card-foreground))'
