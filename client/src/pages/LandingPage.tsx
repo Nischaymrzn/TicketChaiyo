@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import faqs from "@/constants/faqs";
 import demoImage from "@/assets/Demo.png";
 import { AlignJustify, Minus, Plus, X } from "lucide-react";
+
 const navigations = [
     { name: "About Us", href: "#about-us" },
     { name: "Faqs", href: "#faq" },
@@ -21,8 +22,6 @@ const navigations = [
   ];
 
 const LandingPage = () => {
-
-
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -35,9 +34,9 @@ const LandingPage = () => {
         >
           <div className="flex lg:flex-1">
             <div className="-m-1.5 p-1.5">
-              <span className="sr-only ">Ticket Chayo</span>
+              <span className="sr-only ">Ticket Chaiyo</span>
 
-              <h1 className="text-xl font-semibold pl-4 text-[#FFB89F] sm:text-3xl sm:pl-10">Ticket Chayo</h1>
+              <h1 className="text-xl font-semibold pl-4 text-[#FFB89F] sm:text-3xl sm:pl-10">Ticket Chaiyo</h1>
             </div>
           </div>
 

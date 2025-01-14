@@ -5,6 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Link } from "react-router-dom";
 import { z } from "zod";
 import { organizerSignupFormSchema } from "../_schema";
+import { useState } from "react";
+import { EyeIcon, EyeOffIcon } from "lucide-react";
 
 type FormValues = z.infer<typeof organizerSignupFormSchema>;
 
@@ -16,6 +18,12 @@ const OrganizerSignupForm: React.FC = () => {
   } = useForm<FormValues>({
     resolver: zodResolver(organizerSignupFormSchema),
   });
+
+  const [showPassword, setShowPassword] = useState(false);
+    
+  const handleShowPassword = () => {
+    setShowPassword((prevState) => !prevState);
+  };
 
   const handleSignup = async (value: FormValues): Promise<void> => {
     let updatedData = [];
@@ -146,9 +154,9 @@ const OrganizerSignupForm: React.FC = () => {
         >
           Password
         </label>
-        <div className="mt-1 sm:mt-2">
+        <div className="relative mt-1 sm:mt-2">
           <Input
-            type="password"
+            type={showPassword ? "text" : "password"}
             placeholder="Password"
             id="password"
             {...register("password")}
@@ -156,6 +164,19 @@ const OrganizerSignupForm: React.FC = () => {
               "block w-full py-3 sm:py-5 bg-white text-gray-900 shadow-sm placeholder:text-gray-400 text-sm sm:text-base sm:leading-6"
             )}
           />
+          
+          <button
+              type="button"
+              className="absolute right-3 top-1 sm:top-[9px]"
+              onClick={handleShowPassword}>
+                {showPassword ? (
+                  <EyeIcon
+                   className="w-4" />
+                ) : (
+                  <EyeOffIcon className="w-4" />
+                )}
+          </button>   
+
           {errors.password && (
             <p className="mt-1 text-xs sm:text-sm text-error">
               {errors.password.message as string}
@@ -167,17 +188,17 @@ const OrganizerSignupForm: React.FC = () => {
       <div className="mt-4 sm:mt-5">
         <button
           type="submit"
-          className="flex w-full items-center gap-2 bg-[#FFC987] justify-center rounded-md px-2.5 py-2 sm:px-3 sm:py-2.5 text-sm sm:text-md font-semibold shadow-sm hover:bg-[#FFB988] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 transition ease-in-out"
+          className="flex w-full items-center gap-2 bg-[#FFC987] justify-center rounded-md px-2.5 py-2 sm:px-3 sm:py-2.5 text-sm sm:text-base font-semibold shadow-sm hover:bg-[#FFB988] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 transition ease-in-out"
         >
           Sign Up
         </button>
       </div>
 
       <div className="mt-4 sm:mt-5 text-center">
-        <p className="text-xs sm:text-sm">
+        <p className="text-xs sm:text-base">
           Already have an account?{" "}
           <Link to="/login">
-            <span className="text-red-400 font-medium hover:text-red-500 hover:underline">
+            <span className="text-red-400 font-medium hover:text-red-500 hover:underline text-sm sm:text-base">
               Login here
             </span>
           </Link>

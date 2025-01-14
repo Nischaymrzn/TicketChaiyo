@@ -10,13 +10,21 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { useLogout } from "@/hooks/useAuth";
+
 
 const ClientNav: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
 //   const [loggedIn, setLoggedIn] = useState<boolean>(true);
   const navigate = useNavigate();
   const location = useLocation();
-  const loggedIn=true;  
+  const loggedIn=true;
+  const { logout } = useLogout();
+
+  const handleLogout = () =>{
+    logout()
+  }
+  
   
   const isActive = (path: string): boolean => location.pathname === path;
 
@@ -24,7 +32,7 @@ const ClientNav: React.FC = () => {
     <nav className="sticky top-0 left-0 z-10 pt-4 flex justify-between items-center border-b-[0.25px] border-gray-500 pb-3 sm:pb-3">
       <Link to="/home">
         <h1 className="text-xl font-semibold pl-4 text-[#FFB89F] sm:text-3xl sm:pl-10">
-          Ticket Chayo
+          Ticket Chaiyo
         </h1>
       </Link>
 
@@ -131,7 +139,7 @@ const ClientNav: React.FC = () => {
                 </span>
                 Setting
               </DropdownMenuItem>
-              <DropdownMenuItem className="cursor-pointer hover:bg-gray-200 text-[15px]">
+              <DropdownMenuItem className="cursor-pointer hover:bg-gray-200 text-[15px]" onClick={handleLogout}>
                 <span>
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-log-out">
                     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>

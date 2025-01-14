@@ -1,7 +1,7 @@
 import LoginForm from '@/components/LoginForm';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Dialog } from '@headlessui/react';
+import { Dialog, DialogPanel } from '@headlessui/react';
 import { AlignJustify, X } from 'react-feather';
 
 interface LoginPageProps {
@@ -19,9 +19,9 @@ const LoginPage: React.FC<LoginPageProps> = () => {
         // alt="background" text-[#FFB89F]
       /> */}
       <div className="flex py-4 flex-col gap-4 relative z-10 sm:py-6 sm:gap-6">
-        <nav className="flex justify-between items-center border-b-[0.25px] border-gray-800 pb-3 sm:pb-4">
+        <nav className="flex justify-between items-center border-b-[0.25px] border-gray-300 pb-3 sm:pb-4">
           <h1 className="text-xl font-semibold pl-4  sm:text-3xl sm:pl-10">
-            Ticket Chayo
+            Ticket Chaiyo
           </h1>
           {/* Desktop Actions */}
           <div className="hidden lg:flex gap-2 pr-4 sm:gap-5 sm:pr-10">
@@ -55,7 +55,7 @@ const LoginPage: React.FC<LoginPageProps> = () => {
             onClose={setMobileMenuOpen}
           >
             <div className="fixed inset-0 z-50" />
-            <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full border-l-2 border-gray-700 px-6 py-6 overflow-y-auto bg-[#1c1d20] sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+            <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full border-l-2 border-gray-700 px-6 py-6 overflow-y-auto bg-[#1c1d20] sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
               <div className="flex items-center justify-between">
                 <h1 className="text-xl font-semibold text-[#FFB89F]">Ticket Chayo</h1>
                 <button
@@ -84,14 +84,15 @@ const LoginPage: React.FC<LoginPageProps> = () => {
                   </li>
                 </ul>
               </div>
-            </Dialog.Panel>
+            </DialogPanel>
           </Dialog>
         </nav>
 
-        <main className="border min-h-[250px] w-[350px] m-auto bg-white rounded-[30px] mt-24 shadow-md flex flex-col p-3 items-center bg-white/80 sm:min-h-[425px] sm:w-[525px] sm:rounded-[50px] sm:mt-32 sm:p-4">
-          <p className="text-[24px] font-medium pt-4 sm:text-3xl sm:pt-8">
-            Login to your Account
+        <main className="border min-h-[250px] w-[350px] m-auto bg-white rounded-[30px] mt-24 shadow-md flex flex-col p-3 items-center bg-white/80 sm:min-h-[450px] sm:w-[600px] sm:rounded-[25px] sm:mt-28 sm:p-4">
+          <p className="text-[24px] font-semibold pt-4 sm:text-3xl sm:pt-8">
+            Welcome Back!
           </p>
+          <p className='text-gray-900/50 text-sm sm:text-base'>Good to see you again!  Log in to continue</p>
           <LoginForm />
         </main>
       </div>

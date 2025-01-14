@@ -3,16 +3,20 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { cn } from "@/lib/utils";
 import formSchema from "@/schemas/formSchema";
 import { Input } from "./ui/input";
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
 import { z } from "zod";
+import { useLogin } from "@/hooks/useAuth";
+import { EyeIcon, EyeOffIcon } from "lucide-react";
+import { useState } from "react";
+
 
 type FormValues = z.infer<typeof formSchema>;
 
 // Interface for the test data structure
-interface TestData {
-  userName: string;
-  password: string;
-}
+// interface TestData {
+//   userName: string;
+//   password: string;
+// }
 
 const LoginForm = () => {
   const {
@@ -23,25 +27,17 @@ const LoginForm = () => {
     resolver: zodResolver(formSchema),
   });
 
-  const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
 
-  const handleLogin = async (value: FormValues) => {
-    const testData = JSON.parse(localStorage.getItem("test") || "[]") as TestData[];
-    let isLoggedIn = false;
-
-    testData.forEach((data) => {
-      if (data.userName === value.userName && data.password === value.password) {
-        isLoggedIn = true;
-      }
-    });
-
-    if (!isLoggedIn) {
-      console.log("Invalid");
-      return;
-    }
-
-    navigate("/home");
+  const handleShowPassword = () => {
+    setShowPassword((prevState) => !prevState);
   };
+
+  const { login } = useLogin();
+  
+  const handleLogin = async (value: FormValues) => {
+    login(value.email, value.password)
+  };  
 
   return (
     <form className="w-full p-4 gap-2 sm:gap-6 sm:p-10" onSubmit={handleSubmit(handleLogin)}>
@@ -50,22 +46,22 @@ const LoginForm = () => {
           htmlFor="userName"
           className="block text-sm sm:text-base font-medium leading-6 text-gray-900"
         >
-          Username
+          Email
         </label>
 
         <div className="mt-1 sm:mt-2">
           <Input
-            type="text"
-            placeholder="nischay"
-            id="userName"
-            {...register("userName")}
+            type="email"
+            placeholder="your@gmail.com"
+            id="email"
+            {...register("email")}
             className={cn(
-              "block w-full py-3 sm:py-5 bg-white text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-base sm:leading-6"
+              "block w-full py-3 sm:py-5 bg-white text-gray-900 shadow-sm placeholder:text-gray-400 text-sm sm:leading-6"
             )}
           />
 
-          {errors.userName && (
-            <p className="mt-1 text-sm text-error">{errors.userName?.message}</p>
+          {errors.email && (
+            <p className="mt-1 text-sm text-error">{errors.email?.message}</p>
           )}
         </div>
       </div>
@@ -78,15 +74,26 @@ const LoginForm = () => {
           Password
         </label>
 
-        <div className="mt-1 sm:mt-2">
+        <div className="relative mt-1 sm:mt-2">
           <Input
-            type="password"
+            type={showPassword ? "text" : "password"}
             id="password"
             {...register("password")}
             className={cn(
               "block w-full py-3 sm:py-5 bg-white text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-base sm:leading-6"
             )}
           />
+           <button
+                type="button"
+                className="absolute right-3 top-1 sm:top-[9px]"
+                onClick={handleShowPassword}
+              >
+                {showPassword ? (
+                  <EyeIcon className="w-4" />
+                ) : (
+                  <EyeOffIcon className="w-4" />
+                )}
+            </button>
 
           {errors.password && (
             <p className="mt-1 text-sm text-error">{errors.password?.message}</p>

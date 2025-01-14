@@ -23,13 +23,13 @@ const SignupPage: React.FC<SignupPageProps> = () => {
       {/* Content Wrapper */}
       <div className="relative z-10 flex flex-col gap-6 py-6">
         {/* Navbar */}
-        <nav className="flex justify-between items-center border-b border-gray-800 pb-4 px-10">
-          <h1 className="text-xl font-semibold sm:text-3xl">Ticket Chayo</h1>
+        <nav className="flex justify-between items-center border-b border-gray-300 pb-4 px-10">
+          <h1 className="text-xl font-semibold sm:text-3xl">Ticket Chaiyo</h1>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex gap-5">
             <Link to="/login">
-              <button className="p-2 rounded-xl px-4 font-medium border-[#FFC987] border transition hover:bg-[#FFC987] hover:text-black">
+              <button className="p-2 rounded-xl px-4 font-medium border-[#FFC987] border transition hover:text-black">
                 Login here
               </button>
             </Link>
@@ -81,6 +81,7 @@ const SignupPage: React.FC<SignupPageProps> = () => {
                     Login here
                   </Link>
                 </li>
+                
                 <li className="text-white">
                   <Link to="/organizer-signup" onClick={() => setMobileMenuOpen(false)}>
                     Request Organizer
@@ -92,8 +93,9 @@ const SignupPage: React.FC<SignupPageProps> = () => {
         </Dialog>
 
         {/* Main Content */}
-        <main className="border min-h-[425px] w-[90%] max-w-[525px] mx-auto mt-20 bg-white/85 rounded-[50px] shadow-md flex flex-col items-center p-4">
+        <main className="border min-h-[425px] w-[90%] mx-auto mt-16 bg-white/85 rounded-[50px] shadow-md flex flex-col items-center p-4 sm:w-[650px] sm:rounded-[25px]">
           <p className="text-3xl font-medium pt-8">Signup to your Account</p>
+          <p className='text-gray-900/50 text-sm sm:text-base'>Create your account to get started in just a few steps</p>
           {/* Client Signup Form */}
           <SignupForm />
         </main>

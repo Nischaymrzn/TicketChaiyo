@@ -5,6 +5,9 @@ import { Input } from "@/components/ui/input";
 import { Link } from "react-router-dom";
 import { z } from "zod";
 import { signupFormSchema } from "../_schema";
+import { useSignup} from "@/hooks/useAuth";
+import { EyeIcon, EyeOffIcon } from "lucide-react";
+import { useState } from "react";
 
 // Infer the type from the zod schema
 type FormValues = z.infer<typeof signupFormSchema>;
@@ -17,22 +20,19 @@ const SignupForm: React.FC = () => {
   } = useForm<FormValues>({
     resolver: zodResolver(signupFormSchema),
   });
+  const [showPassword, setShowPassword] = useState(false);
+  
+  const handleShowPassword = () => {
+    setShowPassword((prevState) => !prevState);
+  };
+  
+  
+  const handleSignup = useSignup()
 
   const handleLogin = async (value: FormValues): Promise<void> => {
-    let updatedData = [];
-    const storedData = localStorage.getItem("test");
-
-    if (storedData) {
-      updatedData = JSON.parse(storedData);
-      if (storedData.includes(JSON.stringify(value))) {
-        console.log("account already exist");
-        return;
-      }
-    }
-
-    updatedData = [...updatedData, value];
-    console.log(updatedData);
-    localStorage.setItem("test", JSON.stringify(updatedData));
+    const data = {...value,userRole:"client"}
+    handleSignup.signup(data)
+  
   };
 
   return (
@@ -129,15 +129,26 @@ const SignupForm: React.FC = () => {
           Password
         </label>
 
-        <div className="mt-1 sm:mt-2">
+        <div className="relative mt-1 sm:mt-2">
           <Input
-            type="password"
+            type={showPassword ? "text" : "password"}
             id="password"
             {...register("password")}
             className={cn(
               "block w-full py-3 sm:py-5 bg-white text-gray-900 shadow-sm placeholder:text-gray-400 text-sm sm:text-base sm:leading-6"
             )}
           />
+
+          <button
+              type="button"
+              className="absolute right-3 top-1 sm:top-[9px]"
+              onClick={handleShowPassword}>
+                {showPassword ? (
+                  <EyeIcon className="w-4" />
+                ) : (
+                  <EyeOffIcon className="w-4" />
+                )}
+          </button>       
 
           {errors.password && (
             <p className="mt-1 text-xs sm:text-sm text-error">
@@ -160,7 +171,7 @@ const SignupForm: React.FC = () => {
         <p className="text-xs sm:text-base">
           Already have an account?{" "}
           <Link to="/login">
-            <span className="text-red-400 font-medium hover:text-red-500 hover:underline">
+            <span className="text-red-400 font-medium hover:text-red-500 hover:underline text-sm sm:text-base">
               Login here
             </span>
           </Link>

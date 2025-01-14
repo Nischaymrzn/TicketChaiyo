@@ -15,9 +15,9 @@ const OrganizerSignupPage: React.FC<OrganizerSignupPageProps> = () => {
         alt="background"
       /> */}
       <div className='flex py-6 flex-col gap-6 relative z-10'>
-        <nav className='flex justify-between items-center border-b-[0.25px] border-gray-800 pb-4'>
+        <nav className='flex justify-between items-center border-b-[0.25px] border-gray-400 pb-4'>
           <h1 className="text-xl font-semibold pl-4  sm:text-3xl sm:pl-10">
-            Ticket Chayo
+            Ticket Chaiyo
           </h1>
           <div className='flex gap-5 pr-10'>
             <Link to="/login">
@@ -26,16 +26,19 @@ const OrganizerSignupPage: React.FC<OrganizerSignupPageProps> = () => {
               </button>
             </Link>
 
+            <Link to='/signup'>
             <button className='border p-2 bg-[#FFC987] rounded-xl px-4 font-medium'>
-              Request Organizer
+              Register here
             </button>
+            </Link>
           </div>
         </nav>
 
-        <main className='border min-h-[425px] w-[525px] m-auto bg-white rounded-[50px] mt-16 shadow-md flex flex-col p-4 items-center bg-white/85'>
+        <main className='border min-h-[425px] w-[525px] m-auto bg-white rounded-[30px] mt-16 shadow-md flex flex-col p-4 items-center bg-white/85 sm:min-h-[450px] sm:w-[700px] sm:rounded-[25px] sm:mt-6 sm:p-4'>
           <p className='text-3xl font-medium pt-8'>
             Signup as a Organizer
           </p>
+          <p className='text-gray-900/50 text-sm sm:text-base'>Create your account to get started in just a few steps</p>
           <OrganizerSignupForm />
         </main>
       </div>
