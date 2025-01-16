@@ -7,6 +7,7 @@ import HomePage from "./pages/client/HomePage";
 import AuthWrapper from "./pages/AuthWrapper";
 import AuthLayout from "./pages/AuthLayout";
 import ProtectedLayout from "./pages/ProtectedLayout";
+import ClientLayout from "./pages/ClientLayout";
 
 
 
@@ -17,7 +18,9 @@ return(
         <Routes>
             <Route element={<AuthWrapper />}>
                 <Route element={<ProtectedLayout />} >
-                    <Route path="/home" element={<HomePage/>}/>
+                    <Route element={<ClientLayout />} >
+                        <Route path="/home" element={<HomePage/>}/>
+                    </Route>
                 </Route>
 
                 <Route element={<AuthLayout />} >

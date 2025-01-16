@@ -99,10 +99,11 @@ async function handleGetMe(req, res) {
       id: true,
       email: true,
       name: true,
+      userRole : true,
     }
   });
   
-  return res.status(200).json({ data: userData });
+  return res.status(200).json({ data: userData , message : "user fetched successfully"});
 }catch(err){
   return res.status(401).json({data:null})
 }

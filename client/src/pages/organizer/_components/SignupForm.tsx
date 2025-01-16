@@ -7,6 +7,7 @@ import { z } from "zod";
 import { organizerSignupFormSchema } from "../_schema";
 import { useState } from "react";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
+import { useSignup } from "@/hooks/useAuth";
 
 type FormValues = z.infer<typeof organizerSignupFormSchema>;
 
@@ -25,21 +26,11 @@ const OrganizerSignupForm: React.FC = () => {
     setShowPassword((prevState) => !prevState);
   };
 
+  const signup = useSignup()
+
   const handleSignup = async (value: FormValues): Promise<void> => {
-    let updatedData = [];
-    const storedData = localStorage.getItem("test");
-
-    if (storedData) {
-      updatedData = JSON.parse(storedData);
-      if (storedData.includes(JSON.stringify(value))) {
-        console.log("Account already exists");
-        return;
-      }
-    }
-
-    updatedData = [...updatedData, value];
-    console.log(updatedData);
-    localStorage.setItem("test", JSON.stringify(updatedData));
+    const data = {...value,userRole:"organizer"}
+    signup.signup(data)
   };
 
   return (

@@ -203,6 +203,7 @@ const ClientNav: React.FC = () => {
                 </Link>
               </li>
             </ul>
+            {!loggedIn && (
             <div className="mt-6">
               <Link to="/signup">
                 <button className="block w-full px-3 py-2.5 text-base font-medium text-white border border-[#FFC987] rounded-lg hover:border-[#d8a566]">
@@ -215,6 +216,15 @@ const ClientNav: React.FC = () => {
                 </button>
               </Link>
             </div>
+            )}
+
+            {loggedIn && 
+              
+              <button className="block w-full px-3 py-2.5 mt-4 text-base font-medium text-black bg-[#FFC987] rounded-lg hover:bg-[#e5b07e]" onClick={handleLogout}>
+               Logout
+              </button>
+           
+            }
           </div>
         </Dialog.Panel>
       </Dialog>

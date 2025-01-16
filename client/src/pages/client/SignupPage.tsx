@@ -93,7 +93,7 @@ const SignupPage: React.FC<SignupPageProps> = () => {
         </Dialog>
 
         {/* Main Content */}
-        <main className="border min-h-[425px] w-[90%] mx-auto mt-16 bg-white/85 rounded-[50px] shadow-md flex flex-col items-center p-4 sm:w-[650px] sm:rounded-[25px]">
+        <main className="border min-h-[425px] w-[90%] mx-auto mt-12 bg-white/85 rounded-[50px] shadow-md flex flex-col items-center p-4 sm:w-[650px] sm:rounded-[25px]">
           <p className="text-3xl font-medium pt-8">Signup to your Account</p>
           <p className='text-gray-900/50 text-sm sm:text-base'>Create your account to get started in just a few steps</p>
           {/* Client Signup Form */}
