@@ -56,7 +56,12 @@ const useLogin = () => {
         setUser(data.user);
         localStorage.setItem('accessToken',data.accessToken)
         toast.success("Login successfully")
-        navigate('/home');
+        console.log(data)
+        if(data.user.userRole == "client"){
+          navigate("/home")
+        }else if(data.user.userRole == "organizer"){
+          navigate("/organizer/dashboard")
+        }
       },
   });
 

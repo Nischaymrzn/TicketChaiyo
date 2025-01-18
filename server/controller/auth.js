@@ -71,7 +71,8 @@ async function handleLogin(req, res) {
           user :{
             id : user.id,
             email : email,
-            name : user.name
+            name : user.name,
+            userRole : user.userRole,
           },
           accessToken : token
         });
@@ -103,7 +104,7 @@ async function handleGetMe(req, res) {
     }
   });
   
-  return res.status(200).json({ data: userData , message : "user fetched successfully"});
+  return res.status(200).json({ userData , message : "user fetched successfully"});
 }catch(err){
   return res.status(401).json({data:null})
 }
