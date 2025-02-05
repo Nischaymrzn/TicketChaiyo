@@ -1,25 +1,24 @@
-import express from 'express';
-import dotenv from 'dotenv';
-import prisma from './db/prisma.js';
-import cors from "cors";
-import authRoute from "./route/authRoute.js";
+import express from "express"
+import dotenv from "dotenv"
+import cors from "cors"
+import rootRouter from "./routes/root.routes.js"
 
-dotenv.config();
+dotenv.config()
 
-const app = express();
-app.use(cors());  // Enable CORS
+const app = express()
+app.use(cors()) // Enable CORS
 
-const PORT = process.env.PORT || 3003;
+const PORT = process.env.PORT || 3003
 
 // Use express.urlencoded to parse form data
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }))
 
 // Use express.json to parse JSON request bodies
-app.use(express.json());  // You might also want to add this for parsing JSON payloads
-
+app.use(express.json())
 // Set up routes
-app.use('/auth', authRoute);
+app.use("/api", rootRouter)
 
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+  console.log(`Server is running on http://localhost:${PORT}`)
+})
+

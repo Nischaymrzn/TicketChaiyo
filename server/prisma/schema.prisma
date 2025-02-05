@@ -13,11 +13,88 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum UserRole {
+  client
+  organizer
+  admin
+}
+
 model User {
-  id         Int      @id @default(autoincrement())
-  name       String
-  username   String
-  email      String   @unique
-  password   String
-  userRole   String
+  id        String   @id @default(uuid())
+  name      String
+  username  String
+  email     String   @unique
+  password  String
+  userRole      UserRole
+
+  Event Event[] @relation("OrganizerEvents")
+  
+
+  Booking Booking[]
+}
+
+model Event {
+  id                 String   @id @default(uuid())
+  title              String
+  type               EventType
+  released           String?
+  duration           String?
+  genre              String?
+  director           String?
+  cast               String?
+  poster             String?
+  ticketPriceNormal  String
+  ticketPriceVip     String
+  date               String?
+  time               String?
+  venue              String?
+  artist             String?
+  createdDate        DateTime @default(now())
+  description        String?
+
+  // Foreign Keys
+  organizerId        String
+
+  // Relationships
+  organizer User @relation("OrganizerEvents", fields: [organizerId], references: [id], onDelete: Cascade)
+
+  Ticket Ticket[]
+}
+
+enum EventType {
+  MOVIE
+  CONCERT
+  OTHERS
+}
+
+model Ticket {
+  id        String   @id @default(uuid())
+  price     Float
+  quantity  Int 
+  createdAt DateTime @default(now())
+
+  // Foreign Keys
+  eventId String
+
+  // Relationships
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  Booking Booking[]
+}
+
+model Booking {
+  id        String   @id @default(uuid())
+  quantity  Int
+  bookedAt  DateTime @default(now())
+
+  // Foreign Keys
+  clientId String
+  ticketId String
+
+  // Relationships
+  client User   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  ticket Ticket @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+
+  @@index([clientId])
+  @@index([ticketId])
 }
