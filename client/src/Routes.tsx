@@ -12,6 +12,7 @@ import OrganizerLayout from "./pages/OrganizerLayout";
 import Dashboard from "./pages/organizer/Dashboard";
 import AdminLayout from "./pages/AdminLayout";
 import AdminDashboard from "./pages/organizer/Dashboard";
+import VotingPage from "./pages/client/VotingPage";
 
 
 
@@ -24,7 +25,7 @@ return(
                 <Route element={<ProtectedLayout />} >
                     <Route element={<ClientLayout />} >
                         <Route path="/home" element={<HomePage/>}/>
-                        <Route path="/voting" element={<HomePage />} />
+                        <Route path="/voting" element={<VotingPage />} />
                     </Route>
                 
                     <Route path="/organizer" element={<OrganizerLayout />}>
@@ -34,18 +35,18 @@ return(
                     <Route path="/admin" element={<AdminLayout />}>
                         <Route path="dashboard" index element={<AdminDashboard />}/>
                     </Route>
-
                 </Route>
-
+                
                 <Route element={<AuthLayout />} >
                     <Route path="/login" element={<LoginPage />}/>
                     <Route path="/signup" element={<SignupPage />} />
                     <Route path="/organizer-signup" element={<OrganizerSignupPage />}  />
+                    <Route path="/" element={<LandingPage />}/>
                 </Route>
 
-                <Route path="/" element={<LandingPage />}/>
-
             </Route>
+
+
         </Routes>
   </BrowserRouter>
     )

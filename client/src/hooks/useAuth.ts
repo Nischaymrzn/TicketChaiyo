@@ -9,7 +9,7 @@ const useSignup = () => {
   const signupMutation = useMutation({
     mutationFn: async ({ fullName, userName, email, password, userRole }: { fullName: string; userName:string; email: string; password: string; userRole: string }) => {
       const response = await axios.post(
-        'http://localhost:5000/auth/register',
+        'http://localhost:5000/api/auth/register',
         { fullName, userName, email, password, userRole },
         { headers: { 'Content-Type': 'application/json' } }
       );
@@ -17,6 +17,7 @@ const useSignup = () => {
     },
     onSuccess: (response) => {
       toast.success(response.success)
+      console.log(response)
       navigate('/login')
     },
     onError: (err) => {
@@ -45,7 +46,7 @@ const useLogin = () => {
   const loginMutation = useMutation({
       mutationFn: async ({ email, password } : {email:string, password:string}) => {
           const response = await axios.post(
-              'http://localhost:5000/auth/login',
+              'http://localhost:5000/api/auth/login',
               { email, password },
               { headers: { 'Content-Type': 'application/json' } }
           );
@@ -93,7 +94,7 @@ const useGetMe = () => {
   return useQuery({
     queryKey: ["me"],
     queryFn: async () => {
-      const response = await axios.get("http://localhost:5000/auth/getMe", {
+      const response = await axios.get("http://localhost:5000/api/auth/getMe", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

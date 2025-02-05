@@ -1,23 +1,33 @@
-import { Navigate, Outlet } from "react-router";
+import { Navigate, Outlet, useLocation } from "react-router";
 import { useAuth } from "@/state-stores/Auth";
 
-const AuthLayout = () => {
-  const { isAuthenticated,user } = useAuth();
+enum UserRole {
+  ADMIN = "admin",
+  ORGANIZER = "organizer",
+  CLIENT = "client",
+}
 
+type Routes = {
+  [key in UserRole]: string;
+};
+
+const DEFAULT_ROUTES: Routes = {
+  [UserRole.ADMIN]: "/admin/dashboard",
+  [UserRole.ORGANIZER]: "/organizer/dashboard",
+  [UserRole.CLIENT]: "/home",
+};
+
+const AuthLayout = () => {
+  const { isAuthenticated, user } = useAuth();
+  const location = useLocation();
+  //@ts-expect-error
+  const from = location.state?.from?.pathname || DEFAULT_ROUTES[user?.userRole ?? "client"];
+  console.log(from, "from");
   if (isAuthenticated) {
-    if (user?.userRole == "client"){
-      return <Navigate to="/home" replace />;
-    }
-    else if (user?.userRole == "organizer"){
-      return <Navigate to="/organizer/dashboard" replace />;
-    }
+    return <Navigate to={from} replace />;
   }
 
-  return (
-    <>
-      <Outlet />
-    </>
-  );
+  return <Outlet />;
 };
 
 export default AuthLayout;
