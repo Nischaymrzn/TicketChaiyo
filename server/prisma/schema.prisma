@@ -41,24 +41,22 @@ model Event {
   duration           String?
   genre              String?
   director           String?
-  cast               String?
-  poster             String?
-  ticketPriceNormal  String
-  ticketPriceVip     String
-  date               String?
-  time               String?
-  venue              String?
-  artist             String?
-  createdDate        DateTime @default(now())
-  description        String?
+  cast              String?
+  poster            String?
+  ticketPriceNormal String
+  ticketPriceVip    String
+  date              String?
+  time              String?
+  venue             String?
+  artist            String?
+  createdDate       DateTime @default(now())
+  description       String?
+  totalSeats        String[]
+  
+  organizerId       String
 
-  // Foreign Keys
-  organizerId        String
-
-  // Relationships
   organizer User @relation("OrganizerEvents", fields: [organizerId], references: [id], onDelete: Cascade)
-
-  Ticket Ticket[]
+  bookings  Booking[]
 }
 
 enum EventType {
@@ -67,34 +65,19 @@ enum EventType {
   OTHERS
 }
 
-model Ticket {
-  id        String   @id @default(uuid())
-  price     Float
-  quantity  Int 
-  createdAt DateTime @default(now())
-
-  // Foreign Keys
-  eventId String
-
-  // Relationships
-  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
-
-  Booking Booking[]
-}
-
 model Booking {
   id        String   @id @default(uuid())
   quantity  Int
   bookedAt  DateTime @default(now())
+  seats     String[]
+  price     Float 
 
-  // Foreign Keys
-  clientId String
-  ticketId String
+  clientId  String
+  eventId   String
 
-  // Relationships
-  client User   @relation(fields: [clientId], references: [id], onDelete: Cascade)
-  ticket Ticket @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  client    User     @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
   @@index([clientId])
-  @@index([ticketId])
+  @@index([eventId])
 }

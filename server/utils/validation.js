@@ -34,3 +34,18 @@ export const validateEvent = (eventData) => {
     return null
   }
   
+  export const validateBooking = (clientId, eventId, seats, price) => {
+    if (!clientId || !eventId || !seats || !price) {
+      return "All fields must be filled"
+    }
+    if (!Array.isArray(seats) || seats.length === 0) {
+      return "Seats must be a non-empty array"
+    }
+    if (!validator.isUUID(clientId) || !validator.isUUID(eventId)) {
+      return "Invalid client or event ID"
+    }
+    if (!validator.isFloat(price.toString()) || price <= 0) {
+      return "Invalid price"
+    }
+    return null
+  }
