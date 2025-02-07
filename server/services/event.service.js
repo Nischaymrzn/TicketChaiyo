@@ -3,23 +3,26 @@ import { PrismaClient } from "@prisma/client"
 const prisma = new PrismaClient()
 
 export const createEvent = async (eventData) => {
-  return prisma.event.create({
+  return await prisma.event.create({
     data: eventData,
   })
 }
 
-export const getAllEvents = async () => {
-  return prisma.event.findMany()
+export const getAllEvents = async (role,id) => {
+  if(role == "organizer"){
+    return await prisma.event.findMany({where : {organizerId: id} })
+  }
+  return await prisma.event.findMany()
 }
 
 export const getEventById = async (id) => {
-  return prisma.event.findUnique({
+  return await prisma.event.findUnique({
     where: { id },
   })
 }
 
 export const updateEvent = async (id, eventData) => {
-  return prisma.event.update({
+  return await prisma.event.update({
     where: { id },
     data: eventData,
   })
@@ -48,7 +51,7 @@ export const updateEventSeats = async (eventId, seats, action) => {
     throw new Error('Invalid action')
   }
 
-  return prisma.event.update({
+  return await prisma.event.update({
     where: { id: eventId },
     data: { totalSeats: updatedTotalSeats },
   })

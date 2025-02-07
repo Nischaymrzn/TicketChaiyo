@@ -1,6 +1,7 @@
 import { createEvent, getAllEvents, getEventById, updateEvent, deleteEvent } from "../services/event.service.js"
 import { validateEvent } from "../utils/validation.js"
 import { uploadToCloudinary } from "../utils/cloudinary.js"
+import { findUserById } from "../services/user.service.js"
 
 export const createNewEvent = async (req, res) => {
   try {
@@ -27,8 +28,11 @@ export const createNewEvent = async (req, res) => {
 }
 
 export const getEvents = async (req, res) => {
+  const id = req.user.id;
+  const user = await findUserById(id)
+
   try {
-    const events = await getAllEvents()
+    const events = await getAllEvents(user.userRole,user.id)
     res.status(200).json({ events })
   } catch (error) {
     res.status(500).json({

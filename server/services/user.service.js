@@ -5,7 +5,7 @@ export const createUser = async ({ fullName, email, userName, password, userRole
   const salt = await bcrypt.genSalt()
   const hash = await bcrypt.hash(password, salt)
 
-  return prisma.user.create({
+  return await prisma.user.create({
     data: {
       name: fullName,
       username: userName,
@@ -17,13 +17,13 @@ export const createUser = async ({ fullName, email, userName, password, userRole
 }
 
 export const findUserByEmail = async (email) => {
-  return prisma.user.findUnique({
+  return await prisma.user.findUnique({
     where: { email: email },
   })
 }
 
 export const findUserById = async (id) => {
-  return prisma.user.findUnique({
+  return await prisma.user.findUnique({
     where: { id: id },
     select: {
       id: true,
