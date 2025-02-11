@@ -12,7 +12,7 @@ const LoginPage: React.FC<LoginPageProps> = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
 
   return (
-    <div className="bg-[#F7F2EA] min-w-[100vw] min-h-[100vh] text-outfit">
+    <div className="bg-[#F7F2EA] min-h-[100vh] w-full overflow-hidden text-outfit">
       {/* <img
         src="https://images.pexels.com/photos/18413963/pexels-photo-18413963/free-photo-of-vintage-camera-and-typewriter.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
         className="w-full h-full z-0 absolute"

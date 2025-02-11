@@ -5,10 +5,8 @@ import React, { useState } from 'react'
 import VotingCard from '@/pages/client/_components/VotingCard'
 import { votings } from '@/constants/votings'
 
-// Define types for the filter options
 type FilterType = 'all' | 'award' | 'reality'
 
-// Assuming this matches the shape of your voting items in the constants file
 interface Voting {
   id: string | number
   type: string

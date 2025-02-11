@@ -1,7 +1,6 @@
 import ClientNav from './_components/ClientNav'
 import MovieCard from './_components/MovieCard'
 import Slider from '@/components/Slider'
-import React from 'react'
 import {movies} from "@/constants/movies"
 import Footer from '@/components/Footer'
 import { Button } from '@/components/ui/button'
@@ -22,8 +21,8 @@ interface Movie {
   ticketPriceVip: string;
 }
 
-const HomePage: React.FC = () => {
-  const [filter, setFilter] = useState<string>('all'); // State to manage the current filter
+const HomePage = () => {
+  const [filter, setFilter] = useState<string>('all');
 
   const handleFilterChange = (type: string): void => {
     setFilter(type);

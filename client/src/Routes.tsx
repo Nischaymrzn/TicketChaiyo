@@ -11,8 +11,9 @@ import ClientLayout from "./pages/ClientLayout";
 import OrganizerLayout from "./pages/OrganizerLayout";
 import Dashboard from "./pages/organizer/Dashboard";
 import AdminLayout from "./pages/AdminLayout";
-import AdminDashboard from "./pages/organizer/Dashboard";
+import AdminDashboard from "./pages/admin/Dashboard";
 import VotingPage from "./pages/client/VotingPage";
+import { EventsPage } from "./pages/organizer/EventsPage";
 
 
 
@@ -30,7 +31,11 @@ return(
                 
                     <Route path="/organizer" element={<OrganizerLayout />}>
                         <Route path="dashboard" index element={<Dashboard />}/>
-                    </Route>
+                        <Route path="events" index element={<EventsPage />}/>
+                        <Route path="sales" index element={<p className="text-white p-4">This is Sales page</p>}/>
+                        <Route path="customers" index element={<p className="text-white p-4">This is Customer page</p>}/>
+                        <Route path="settings" index element={<p className="text-white p-4">This is Settings page</p>}/>
+                    </Route> 
 
                     <Route path="/admin" element={<AdminLayout />}>
                         <Route path="dashboard" index element={<AdminDashboard />}/>

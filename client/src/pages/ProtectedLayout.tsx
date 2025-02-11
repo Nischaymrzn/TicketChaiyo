@@ -3,7 +3,6 @@ import { Navigate, Outlet, useLocation } from 'react-router';
 
 const ProtectedLayout = () => {
   const { isAuthenticated } = useAuth();
-  console.log("protected", isAuthenticated);
   const location = useLocation();
   console.log(location.pathname)
   if (!isAuthenticated) {

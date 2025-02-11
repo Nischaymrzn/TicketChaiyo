@@ -17,16 +17,15 @@ const SignupPage: React.FC<SignupPageProps> = () => {
       {/* <img
         src="https://images.pexels.com/photos/18413963/pexels-photo-18413963/free-photo-of-vintage-camera-and-typewriter.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
         className="w-full h-full absolute object-cover"
-        alt="Background of vintage camera and typewriter"
+        alt="Background"
       /> */}
 
       {/* Content Wrapper */}
       <div className="relative z-10 flex flex-col gap-6 py-6">
-        {/* Navbar */}
+
         <nav className="flex justify-between items-center border-b border-gray-300 pb-4 px-10">
           <h1 className="text-xl font-semibold sm:text-3xl">Ticket Chaiyo</h1>
 
-          {/* Desktop Navigation */}
           <div className="hidden lg:flex gap-5">
             <Link to="/login">
               <button className="p-2 rounded-xl px-4 font-medium border-[#FFC987] border transition hover:text-black">
@@ -40,7 +39,6 @@ const SignupPage: React.FC<SignupPageProps> = () => {
             </Link>
           </div>
 
-          {/* Mobile Menu Toggle */}
           <div className="lg:hidden">
             <button
               type="button"
@@ -53,7 +51,6 @@ const SignupPage: React.FC<SignupPageProps> = () => {
           </div>
         </nav>
 
-        {/* Mobile Menu */}
         <Dialog
           as="div"
           className="lg:hidden"
@@ -92,11 +89,11 @@ const SignupPage: React.FC<SignupPageProps> = () => {
           </Dialog.Panel>
         </Dialog>
 
-        {/* Main Content */}
+      
         <main className="border min-h-[425px] w-[90%] mx-auto mt-12 bg-white/85 rounded-[50px] shadow-md flex flex-col items-center p-4 sm:w-[650px] sm:rounded-[25px]">
           <p className="text-3xl font-medium pt-8">Signup to your Account</p>
           <p className='text-gray-900/50 text-sm sm:text-base'>Create your account to get started in just a few steps</p>
-          {/* Client Signup Form */}
+          
           <SignupForm />
         </main>
       </div>

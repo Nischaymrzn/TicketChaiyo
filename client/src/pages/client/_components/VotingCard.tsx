@@ -19,7 +19,7 @@ interface VotingCardProps {
 const VotingCard: React.FC<VotingCardProps> = ({ movie, isDetailed }) => {
   return (
     <div className="flex flex-col w-full gap-3 pb-8" key={movie.id}>
-      {/* Group container for hover effect */}
+
       <div className="relative w-full group">
         <img
           src={movie.poster}
@@ -34,7 +34,6 @@ const VotingCard: React.FC<VotingCardProps> = ({ movie, isDetailed }) => {
           {movie.type}
         </p>
 
-        {/* Get Ticket Button */}
         <Link to="/voting/details">
           <button className="absolute bottom-12 w-[150px] xl:w-[200px] left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 text-sm sm:text-base p-2 rounded-lg px-3 font-medium border bg-[#FFC987] sm:rounded-xl sm:px-8 shadow-md border-red-300 hover:bg-[#e4ad69] transition duration-700 text-black">
             Vote now
@@ -42,7 +41,6 @@ const VotingCard: React.FC<VotingCardProps> = ({ movie, isDetailed }) => {
         </Link>
       </div>
 
-      {/* Movie Details */}
       <div className="flex flex-col gap-1">
         <p className="text-lg font-semibold">{movie.title}</p>
 

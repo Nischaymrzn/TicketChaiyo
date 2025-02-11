@@ -80,7 +80,7 @@ const LoginForm = () => {
             id="password"
             {...register("password")}
             className={cn(
-              "block w-full py-3 sm:py-5 bg-white text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-base sm:leading-6"
+              "block w-full py-3 sm:py-5 bg-white text-gray-900 shadow-sm placeholder:text-gray-400 text-sm sm:text-base sm:leading-6"
             )}
           />
            <button

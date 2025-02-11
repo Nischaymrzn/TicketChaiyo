@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 
 type movie={
@@ -20,7 +19,7 @@ interface MovieCardProps {
     isDetailed:boolean;
   }
   
-const MovieCard: React.FC<MovieCardProps> = ({movie,isDetailed}) => {
+const MovieCard = ({movie,isDetailed} : MovieCardProps) => {
   return (
     <div className="flex flex-col w-full gap-3 pb-8" key={movie.id}>
       {/* Group container for hover effect */}

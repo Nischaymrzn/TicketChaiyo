@@ -9,7 +9,6 @@ import { useSignup} from "@/hooks/useAuth";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { useState } from "react";
 
-// Infer the type from the zod schema
 type FormValues = z.infer<typeof signupFormSchema>;
 
 const SignupForm: React.FC = () => {

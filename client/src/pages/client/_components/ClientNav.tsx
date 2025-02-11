@@ -11,6 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { useLogout } from "@/hooks/useAuth";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 
 const ClientNav: React.FC = () => {
@@ -103,13 +104,10 @@ const ClientNav: React.FC = () => {
       {loggedIn && (
         <div className="hidden lg:flex gap-2 pr-4 sm:gap-5 sm:pr-24 ml-24">
           <DropdownMenu>
-            <DropdownMenuTrigger className="text-white text-sm sm:text-base p-1 rounded-lg px-3 font-medium border-gray-700 border sm:rounded-xl sm:px-4 focus:outline-none focus:ring-transparent flex flex-row items-center gap-1">
-              nischay
-              <span className="pt-[2px]">
-                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-down">
-                  <path d="m6 9 6 6 6-6"/>
-                </svg>
-              </span>
+            <DropdownMenuTrigger>              
+            <Avatar>
+              <AvatarFallback>N</AvatarFallback>
+            </Avatar>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56">
               <DropdownMenuLabel className="text-[16px]">My Account</DropdownMenuLabel>
