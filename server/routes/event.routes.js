@@ -11,7 +11,7 @@ import upload from "../utils/multer.js"
 
 const router = express.Router()
 
-router.post("/", verifyTokenMiddleware, upload.single("poster"), createNewEvent)
+router.post("/", verifyTokenMiddleware, upload.fields([{ name: "poster" }, { name: "cardImage" }]), createNewEvent);
 router.get("/", verifyTokenMiddleware, getEvents)
 router.get("/:id", verifyTokenMiddleware, getEvent)
 router.patch("/:id", verifyTokenMiddleware, upload.single("poster"), updateEventById)

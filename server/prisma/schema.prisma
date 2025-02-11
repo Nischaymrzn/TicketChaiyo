@@ -37,21 +37,21 @@ model Event {
   id                 String   @id @default(uuid())
   title              String
   type               EventType
-  released           String?
   duration           String?
   genre              String?
   director           String?
   cast              String?
   poster            String?
+  cardImage          String?
   ticketPriceNormal String
   ticketPriceVip    String
-  date              String?
-  time              String?
+  date              DateTime?
   venue             String?
   artist            String?
   createdDate       DateTime @default(now())
   description       String?
   totalSeats        String[]
+  totalTicketsSold  String?
   
   organizerId       String
 

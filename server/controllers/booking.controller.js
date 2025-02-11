@@ -4,15 +4,15 @@ import { updateEventSeats } from "../services/event.service.js"
 
 export const createBookingController = async (req, res) => {
   try {
-    const { clientId, eventId, seats, price } = req.body
+    const { clientId, eventId, seats, price, quantity } = req.body
 
     const validationError = validateBooking(clientId, eventId, seats, price)
     if (validationError) {
       return res.status(400).json({ error: validationError })
     }
 
-    const booking = await createBooking({ clientId, eventId, seats, price })
-    await updateEventSeats(eventId, seats, 'add')
+    const booking = await createBooking({ clientId, eventId, seats, price, quantity })
+    await updateEventSeats(eventId, seats, quantity, "add")
 
     res.status(201).json({ success: true, booking })
   } catch (err) {
@@ -31,7 +31,7 @@ export const cancelBookingController = async (req, res) => {
     }
 
     await cancelBooking(id)
-    await updateEventSeats(booking.eventId, booking.seats, 'remove')
+    await updateEventSeats(booking.eventId, booking.seats, booking.quantity, "remove")
 
     res.status(200).json({ success: true, message: "Booking cancelled successfully" })
   } catch (err) {

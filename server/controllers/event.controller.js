@@ -5,27 +5,32 @@ import { findUserById } from "../services/user.service.js"
 
 export const createNewEvent = async (req, res) => {
   try {
-    const eventData = req.body
-    const validationError = validateEvent(eventData)
+    const eventData = req.body;
+    const validationError = validateEvent(eventData);
     if (validationError) {
-      return res.status(400).json({ error: validationError })
-    }
-    console.log(req)
-    if (req.file) {
-        
-      const result = await uploadToCloudinary(req.file.path)
-      eventData.poster = result.secure_url
+      return res.status(400).json({ error: validationError });
     }
 
-    eventData.organizerId = req.user.id
+    if (req.files) {
+      if (req.files.poster) {
+        const posterResult = await uploadToCloudinary(req.files.poster[0].path);
+        eventData.poster = posterResult.secure_url;
+      }
+      if (req.files.cardImage) {
+        const cardImageResult = await uploadToCloudinary(req.files.cardImage[0].path);
+        eventData.cardImage = cardImageResult.secure_url;
+      }
+    }
 
-    const event = await createEvent(eventData)
-    res.status(201).json({ success: "Event created successfully", event })
+    eventData.organizerId = req.user.id;
+    const event = await createEvent(eventData);
+    res.status(201).json({ success: "Event created successfully", event });
   } catch (err) {
-    console.error("Error creating event:", err)
-    res.status(500).json({ error: "Internal error" })
+    console.error("Error creating event:", err);
+    res.status(500).json({ error: "Internal error" });
   }
-}
+};
+
 
 export const getEvents = async (req, res) => {
   const id = req.user.id;

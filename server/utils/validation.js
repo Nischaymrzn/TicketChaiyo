@@ -22,8 +22,9 @@ export const validateLogin = (email, password) => {
 
 export const validateEvent = (eventData) => {
     const { title, type, ticketPriceNormal, ticketPriceVip } = eventData
+    console.log(eventData,eventData.title,type,ticketPriceNormal,ticketPriceVip)
   
-    if (!title || !type || !ticketPriceNormal || !ticketPriceVip) {
+    if (!title || !type || !ticketPriceNormal) {
       return "Title, type, and ticket prices are required"
     }
   

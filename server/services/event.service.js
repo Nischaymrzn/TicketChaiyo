@@ -34,7 +34,7 @@ export const deleteEvent = async (id) => {
   })
 }
 
-export const updateEventSeats = async (eventId, seats, action) => {
+export const updateEventSeats = async (eventId, seats, quantity, action) => {
   const event = await prisma.event.findUnique({
     where: { id: eventId },
     select: { totalSeats: true },
@@ -51,8 +51,15 @@ export const updateEventSeats = async (eventId, seats, action) => {
     throw new Error('Invalid action')
   }
 
+  const currentTotal = Number.parseInt(event.totalTicketsSold || "0")
+  const updatedTotal = action === "add" ? currentTotal + quantity : currentTotal - quantity
+
   return await prisma.event.update({
     where: { id: eventId },
-    data: { totalSeats: updatedTotalSeats },
+    data: {
+      totalSeats: updatedTotalSeats,
+      totalTicketsSold: updatedTotal.toString(),
+    },
   })
+
 }
