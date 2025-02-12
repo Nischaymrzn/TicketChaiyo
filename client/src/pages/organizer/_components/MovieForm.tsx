@@ -16,11 +16,24 @@ import { movieSchema, type MovieFormData } from "../_schema"
 interface MovieFormProps {
   onSubmit: (data: MovieFormData) => void
   onCancel?: () => void
+  initialData?: MovieFormData
 }
 
-export function MovieForm({ onSubmit, onCancel }: MovieFormProps) {
+export function MovieForm({ onSubmit, onCancel, initialData }: MovieFormProps) {
   const form = useForm<MovieFormData>({
     resolver: zodResolver(movieSchema),
+    defaultValues: {
+      title: initialData?.title || "",
+      duration: initialData?.duration || "",
+      genre: initialData?.genre || "",
+      director: initialData?.director || "",
+      cast: initialData?.cast || "",
+      description: initialData?.description || "",
+      ticketPriceNormal: initialData?.ticketPriceNormal || "",
+      ticketPriceVip: initialData?.ticketPriceVip || "",
+      date: initialData?.date ? new Date(initialData.date) : new Date(),
+      venue: initialData?.venue || "",
+    },
   })
 
   const {
@@ -31,7 +44,7 @@ export function MovieForm({ onSubmit, onCancel }: MovieFormProps) {
   return (
     <Card className="w-full max-w-3xl border-none shadow-none bg-[#1C1C24] text-white">
       <CardHeader className="p-6">
-        <CardTitle className="text-2xl font-bold">Create Movie Event</CardTitle>
+        <CardTitle className="text-2xl font-bold">{initialData ? "Edit" : "Create"} Movie Event</CardTitle>
       </CardHeader>
       <CardContent>
         <ScrollArea className="h-[75vh] pr-4">
@@ -146,7 +159,9 @@ export function MovieForm({ onSubmit, onCancel }: MovieFormProps) {
                           {field.value ? "Change Poster" : "Upload Poster"}
                         </label>
                         {field.value && (
-                          <p className="mt-2 text-sm text-gray-400">File selected: {(field.value as File).name}</p>
+                          <p className="mt-2 text-sm text-gray-400">
+                            File selected: {field.value instanceof File ? field.value.name : "Previous poster"}
+                          </p>
                         )}
                       </div>
                     </FormControl>
@@ -155,8 +170,7 @@ export function MovieForm({ onSubmit, onCancel }: MovieFormProps) {
                 )}
               />
 
-              
-<FormField
+              <FormField
                 control={form.control}
                 name="cardImage"
                 render={({ field }) => (
@@ -184,7 +198,9 @@ export function MovieForm({ onSubmit, onCancel }: MovieFormProps) {
                           {field.value ? "Change Card Image" : "Upload Card Image"}
                         </label>
                         {field.value && (
-                          <p className="mt-2 text-sm text-gray-400">File selected: {(field.value as File).name}</p>
+                          <p className="mt-2 text-sm text-gray-400">
+                            File selected: {field.value instanceof File ? field.value.name : "Previous card image"}
+                          </p>
                         )}
                       </div>
                     </FormControl>
@@ -192,6 +208,7 @@ export function MovieForm({ onSubmit, onCancel }: MovieFormProps) {
                   </FormItem>
                 )}
               />
+
               <FormField
                 control={form.control}
                 name="ticketPriceNormal"
@@ -311,7 +328,7 @@ export function MovieForm({ onSubmit, onCancel }: MovieFormProps) {
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}
-                  Create Movie Event
+                  {initialData ? "Update" : "Create"} Movie Event
                 </Button>
               </div>
             </form>

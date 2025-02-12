@@ -1,12 +1,9 @@
-"use client"
-
-import type React from "react"
 import { useState } from "react"
 import { CalendarDays, PieChart, LayoutDashboard, Settings, Users, Menu, X } from "lucide-react"
 import { NavItem } from "../../../components/ui/NavItem"
 import ticketImg from "@/assets/ticket.png"
 
-const SideNav: React.FC = () => {
+const SideNav = () => {
   const [isOpen, setIsOpen] = useState(false)
 
   const toggleSidebar = () => setIsOpen(!isOpen)
@@ -14,16 +11,17 @@ const SideNav: React.FC = () => {
   return (
     <>
       <button
-        className="fixed top-4 left-4 z-50 rounded-md bg-gray-800 p-2 text-white md:hidden"
+        className="fixed top-4 left-4 z-50 rounded-md bg-gray-800 p-2 text-white lg:hidden"
         onClick={toggleSidebar}
       >
-        {isOpen ? <X size={20} /> : <Menu size={20}/>}
+        {isOpen ? <X size={20} /> : <Menu size={20} />}
       </button>
 
-      {isOpen && <div className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden" onClick={toggleSidebar} />}
+      {/* Overlay when menu is open */}
+      {isOpen && <div className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden" onClick={toggleSidebar} />}
 
       <nav
-        className={`fixed top-0 left-0 z-50 flex h-screen w-72 flex-col bg-[#1C1C24] p-4 text-white transition-transform duration-300 ease-in-out md:static md:translate-x-0 ${
+        className={`fixed top-0 left-0 z-50 flex h-screen w-72 flex-col bg-[#1C1C24] p-4 text-white transition-transform duration-300 ease-in-out lg:static lg:translate-x-0 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -46,4 +44,3 @@ const SideNav: React.FC = () => {
 }
 
 export default SideNav
-

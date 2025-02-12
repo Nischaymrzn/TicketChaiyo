@@ -28,7 +28,6 @@ export const movieSchema = eventBaseSchema.extend({
 
 export const concertSchema = eventBaseSchema.extend({
   artist: z.string().min(1, "Artist is required"),
-  totalSeats: z.number().int().positive({ message: "Total seats must be a positive integer" }),
 })
 
 export type MovieFormData = z.infer<typeof movieSchema>

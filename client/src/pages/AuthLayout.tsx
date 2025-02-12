@@ -22,7 +22,6 @@ const AuthLayout = () => {
   const location = useLocation();
   //@ts-expect-error
   const from = location.state?.from?.pathname || DEFAULT_ROUTES[user?.userRole ?? "client"];
-  console.log(from, "from");
   if (isAuthenticated) {
     return <Navigate to={from} replace />;
   }

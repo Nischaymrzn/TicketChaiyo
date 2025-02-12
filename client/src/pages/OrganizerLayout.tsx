@@ -12,11 +12,11 @@ const OrganizerLayout = () => {
     }
 
   return(
-    <div className="bg-[#13131A] h-[100vh] w-full flex flex-row">
-        <div>
+    <div className="bg-[#13131A] h-full w-full flex flex-row">
+        <div className='fixed z-10'>
           <SideNav />
         </div>
-        <div className="p-6 w-full mt-12 md:mt-0">
+        <div className="z-0 p-6 w-full min-h-[100vh] mt-12 lg:mt-0 lg:pl-[19.5rem]">
           <Outlet />
         </div>
     </div>

@@ -1,73 +1,115 @@
 import { useState } from "react"
-import { PlusCircle } from 'lucide-react'
+import { PlusCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import { EventTypeSelector } from "./_components/EventTypeSelector"
 import { MovieForm } from "./_components/MovieForm"
 import { ConcertForm } from "./_components/ConcertForm"
 import type { MovieFormData, ConcertFormData } from "./_schema"
-import authenticatedApi from "@/api"
+import { useGetOrganizerEvents, useCreateEvent } from "@/hooks/useOrganizer"
+import { useUpdateEvent, useDeleteEvent } from "@/hooks/useOrganizer"
+import { EventCard } from "./_components/EventCard"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+
+type EventType = "MOVIE" | "CONCERT"
+
+interface Event {
+  id: string
+  title: string
+  type: EventType
+  duration: string | null
+  genre: string | null
+  director: string | null
+  cast: string | null
+  poster: string | null
+  cardImage: string | null
+  ticketPriceNormal: string
+  ticketPriceVip: string
+  date: string | null
+  venue: string | null
+  artist: string | null
+  createdDate: string
+  description: string | null
+  totalSeats: string[]
+  totalTicketsSold: string | null
+}
 
 export const EventsPage = () => {
+  const { data, isLoading, error } = useGetOrganizerEvents()
+  const createEventMutation = useCreateEvent()
+  const updateEventMutation = useUpdateEvent()
+  const deleteEventMutation = useDeleteEvent()
+  const eventsData = data?.events
   const [isOpen, setIsOpen] = useState(false)
-  const [eventType, setEventType] = useState<"MOVIE" | "CONCERT" | null>(null)
+  const [eventType, setEventType] = useState<EventType | null>(null)
+  const [filter, setFilter] = useState<"ALL" | EventType>("ALL")
+  const [editingEvent, setEditingEvent] = useState<Event | null>(null)
 
-  const handleEventTypeSelect = (type: "MOVIE" | "CONCERT") => {
+  const handleEventTypeSelect = (type: EventType) => {
     setEventType(type)
   }
 
   const handleCreateEvent = async (formData: MovieFormData | ConcertFormData) => {
-    console.log(formData);
-  
+    if (!eventType) return
+
     try {
-      const formDataToSend = new FormData();
-  
-      // Append form data fields
-      Object.entries(formData).forEach(([key, value]) => {
-        if (key === "date" && value instanceof Date) {
-          formDataToSend.append(key, value.toISOString()); // Convert date to ISO 8601 format
-        } else if (value instanceof File) {
-          formDataToSend.append(key, value); // Append file fields (e.g., poster, cardImage)
-        } else {
-          formDataToSend.append(key, String(value)); // Ensure all other fields are strings
-        }
-      });
-  
-      formDataToSend.append("type", eventType || "");
-  
-      // Send the form data to the backend
-      const response = await authenticatedApi.post("/events", formDataToSend, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-  
-      if (response.status === 201) {
-        setIsOpen(false);
-        setEventType(null);
-      } else {
-        console.error("Failed to create event", response);
-      }
+      await createEventMutation.mutateAsync({ formData, eventType })
+      handleDialogClose()
     } catch (error) {
-      console.error("Error creating event:", error);
+      console.error("Error creating event:", error)
     }
-  };
-  
+  }
+
+  const handleUpdateEvent = async (formData: MovieFormData | ConcertFormData) => {
+    if (!editingEvent) return
+
+    try {
+      await updateEventMutation.mutateAsync({
+        eventId: editingEvent.id,
+        formData,
+        eventType: editingEvent.type,
+      })
+      handleDialogClose()
+    } catch (error) {
+      console.error("Error updating event:", error)
+    }
+  }
+
+  const handleDeleteEvent = async (eventId: string) => {
+    try {
+      await deleteEventMutation.mutateAsync(eventId)
+    } catch (error) {
+      console.error("Error deleting event:", error)
+    }
+  }
+
   const handleDialogClose = () => {
     setIsOpen(false)
     setEventType(null)
+    setEditingEvent(null)
   }
 
+  const handleEditEvent = (event: Event) => {
+    setEditingEvent(event)
+    setEventType(event.type)
+    setIsOpen(true)
+  }
+
+  const filteredEvents = eventsData?.filter((event: Event) => filter === "ALL" || event.type === filter) || []
+
+  if (isLoading) return <div>Loading...</div>
+  if (error) return <div>Error loading events</div>
+
   return (
-    <div className="text-gray-300 w-full flex flex-col space-y-6">
-      <div className="flex justify-between items-center">
+    <div className="text-gray-300 w-full h-full flex flex-col space-y-6">
+      <div className="flex justify-between sm:items-center sm:flex-row flex-col">
         <div>
           <h1 className="text-2xl font-bold">Events</h1>
           <p className="text-sm md:text-base text-gray-400">Monitor all your events here</p>
         </div>
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
           <DialogTrigger asChild>
-            <Button className="bg-[#FFC987] text-black hover:bg-[#f5d0a2]" onClick={() => setIsOpen(true)}>
+            <Button className="bg-[#FFC987] text-black hover:bg-[#f5d0a2] mt-4 w-36" onClick={() => setIsOpen(true)}>
               <PlusCircle className="mr-2 h-4 w-4" /> Create Event
             </Button>
           </DialogTrigger>
@@ -75,15 +117,41 @@ export const EventsPage = () => {
             {!eventType ? (
               <EventTypeSelector onSelect={handleEventTypeSelect} />
             ) : eventType === "MOVIE" ? (
-              <MovieForm onSubmit={handleCreateEvent} onCancel={handleDialogClose} />
+              <MovieForm
+                onSubmit={editingEvent ? handleUpdateEvent : handleCreateEvent}
+                onCancel={handleDialogClose}
+                initialData={editingEvent as any}
+              />
             ) : (
-              <ConcertForm onSubmit={handleCreateEvent} onCancel={handleDialogClose} />
+              <ConcertForm
+                onSubmit={editingEvent ? handleUpdateEvent : handleCreateEvent}
+                onCancel={handleDialogClose}
+                initialData={editingEvent as any}
+              />
             )}
           </DialogContent>
         </Dialog>
       </div>
 
-      {/* Event list rendering code (commented out in the original) */}
+      <div className="flex justify-end mb-4">
+        <Select value={filter} onValueChange={(value: "ALL" | EventType) => setFilter(value)}>
+          <SelectTrigger className="w-[180px] bg-[#1C1C24] border-[#2C2C35] text-gray-200">
+            <SelectValue placeholder="Filter events" />
+          </SelectTrigger>
+          <SelectContent className="bg-[#1C1C24] border-[#2C2C35] text-gray-200">
+            <SelectItem value="ALL">All Events</SelectItem>
+            <SelectItem value="MOVIE">Movies</SelectItem>
+            <SelectItem value="CONCERT">Concerts</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+
+      <div className="space-y-4">
+        {filteredEvents.map((event: Event) => (
+          <EventCard key={event.id} event={event} onEdit={handleEditEvent} onDelete={handleDeleteEvent} />
+        ))}
+      </div>
     </div>
   )
 }
+

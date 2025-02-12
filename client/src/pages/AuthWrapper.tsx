@@ -6,8 +6,7 @@ const AuthWrapper = () => {
   const { handleSetAccessToken, setUser } = useAuth();
   const token = localStorage.getItem("accessToken");
   const response = useGetMe();
-  console.log("hello");
-  console.log(response?.data);
+
 
   if(response?.isLoading){
     return <div>...loading</div>

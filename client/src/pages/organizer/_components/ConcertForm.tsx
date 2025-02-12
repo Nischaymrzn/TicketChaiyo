@@ -16,11 +16,21 @@ import { concertSchema, type ConcertFormData } from "../_schema"
 interface ConcertFormProps {
   onSubmit: (data: ConcertFormData) => void
   onCancel?: () => void
+  initialData?: ConcertFormData
 }
 
-export function ConcertForm({ onSubmit, onCancel }: ConcertFormProps) {
+export function ConcertForm({ onSubmit, onCancel, initialData }: ConcertFormProps) {
   const form = useForm<ConcertFormData>({
     resolver: zodResolver(concertSchema),
+    defaultValues: {
+      title: initialData?.title || "",
+      artist: initialData?.artist || "",
+      description: initialData?.description || "",
+      ticketPriceNormal: initialData?.ticketPriceNormal || "",
+      ticketPriceVip: initialData?.ticketPriceVip || "",
+      date: initialData?.date ? new Date(initialData.date) : new Date(),
+      venue: initialData?.venue || "",
+    },
   })
 
   const {
@@ -31,7 +41,7 @@ export function ConcertForm({ onSubmit, onCancel }: ConcertFormProps) {
   return (
     <Card className="w-full max-w-3xl border-none shadow-none bg-[#1C1C24] text-white">
       <CardHeader className="p-6">
-        <CardTitle className="text-2xl font-bold">Create Concert Event</CardTitle>
+        <CardTitle className="text-2xl font-bold">{initialData ? "Edit" : "Create"} Concert Event</CardTitle>
       </CardHeader>
       <CardContent>
         <ScrollArea className="h-[75vh] pr-4">
@@ -69,7 +79,7 @@ export function ConcertForm({ onSubmit, onCancel }: ConcertFormProps) {
                   </FormItem>
                 )}
               />
-              
+
               <FormField
                 control={form.control}
                 name="poster"
@@ -98,7 +108,9 @@ export function ConcertForm({ onSubmit, onCancel }: ConcertFormProps) {
                           {field.value ? "Change Poster" : "Upload Poster"}
                         </label>
                         {field.value && (
-                          <p className="mt-2 text-sm text-gray-400">File selected: {(field.value as File).name}</p>
+                          <p className="mt-2 text-sm text-gray-400">
+                            File selected: {field.value instanceof File ? field.value.name : "Previous poster"}
+                          </p>
                         )}
                       </div>
                     </FormControl>
@@ -135,7 +147,9 @@ export function ConcertForm({ onSubmit, onCancel }: ConcertFormProps) {
                           {field.value ? "Change Card Image" : "Upload Card Image"}
                         </label>
                         {field.value && (
-                          <p className="mt-2 text-sm text-gray-400">File selected: {(field.value as File).name}</p>
+                          <p className="mt-2 text-sm text-gray-400">
+                            File selected: {field.value instanceof File ? field.value.name : "Previous card image"}
+                          </p>
                         )}
                       </div>
                     </FormControl>
@@ -143,7 +157,6 @@ export function ConcertForm({ onSubmit, onCancel }: ConcertFormProps) {
                   </FormItem>
                 )}
               />
-
 
               <FormField
                 control={form.control}
@@ -246,24 +259,7 @@ export function ConcertForm({ onSubmit, onCancel }: ConcertFormProps) {
                   </FormItem>
                 )}
               />
-              <FormField
-                control={form.control}
-                name="totalSeats"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Total Seats</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        type="number"
-                        placeholder="e.g., 1000"
-                        className="bg-[#2A2A35] border-gray-700 h-12 text-lg focus:border-[#FFC987] focus:ring-[#FFC987]"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+
               <div className="flex justify-between pt-6">
                 {onCancel && (
                   <Button
@@ -281,7 +277,7 @@ export function ConcertForm({ onSubmit, onCancel }: ConcertFormProps) {
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}
-                  Create Concert Event
+                  {initialData ? "Update" : "Create"} Concert Event
                 </Button>
               </div>
             </form>

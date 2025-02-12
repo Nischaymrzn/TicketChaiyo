@@ -1,6 +1,5 @@
 import type React from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { ArrowDownIcon, ArrowUpIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 interface CardDataStatsProps {
@@ -11,9 +10,8 @@ interface CardDataStatsProps {
   icon: React.ReactNode
 }
 
-export const CardDataStats = ({ title, total, trend, trendPercentage, icon } : CardDataStatsProps) => {
+export const CardDataStats = ({ title, total, trend, icon } : CardDataStatsProps) => {
   const isTrendUp = trend === "up"
-  const trendColor = isTrendUp ? "text-green-400" : "text-red-400"
   const bgColor = isTrendUp ? "bg-green-400/10" : "bg-red-400/10"
 
   return (
@@ -25,14 +23,6 @@ export const CardDataStats = ({ title, total, trend, trendPercentage, icon } : C
 
       <CardContent>
         <div className="text-2xl font-bold text-white">{total}</div>
-
-        {trend && trendPercentage && (
-          <p className={cn("mt-1 text-xs", trendColor)}>
-            {isTrendUp ? <ArrowUpIcon className="inline h-4 w-4" /> : <ArrowDownIcon className="inline h-4 w-4" />}
-
-            <span className="ml-1">{trendPercentage}</span>
-          </p>
-        )}
       </CardContent>
     </Card>
   )
