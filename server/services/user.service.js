@@ -29,6 +29,7 @@ export const findUserById = async (id) => {
       id: true,
       email: true,
       name: true,
+      username : true,
       userRole: true,
     },
   })

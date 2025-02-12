@@ -14,7 +14,7 @@ const router = express.Router()
 router.post("/", verifyTokenMiddleware, upload.fields([{ name: "poster" }, { name: "cardImage" }]), createNewEvent);
 router.get("/", verifyTokenMiddleware, getEvents)
 router.get("/:id", verifyTokenMiddleware, getEvent)
-router.patch("/:id", verifyTokenMiddleware, upload.single("poster"), updateEventById)
+router.patch("/:id", verifyTokenMiddleware, upload.fields([{ name: "poster" }, { name: "cardImage" }]), updateEventById)
 router.delete("/:id", verifyTokenMiddleware, deleteEventById)
 
 export default router

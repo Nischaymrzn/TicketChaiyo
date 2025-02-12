@@ -66,9 +66,15 @@ export const updateEventById = async (req, res) => {
     try {
       const eventData = req.body;
 
-      if (req.file) {
-        const result = await uploadToCloudinary(req.file.path);
-        eventData.poster = result.secure_url;
+      if (req.files) {
+        if (req.files.poster) {
+          const posterResult = await uploadToCloudinary(req.files.poster[0].path);
+          eventData.poster = posterResult.secure_url;
+        }
+        if (req.files.cardImage) {
+          const cardImageResult = await uploadToCloudinary(req.files.cardImage[0].path);
+          eventData.cardImage = cardImageResult.secure_url;
+        }
       }
 
       const event = await updateEvent(req.params.id, eventData);

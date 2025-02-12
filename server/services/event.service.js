@@ -10,9 +10,9 @@ export const createEvent = async (eventData) => {
 
 export const getAllEvents = async (role,id) => {
   if(role == "organizer"){
-    return await prisma.event.findMany({where : {organizerId: id} })
+    return await prisma.event.findMany({where : {organizerId: id}, include : {bookings : { include: {client : true} } }})
   }
-  return await prisma.event.findMany()
+  return await prisma.event.findMany({include : {bookings : true }})
 }
 
 export const getEventById = async (id) => {
@@ -37,7 +37,7 @@ export const deleteEvent = async (id) => {
 export const updateEventSeats = async (eventId, seats, quantity, action) => {
   const event = await prisma.event.findUnique({
     where: { id: eventId },
-    select: { totalSeats: true },
+    select: { totalSeats: true, totalTicketsSold : true },
   })
 
   if (!event) throw new Error('Event not found')

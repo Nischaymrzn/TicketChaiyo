@@ -11,6 +11,7 @@ export const createBookingController = async (req, res) => {
       return res.status(400).json({ error: validationError })
     }
 
+    console.log("now creating...")
     const booking = await createBooking({ clientId, eventId, seats, price, quantity })
     await updateEventSeats(eventId, seats, quantity, "add")
 

@@ -1,12 +1,12 @@
 import prisma from "../db/prisma.js"
 
-export const createBooking = async ({ clientId, eventId, seats, price }) => {
+export const createBooking = async ({ clientId, eventId, seats, price,quantity }) => {
   return await prisma.booking.create({
     data: {
       clientId,
       eventId,
       seats,
-      quantity: seats.length,
+      quantity,
       price,
     },
   })
