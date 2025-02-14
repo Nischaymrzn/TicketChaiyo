@@ -1,6 +1,7 @@
 import { createUser, findUserByEmail, findUserById } from "../services/user.service.js"
 import { validateSignup, validateLogin } from "../utils/validation.js"
 import { comparePasswords, createToken } from "../services/auth.service.js"
+import { UserRole } from "@prisma/client"
 
 export const signup = async (req, res) => {
   try {
@@ -19,7 +20,10 @@ export const signup = async (req, res) => {
       })
     }
 
-    const user = await createUser({ fullName, email, userName, password, userRole })
+    const isAccepted = userRole?.toLowerCase() === "client";
+    console.log(userRole,isAccepted)
+    
+    const user = await createUser({ fullName, email, userName, password, userRole, isAccepted })
     res.status(201).json({ success: "User created successfully" })
   } catch (err) {
     console.error("Error creating user:", err)
@@ -41,6 +45,13 @@ export const login = async (req, res) => {
       return res.status(401).json({
         status: "error",
         message: "Invalid credentials",
+      })
+    }
+
+    if(!user.isAccepted){
+      return res.status(401).json({
+        status: "error",
+        message: "Your account is awaiting admin approval",
       })
     }
 

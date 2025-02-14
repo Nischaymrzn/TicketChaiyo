@@ -1,5 +1,6 @@
 import express from "express"
 import {
+    createOrganizers,
     deleteUser,
     getCustomers,
     getOrganizers,
@@ -15,6 +16,7 @@ router.get("/customers", verifyTokenMiddleware, getCustomers)
 router.get("/organizers", verifyTokenMiddleware, getOrganizers)
 router.delete("/:id",verifyTokenMiddleware,deleteUser)
 router.patch("/:id",verifyTokenMiddleware,updateUser)
+router.post("/createOrganizers",verifyTokenMiddleware,createOrganizers)
 
 export default router
 

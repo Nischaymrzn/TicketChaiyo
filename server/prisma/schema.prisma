@@ -26,6 +26,8 @@ model User {
   email     String   @unique
   password  String
   userRole      UserRole
+  isAccepted        Boolean @default(false)
+  createdDate       DateTime @default(now())
 
   Event Event[] @relation("OrganizerEvents")
   
@@ -52,6 +54,7 @@ model Event {
   description       String?
   totalSeats        String[]
   totalTicketsSold  String?
+  isAccepted        Boolean @default(false)
   
   organizerId       String
 

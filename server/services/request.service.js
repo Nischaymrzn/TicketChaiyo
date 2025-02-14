@@ -11,12 +11,12 @@ export const fetchAllRequests = async () => {
     if (!user.isAccepted) {
       pendingRequests.push({
         id: user.id,
-        type: "organizer",
+        requestType: "organizer",
         userName: user.name,
         description: "has requested to become an organizer.",
         timestamp: formatTimestamp(user.createdDate),
         hasActions: true,
-        status: "pending",
+        type: "organizer",
       })
     }
   })
@@ -25,13 +25,13 @@ export const fetchAllRequests = async () => {
     if (!event.isAccepted) {
       pendingRequests.push({
         id: event.id,
-        type: "event",
+        requestType: "event",
         userName: users.find((user) => user.id === event.organizerId)?.name || "Unknown Organizer",
         eventName: event.title,
         description: "has created a new event.",
         timestamp: formatTimestamp(event.createdDate),
         hasActions: true,
-        status: "pending",
+        type: event.type,
       })
     }
   })
