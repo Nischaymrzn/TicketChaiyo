@@ -6,8 +6,8 @@ import { EventTypeSelector } from "./_components/EventTypeSelector"
 import { MovieForm } from "./_components/MovieForm"
 import { ConcertForm } from "./_components/ConcertForm"
 import type { MovieFormData, ConcertFormData } from "./_schema"
-import { useGetOrganizerEvents, useCreateEvent } from "@/hooks/useOrganizer"
-import { useUpdateEvent, useDeleteEvent } from "@/hooks/useOrganizer"
+import { useGetOrganizerEvents, useCreateEvent } from "@/hooks/useEvent"
+import { useUpdateEvent, useDeleteEvent } from "@/hooks/useEvent"
 import { EventCard } from "./_components/EventCard"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
@@ -39,7 +39,7 @@ export const EventsPage = () => {
   const createEventMutation = useCreateEvent()
   const updateEventMutation = useUpdateEvent()
   const deleteEventMutation = useDeleteEvent()
-  const eventsData = data?.events
+  const eventsData = data?.events.filter((event : any) => event.isAccepted === true) ?? []
   const [isOpen, setIsOpen] = useState(false)
   const [eventType, setEventType] = useState<EventType | null>(null)
   const [filter, setFilter] = useState<"ALL" | EventType>("ALL")

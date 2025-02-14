@@ -15,7 +15,9 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Separator } from "@/components/ui/separator"
-import { useGetMe } from "@/hooks/useAuth"
+import { useGetMe, useLogout } from "@/hooks/useAuth"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 
 
 export const SettingsPage = () => {
@@ -43,12 +45,42 @@ export const SettingsPage = () => {
     setIsDialogOpen(false)
   }
 
+  const { logout } = useLogout();
+
+  const handleLogout = () =>{
+    logout()
+  }
+
   return (
     <div className="text-gray-300 w-full flex flex-col gap-14">
-      <div>
-        <p className="text-2xl font-bold">Settings</p>
+      <div className="flex justify-between">
+        <div>
+          <p className="text-2xl font-bold">Settings</p>
 
-        <p className="text-sm md:text-base px-1">Monitor all your profile details here</p>
+          <p className="text-sm md:text-base px-1">Monitor all your profile details here</p>
+        </div>
+
+        <div>
+          <DropdownMenu>
+            <DropdownMenuTrigger>              
+            <Avatar>
+              <AvatarFallback className="text-black">{userData.name.split("")[0]}</AvatarFallback>
+            </Avatar>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-56">
+              <DropdownMenuItem className="cursor-pointer hover:bg-gray-200 text-[15px]" onClick={handleLogout}>
+                <span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-log-out">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                    <polyline points="16 17 21 12 16 7"/>
+                    <line x1="21" x2="9" y1="12" y2="12"/>
+                  </svg>
+                </span>
+                Logout
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
 
       <Card className="w-full max-w-2xl bg-[#1c1c24] border border-[#2a2a35] rounded-lg overflow-hidden py-1 pb-3">

@@ -1,7 +1,7 @@
 import { useAuth } from '@/state-stores/Auth';
 import { Outlet } from 'react-router';
 import Unauthorized from './client/_components/Unauthorized';
-import SideNav from './organizer/_components/SideNav';
+import SideNav from './admin/_components/SideNav';
 
 const AdminLayout = () => {
     const { user } = useAuth();

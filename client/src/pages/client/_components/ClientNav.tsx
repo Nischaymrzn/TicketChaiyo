@@ -16,7 +16,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 const ClientNav: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
-//   const [loggedIn, setLoggedIn] = useState<boolean>(true);
+
   const navigate = useNavigate();
   const location = useLocation();
   const loggedIn=true;
@@ -73,7 +73,6 @@ const ClientNav: React.FC = () => {
         </li>
       </ul>
 
-      {/* Mobile Menu Toggle Button */}
       <div className="lg:hidden">
         <button
           type="button"
@@ -85,7 +84,6 @@ const ClientNav: React.FC = () => {
         </button>
       </div>
 
-      {/* Desktop Actions */}
       {!loggedIn && (
         <div className="hidden lg:flex gap-2 pr-4 sm:gap-5 sm:pr-10">
           <Link to="/signup">

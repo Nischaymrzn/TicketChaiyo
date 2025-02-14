@@ -14,9 +14,14 @@ import AdminLayout from "./pages/AdminLayout";
 import AdminDashboard from "./pages/admin/Dashboard";
 import VotingPage from "./pages/client/VotingPage";
 import { EventsPage } from "./pages/organizer/EventsPage";
+import { AdminEventsPage } from "./pages/admin/AdminEventsPage";
 import { SalesPage } from "./pages/organizer/SalesPage";
 import {CustomerPage} from "./pages/organizer/CustomerPage";
 import { SettingsPage } from "./pages/organizer/SettingsPage";
+import { OrganizersPage } from "./pages/admin/OrganizersPage";
+import { AdminCustomersPage } from "./pages/admin/AdminCustomersPage";
+import RequestsPage from "./pages/admin/RequestsPage";
+import { AdminSettingsPage } from "./pages/admin/AdminSettingsPage";
 
 
 
@@ -42,6 +47,11 @@ return(
 
                     <Route path="/admin" element={<AdminLayout />}>
                         <Route path="dashboard" index element={<AdminDashboard />}/>
+                        <Route path="events" index element={<AdminEventsPage />}/>
+                        <Route path="organizers" index element={<OrganizersPage />}/>
+                        <Route path="customers" index element={<AdminCustomersPage />}/>
+                        <Route path="request" index element={<RequestsPage />}/>
+                        <Route path="settings" index element={<AdminSettingsPage />}/>
                     </Route>
                 </Route>
                 

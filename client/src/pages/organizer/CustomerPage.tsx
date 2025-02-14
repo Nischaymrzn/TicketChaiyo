@@ -1,4 +1,4 @@
-import { useGetOrganizerEvents } from "@/hooks/useOrganizer"
+import { useGetOrganizerEvents } from "@/hooks/useEvent"
 import { CustomerDataTable } from "./_components/CustomerDataTable"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 

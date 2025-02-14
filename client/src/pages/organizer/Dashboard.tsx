@@ -27,7 +27,7 @@ const Dashboard = () => {
           />
           <CardDataStats
             title="Total Revenue"
-            total="Rs. x12,345"
+            total="Rs. 12,345"
             icon={<DollarSign className="h-4 w-4 text-yellow-500" />}
           />
                   <CardDataStats

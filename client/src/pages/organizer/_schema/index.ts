@@ -17,6 +17,7 @@ const eventBaseSchema = z.object({
   description: z.string().optional(),
   poster: z.instanceof(File).optional(),
   cardImage: z.instanceof(File).optional(),
+
 })
 
 export const movieSchema = eventBaseSchema.extend({

@@ -62,6 +62,11 @@ export const useLogin = () => {
         navigate("/organizer/dashboard")
       }
     },
+    onError: (err) => {
+      console.log(err)
+      //@ts-ignore
+      toast.error(err?.response?.data?.error)
+    },
   })
 
   const login = (email: string, password: string) => {
