@@ -1,11 +1,11 @@
 import ClientNav from './_components/ClientNav'
 import MovieCard from './_components/MovieCard'
 import Slider from '@/components/Slider'
-import {movies} from "@/constants/movies"
 import Footer from '@/components/Footer'
 import { Button } from '@/components/ui/button'
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
+import { useGetEvents } from '@/hooks/useEvent'
 
 interface Movie {
   id: number;
@@ -14,14 +14,20 @@ interface Movie {
   released: string;
   duration: string;
   genre: string; 
+  date: string;
   director: string;
   cast: string;
   poster: string;
   ticketPriceNormal: string;
   ticketPriceVip: string;
+  cardImage : string;
+  venue : string;
 }
 
 const HomePage = () => {
+  const { data } = useGetEvents()
+  const movies = data?.events ?? []
+
   const [filter, setFilter] = useState<string>('all');
 
   const handleFilterChange = (type: string): void => {
@@ -29,7 +35,7 @@ const HomePage = () => {
   };
 
   const filteredMovies : Movie[] =
-    filter === 'all' ? movies : movies.filter((movie) => movie.type === filter);
+    filter === 'all' ? movies : movies.filter((movie : any) => movie.type === filter);
 
   
   return (
@@ -58,7 +64,7 @@ const HomePage = () => {
                 'px-6 py-5 font-medium text-lg border border-gray-500',
                 filter === 'movie' ? 'bg-[#FFC987] hover:bg-[#f1c692] text-black border-transparent' : 'border-gray-500'
               )}
-              onClick={() => handleFilterChange('movie')}
+              onClick={() => handleFilterChange('MOVIE')}
             >
               Movies
             </Button>
@@ -67,7 +73,7 @@ const HomePage = () => {
                 'px-6 py-5 font-medium text-lg border border-gray-500',
                 filter === 'concert' ? 'bg-[#FFC987] hover:bg-[#f1c692] text-black border-transparent' : 'border-gray-500'
               )}
-              onClick={() => handleFilterChange('concert')}
+              onClick={() => handleFilterChange('CONCERT')}
             >
               Concert
             </Button>
