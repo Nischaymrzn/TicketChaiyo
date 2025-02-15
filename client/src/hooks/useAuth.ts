@@ -65,7 +65,7 @@ export const useLogin = () => {
     onError: (err) => {
       console.log(err)
       //@ts-ignore
-      toast.error(err?.response?.data?.error)
+      toast.error(err?.response?.data?.message)
     },
   })
 

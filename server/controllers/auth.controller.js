@@ -37,7 +37,7 @@ export const login = async (req, res) => {
 
     const validationError = validateLogin(email, password)
     if (validationError) {
-      return res.status(400).json({ error: validationError })
+      return res.status(400).json({ message: validationError })
     }
 
     const user = await findUserByEmail(email)
@@ -57,7 +57,7 @@ export const login = async (req, res) => {
 
     const isValidPassword = await comparePasswords(password, user.password)
     if (!isValidPassword) {
-      return res.status(401).json({ error: "Incorrect password" })
+      return res.status(401).json({ message: "Incorrect password" })
     }
 
     const token = createToken(user.id)
