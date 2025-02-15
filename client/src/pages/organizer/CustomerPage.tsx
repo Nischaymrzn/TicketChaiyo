@@ -1,9 +1,9 @@
-import { useGetOrganizerEvents } from "@/hooks/useEvent"
+import { useGetEvents } from "@/hooks/useEvent"
 import { CustomerDataTable } from "./_components/CustomerDataTable"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 
 export const CustomerPage = () => {
-  const data = useGetOrganizerEvents()
+  const data = useGetEvents()
   const eventData = data?.data?.events || []
 
   const columns = [

@@ -5,9 +5,9 @@ import type { MovieFormData, ConcertFormData } from "../pages/organizer/_schema"
 
 type EventType = "MOVIE" | "CONCERT"
 
-export const useGetOrganizerEvents = () => {
+export const useGetEvents = () => {
     return useQuery({
-      queryKey: ["organizers-events"],
+      queryKey: ["events"],
       queryFn: async () => {
         const response = await authenticatedApi.get("/events")
         return response.data

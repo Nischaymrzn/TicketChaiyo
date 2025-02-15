@@ -1,17 +1,21 @@
 import { Link } from 'react-router-dom';
+import { format, parseISO } from 'date-fns';
 
-type movie={
+export type movie={
     id: number;
     title: string;
     type: string;
     released: string;
+    date: string;
     duration: string;
     genre: string;
     director: string;
     cast: string;
     poster: string;
+    cardImage : string;
     ticketPriceNormal: string;
     ticketPriceVip: string;
+    venue : string;
 }
 
 interface MovieCardProps {
@@ -25,9 +29,9 @@ const MovieCard = ({movie,isDetailed} : MovieCardProps) => {
       {/* Group container for hover effect */}
       <div className="relative w-full group">
         <img
-          src={movie.poster}
+          src={movie.cardImage}
           alt={movie.title}
-          className="object-cover w-full 2xl:w-[380px] 2xl:h-[435px] border rounded-lg cursor-pointer border-gray-700"
+          className="object-cover w-full sm:h-[300px] md:h-[350px] xl:h-[400px] 2xl:w-[380px] 2xl:h-[435px] border rounded-lg cursor-pointer border-gray-700"
           width={500}
           height={500}
           loading="lazy"
@@ -52,9 +56,9 @@ const MovieCard = ({movie,isDetailed} : MovieCardProps) => {
         
         {!isDetailed ? (
           <div className="flex items-center gap-3 text-sm">
-            <p>{movie.released}</p>
+            <p>{format(parseISO(movie.date), 'yyyy-MM-dd')}</p>
             <div className="w-2 h-2 rounded-full bg-text-secondary"></div>
-            <p>Kathmandu, Nepal</p>
+            <p>{movie.venue}</p>
           </div>
         ) : (
           <div className="flex flex-col gap-1 text-sm">

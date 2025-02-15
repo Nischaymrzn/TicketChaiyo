@@ -4,7 +4,7 @@ import { EventTypeSelector } from "../organizer/_components/EventTypeSelector"
 import { MovieForm } from "../organizer/_components/MovieForm" 
 import { ConcertForm } from "../organizer/_components/ConcertForm"
 import type { MovieFormData, ConcertFormData } from "../organizer/_schema"
-import { useGetOrganizerEvents, useCreateEvent } from "@/hooks/useEvent"
+import { useGetEvents, useCreateEvent } from "@/hooks/useEvent"
 import { useUpdateEvent, useDeleteEvent } from "@/hooks/useEvent"
 import { EventCard } from "../organizer/_components/EventCard" 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
@@ -33,7 +33,7 @@ interface Event {
 }
 
 export const AdminEventsPage = () => {
-  const { data, isLoading, error } = useGetOrganizerEvents()
+  const { data, isLoading, error } = useGetEvents()
   const createEventMutation = useCreateEvent()
   const updateEventMutation = useUpdateEvent()
   const deleteEventMutation = useDeleteEvent()
