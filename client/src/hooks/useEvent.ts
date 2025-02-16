@@ -107,3 +107,15 @@ export const useGetEvents = () => {
       },
     })
   }
+
+  export const useGetEvent = (id : string) => {
+    return useQuery({
+      queryKey: ["events",id],
+      queryFn: async () => {
+        const response = await authenticatedApi.get(`/events/${id}`)
+        return response.data
+      },
+      enabled: !!localStorage.getItem("accessToken"), 
+      retry: false,
+    })
+  }
