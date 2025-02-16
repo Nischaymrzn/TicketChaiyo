@@ -26,7 +26,6 @@ const ClientNav: React.FC = () => {
     logout()
   }
   
-  
   const isActive = (path: string): boolean => location.pathname === path;
 
   return (
@@ -37,7 +36,6 @@ const ClientNav: React.FC = () => {
         </h1>
       </Link>
 
-      {/* Desktop Navigation */}
       <ul className="hidden lg:flex gap-8 text-lg">
         <li
           className={`cursor-pointer ${
@@ -104,7 +102,7 @@ const ClientNav: React.FC = () => {
           <DropdownMenu>
             <DropdownMenuTrigger>              
             <Avatar>
-              <AvatarFallback>N</AvatarFallback>
+              <AvatarFallback className="text-black">N</AvatarFallback>
             </Avatar>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56">
@@ -150,7 +148,6 @@ const ClientNav: React.FC = () => {
         </div>
       )}
 
-      {/* Mobile Menu */}
       <Dialog
         as="div"
         className="lg:hidden"
