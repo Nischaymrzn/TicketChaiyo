@@ -1,18 +1,19 @@
 import { useState } from "react"
-import { ShipWheelIcon as Wheelchair } from "lucide-react"
+import { Accessibility, Square } from "lucide-react"
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 
 interface SeatSelectionProps {
-  totalRows: number
-  seatsPerRow: number
-  totalSeatsBooked: string[]
+  totalSeats: string[]
   onSeatSelect: (seat: string) => void
+  ticketPriceNormal: number
+  ticketPriceVip: number
 }
 
-const SeatSelection = ({ totalRows, seatsPerRow, totalSeatsBooked, onSeatSelect } : SeatSelectionProps) => {
+const SeatSelection = ({ totalSeats, onSeatSelect, ticketPriceNormal, ticketPriceVip }: SeatSelectionProps) => {
   const [selectedSeats, setSelectedSeats] = useState<string[]>([])
 
   const handleSeatClick = (seat: string) => {
-    if (totalSeatsBooked.includes(seat.toLowerCase())) return
+    if (totalSeats.includes(seat.toLowerCase())) return
 
     setSelectedSeats((prev) => {
       if (prev.includes(seat)) {
@@ -24,36 +25,32 @@ const SeatSelection = ({ totalRows, seatsPerRow, totalSeatsBooked, onSeatSelect 
     onSeatSelect(seat)
   }
 
-  const handleBooking = () => {
-    if (selectedSeats.length === 0) {
-      alert("Please select at least one seat")
-      return
-    }
-    console.log("Booking seats:", selectedSeats)
-    // Add your booking logic here
+  const isVipRow = (rowLetter: string) => {
+    return rowLetter === "D" || rowLetter === "E"
   }
 
   const renderSeats = () => {
+    const totalRows = 8
+    const seatsPerRow = 12
+
     const rows = []
     for (let i = 0; i < totalRows; i++) {
       const rowLetter = String.fromCharCode(65 + i)
       const seats = []
 
-      // Add row label at the start
       seats.push(
-        <div key={`label-start-${rowLetter}`} className="w-6 text-gray-400 text-sm flex items-center">
+        <div key={`label-start-${rowLetter}`} className="w-8 text-gray-400 text-sm flex items-center justify-center">
           {rowLetter}
         </div>,
       )
 
-      // Add seats with proper grouping
       for (let j = 1; j <= seatsPerRow; j++) {
         const seatNumber = `${rowLetter}${j}`
-        const isBooked = totalSeatsBooked.includes(seatNumber.toLowerCase())
+        const isBooked = totalSeats.includes(seatNumber.toLowerCase())
         const isSelected = selectedSeats.includes(seatNumber)
-        const isAccessible = (rowLetter === "D" && j === 5) || (rowLetter === "G" && j === 2)
+        const isVip = isVipRow(rowLetter)
+        const isAccessible = (rowLetter === "D" && j === 6) || (rowLetter === "G" && j === 3)
 
-        // Add gap for aisle
         if (j === Math.floor(seatsPerRow / 3) || j === Math.floor((2 * seatsPerRow) / 3)) {
           seats.push(<div key={`gap-${rowLetter}-${j}`} className="w-8" />)
         }
@@ -61,25 +58,28 @@ const SeatSelection = ({ totalRows, seatsPerRow, totalSeatsBooked, onSeatSelect 
         seats.push(
           <button
             key={seatNumber}
-            className={`w-7 h-7 m-0.5 rounded-md flex items-center justify-center text-xs transition-all ${
+            className={`w-9 h-9 m-1 mx-2 rounded-md flex items-center justify-center text-xs transition-all ${
               isBooked
-                ? "bg-gray-700 cursor-not-allowed"
+                ? "bg-gray-800 cursor-not-allowed"
                 : isSelected
-                  ? "bg-blue-500 shadow-lg shadow-blue-500/50"
-                  : "bg-gray-600 hover:bg-gray-500"
+                  ? isVip
+                    ? "bg-purple-500 shadow-lg shadow-purple-500/50"
+                    : "bg-blue-500 shadow-lg shadow-blue-500/50"
+                  : isVip
+                    ? "bg-purple-600/40 hover:bg-purple-900/70"
+                    : "bg-gray-600 hover:bg-gray-500"
             }`}
             onClick={() => handleSeatClick(seatNumber)}
             disabled={isBooked}
-            title={`Seat ${seatNumber}`}
+            title={`Seat ${seatNumber}${isVip ? " (VIP)" : ""}`}
           >
-            {isAccessible ? <Wheelchair className="w-4 h-4 text-gray-300" /> : null}
+            {isAccessible ? <Accessibility className="w-4 h-4 text-gray-300" /> : seatNumber}
           </button>,
         )
       }
 
-      // Add row label at the end
       seats.push(
-        <div key={`label-end-${rowLetter}`} className="w-6 text-gray-400 text-sm flex items-center">
+        <div key={`label-end-${rowLetter}`} className="w-8 text-gray-400 text-sm flex items-center justify-center">
           {rowLetter}
         </div>,
       )
@@ -94,37 +94,40 @@ const SeatSelection = ({ totalRows, seatsPerRow, totalSeatsBooked, onSeatSelect 
   }
 
   return (
-    <div className="max-w-5xl mx-auto p-8 bg-[#1c1c24] rounded-lg">
-      {/* Curved screen text */}
-      <div className="relative mb-16 text-center">
-        <div className="absolute inset-x-0 top-0 h-[120px] overflow-hidden">
-          <div
-            className="w-full h-[200px] rounded-[100%] border-t-2 border-blue-500/30"
-            style={{ transform: "translateY(-120px)" }}
-          />
+    <div className="w-full max-w-7xl mx-auto p-8 bg-[#1c1d20] rounded-lg">
+      {/* Legend */}
+      <div className="flex items-center justify-center gap-6 mb-8">
+        <div className="flex items-center gap-2">
+          <Square className="w-4 h-4 fill-gray-600" />
+          <span className="text-sm text-gray-400">Normal (रु {ticketPriceNormal})</span>
         </div>
-        <span className="relative text-blue-400 text-sm tracking-[0.2em]">SCREEN</span>
+        <div className="flex items-center gap-2">
+          <Square className="w-4 h-4 fill-purple-600/40" />
+          <span className="text-sm text-gray-400">VIP (रु {ticketPriceVip})</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <Square className="w-4 h-4 fill-gray-800" />
+          <span className="text-sm text-gray-400">Booked</span>
+        </div>
       </div>
 
-      {/* Seats container */}
-      <div className="space-y-2 mb-12">{renderSeats()}</div>
+      <ScrollArea className="rounded-lg w-full whitespace-nowrap shrink-0">
 
-      {/* Booking Button */}
-      <div className="flex justify-center">
-        <button
-          onClick={handleBooking}
-          className={`px-8 py-3 rounded-md text-sm font-semibold transition-all
-            ${
-              selectedSeats.length > 0
-                ? "bg-blue-500 hover:bg-blue-600 text-white shadow-lg shadow-blue-500/30"
-                : "bg-gray-700 text-gray-400 cursor-not-allowed"
-            }`}
-        >
-          {selectedSeats.length > 0
-            ? `Book ${selectedSeats.length} Seat${selectedSeats.length > 1 ? "s" : ""}`
-            : "Select seats to book"}
-        </button>
-      </div>
+        <div className="relative mb-16 text-center">
+          <div className="absolute inset-x-0 top-0 h-[120px] overflow-hidden">
+            <div
+              className="w-full h-[200px] rounded-[100%] border-t-2 border-blue-500/30"
+              style={{ transform: "translateY(-120px)" }}
+            />
+          </div>
+          <span className="relative text-blue-400 text-sm tracking-[0.2em]">SCREEN</span>
+        </div>
+
+        <div className="space-y-2 mb-12 overflow-x-auto">
+          <div className="inline-block min-w-full">{renderSeats()}</div>
+        </div>
+        <ScrollBar orientation="horizontal" />
+      </ScrollArea>
     </div>
   )
 }
