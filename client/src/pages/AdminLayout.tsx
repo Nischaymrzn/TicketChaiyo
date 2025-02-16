@@ -12,8 +12,8 @@ const AdminLayout = () => {
     }
 
     return(
-      <div className="bg-[#13131A] h-[100vh] w-full flex flex-row">
-          <div>
+      <div className="bg-[#13131A] min-h-[100vh] w-full flex flex-row">
+          <div className=''>
             <SideNav />
           </div>
           <div className="p-6 w-full mt-12 md:mt-0">
