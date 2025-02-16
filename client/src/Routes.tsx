@@ -22,6 +22,8 @@ import { OrganizersPage } from "./pages/admin/OrganizersPage";
 import { AdminCustomersPage } from "./pages/admin/AdminCustomersPage";
 import RequestsPage from "./pages/admin/RequestsPage";
 import { AdminSettingsPage } from "./pages/admin/AdminSettingsPage";
+import { EventDetailPage } from "./pages/client/EventDetailPage";
+import { EventCheckoutPage } from "./pages/client/EventCheckoutPage";
 
 
 
@@ -35,6 +37,8 @@ return(
                     <Route element={<ClientLayout />} >
                         <Route path="/home" element={<HomePage/>}/>
                         <Route path="/voting" element={<VotingPage />} />
+                        <Route path="/event/:id" element={<EventDetailPage />} />
+                        <Route path="/event/:id/checkout" element={<EventCheckoutPage />} />
                     </Route>
                 
                     <Route path="/organizer" element={<OrganizerLayout />}>
