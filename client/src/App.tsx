@@ -5,6 +5,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
+import { CheckoutProvider } from "./state-stores/CheckoutContext"
 
 const queryClient = new QueryClient()
 
@@ -15,8 +16,11 @@ function App() {
     <>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <AppRoutes />
+          <CheckoutProvider>
+            <AppRoutes />
+            
             <Toaster  position="bottom-right" theme="dark" />
+          </CheckoutProvider>
         </AuthProvider>
       </QueryClientProvider>
     </>
