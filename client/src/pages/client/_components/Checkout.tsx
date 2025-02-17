@@ -1,7 +1,9 @@
+import { useEffect } from "react"
+import { useNavigate, useParams } from "react-router"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
-import { useNavigate, useParams } from "react-router"
+import { useCheckout } from "@/state-stores/CheckoutContext"
 
 interface CheckoutSidebarProps {
   selectedSeats: string[]
@@ -10,20 +12,29 @@ interface CheckoutSidebarProps {
 }
 
 export function CheckoutSidebar({ selectedSeats, ticketPriceNormal, ticketPriceVip }: CheckoutSidebarProps) {
-   const {id} = useParams() 
+  const { id } = useParams()
+  const navigate = useNavigate()
+  const { setCheckoutData } = useCheckout()
 
-  const navigate = useNavigate()  
   const isVipSeat = (seat: string) => {
     const row = seat.charAt(0)
     return row === "D" || row === "E"
   }
 
-  const vipSeatsCount = selectedSeats.filter(seat => isVipSeat(seat)).length
+  const vipSeatsCount = selectedSeats.filter((seat) => isVipSeat(seat)).length
   const normalSeatsCount = selectedSeats.length - vipSeatsCount
 
   const normalTotal = normalSeatsCount * ticketPriceNormal
   const vipTotal = vipSeatsCount * ticketPriceVip
   const total = normalTotal + vipTotal
+
+  useEffect(() => {
+    setCheckoutData((prev) => ({
+      ...prev,
+      selectedSeats,
+      totalAmount: total,
+    }))
+  }, [selectedSeats, total, setCheckoutData])
 
   return (
     <Card className="bg-[#1c1d20] text-gray-100 border-none">
@@ -35,12 +46,10 @@ export function CheckoutSidebar({ selectedSeats, ticketPriceNormal, ticketPriceV
           <div className="flex justify-between items-center">
             <div className="flex flex-wrap gap-1">
               {selectedSeats.map((seat) => (
-                <span 
-                  key={seat} 
+                <span
+                  key={seat}
                   className={`${
-                    isVipSeat(seat) 
-                      ? "bg-purple-500/20 text-purple-600" 
-                      : "bg-blue-500/20 text-blue-400"
+                    isVipSeat(seat) ? "bg-purple-500/20 text-purple-600" : "bg-blue-500/20 text-blue-400"
                   } px-2 py-1 rounded text-sm`}
                 >
                   {seat}
@@ -57,7 +66,7 @@ export function CheckoutSidebar({ selectedSeats, ticketPriceNormal, ticketPriceV
             <span>x{normalSeatsCount}</span>
             <span>रु {normalTotal}</span>
           </div>
-          
+
           <div className="flex justify-between text-sm">
             <span>VIP</span>
             <span className="pl-6">x{vipSeatsCount}</span>
@@ -68,12 +77,12 @@ export function CheckoutSidebar({ selectedSeats, ticketPriceNormal, ticketPriceV
 
           <div className="flex justify-between font-semibold">
             <span>Total</span>
-            <span>{total}</span>
+            <span>रु {total}</span>
           </div>
         </div>
       </CardContent>
       <CardFooter>
-        <Button 
+        <Button
           className="p-2 bg-[#FFC987] rounded-xl px-4 font-medium transition hover:bg-[#FFB988] w-full text-black"
           disabled={selectedSeats.length === 0}
           onClick={() => navigate(`/event/${id}/checkout`)}
@@ -84,3 +93,4 @@ export function CheckoutSidebar({ selectedSeats, ticketPriceNormal, ticketPriceV
     </Card>
   )
 }
+

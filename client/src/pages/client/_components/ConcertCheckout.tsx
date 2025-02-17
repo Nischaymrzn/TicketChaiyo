@@ -1,11 +1,10 @@
-"use client"
-
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { useCheckout } from "@/state-stores/CheckoutContext"
 
 interface CheckoutSidebarProps {
   ticketPriceNormal: number
@@ -15,6 +14,7 @@ interface CheckoutSidebarProps {
 export function ConcertCheckoutSidebar({ ticketPriceNormal, ticketPriceVip }: CheckoutSidebarProps) {
   const { id } = useParams()
   const navigate = useNavigate()
+  const { setCheckoutData } = useCheckout()
 
   const [normalTickets, setNormalTickets] = useState(0)
   const [vipTickets, setVipTickets] = useState(0)
@@ -22,6 +22,15 @@ export function ConcertCheckoutSidebar({ ticketPriceNormal, ticketPriceVip }: Ch
   const normalTotal = normalTickets * ticketPriceNormal
   const vipTotal = vipTickets * ticketPriceVip
   const total = normalTotal + vipTotal
+
+  useEffect(() => {
+    setCheckoutData((prev) => ({
+      ...prev,
+      normalTickets,
+      vipTickets,
+      totalAmount: total,
+    }))
+  }, [normalTickets, vipTickets, total, setCheckoutData])
 
   return (
     <Card className="bg-[#1c1d20] text-gray-100 border-none">

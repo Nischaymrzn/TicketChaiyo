@@ -1,6 +1,7 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Accessibility, Square } from "lucide-react"
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
+import { useCheckout } from "@/state-stores/CheckoutContext"
 
 interface SeatSelectionProps {
   totalSeats: string[]
@@ -11,6 +12,7 @@ interface SeatSelectionProps {
 
 const SeatSelection = ({ totalSeats, onSeatSelect, ticketPriceNormal, ticketPriceVip }: SeatSelectionProps) => {
   const [selectedSeats, setSelectedSeats] = useState<string[]>([])
+  const { setCheckoutData } = useCheckout()
 
   const handleSeatClick = (seat: string) => {
     if (totalSeats.includes(seat.toLowerCase())) return
@@ -24,6 +26,18 @@ const SeatSelection = ({ totalSeats, onSeatSelect, ticketPriceNormal, ticketPric
     })
     onSeatSelect(seat)
   }
+
+  useEffect(() => {
+    const normalSeatsCount = selectedSeats.filter((seat) => !isVipRow(seat[0])).length
+    const vipSeatsCount = selectedSeats.length - normalSeatsCount
+    const totalAmount = normalSeatsCount * ticketPriceNormal + vipSeatsCount * ticketPriceVip
+
+    setCheckoutData((prev) => ({
+      ...prev,
+      selectedSeats,
+      totalAmount,
+    }))
+  }, [selectedSeats, ticketPriceNormal, ticketPriceVip, setCheckoutData])
 
   const isVipRow = (rowLetter: string) => {
     return rowLetter === "D" || rowLetter === "E"
@@ -112,7 +126,6 @@ const SeatSelection = ({ totalSeats, onSeatSelect, ticketPriceNormal, ticketPric
       </div>
 
       <ScrollArea className="rounded-lg w-full whitespace-nowrap shrink-0">
-
         <div className="relative mb-16 text-center">
           <div className="absolute inset-x-0 top-0 h-[120px] overflow-hidden">
             <div
