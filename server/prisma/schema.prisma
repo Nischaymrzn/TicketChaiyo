@@ -55,6 +55,7 @@ model Event {
   totalSeats        String[]
   totalTicketsSold  String?
   isAccepted        Boolean @default(false)
+  videoUrl          String?
   
   organizerId       String
 
@@ -73,7 +74,12 @@ model Booking {
   quantity  Int
   bookedAt  DateTime @default(now())
   seats     String[]
-  price     Float 
+  price     Float
+  name      String?
+  email     String?
+  country   String?
+  state     String?
+  city      String?
 
   clientId  String
   eventId   String
