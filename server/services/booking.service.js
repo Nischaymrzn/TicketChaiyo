@@ -1,6 +1,6 @@
 import prisma from "../db/prisma.js"
 
-export const createBooking = async ({ clientId, eventId, seats, price,quantity }) => {
+export const createBooking = async ({ clientId, eventId, seats, price,quantity, name, email, country, state, city, normalTicketQty, vipTicketQty }) => {
   return await prisma.booking.create({
     data: {
       clientId,
@@ -8,9 +8,24 @@ export const createBooking = async ({ clientId, eventId, seats, price,quantity }
       seats,
       quantity,
       price,
+      name,
+      email,
+      country,
+      state,
+      city,
+      normalTicketQty, 
+      vipTicketQty
     },
   })
 }
+
+export const updateBooking = async (id, bookingData) => {
+  return await prisma.booking.update({
+    where: { id },
+    data: bookingData,
+  })
+}
+
 
 export const cancelBooking = async (id) => {
   return await prisma.booking.delete({
@@ -27,15 +42,7 @@ export const getBookingById = async (id) => {
 export const getBookingsByUser = async (userId) => {
   return await prisma.booking.findMany({
     where: { clientId: userId },
-    include: { event: {
-        select : {
-            id : true,
-            title : true,
-            type : true,
-            venue : true,
-            artist : true
-        }
-    } },
+    include: { event: true },
   })
 }
 
