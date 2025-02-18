@@ -13,16 +13,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-
-const chartData = [
-    { month: "January", eventCount: 20 },
-    { month: "February", eventCount: 35 },
-    { month: "March", eventCount: 30 },
-    { month: "April", eventCount: 45 },
-    { month: "May", eventCount: 30 },
-    { month: "June", eventCount: 45 },
-  ]
-  
+import { format } from "date-fns";
 
 const chartConfig: ChartConfig = {
   eventCount: {
@@ -31,7 +22,7 @@ const chartConfig: ChartConfig = {
   },
 };
 
-export function MonthlyEventDistribution() {
+export function MonthlyEventDistribution({chartData} : {chartData:any}) {
   return (
     <Card className="flex flex-col bg-[#13131A] border-[#2E2E3A] text-white">
       <CardHeader>
@@ -58,7 +49,10 @@ export function MonthlyEventDistribution() {
                 tickLine={false}
                 axisLine={false}
                 tickMargin={12}
-                tickFormatter={(value) => value.slice(0, 3)}
+                tickFormatter={(value) => {
+                  const date = new Date(value + '-01'); 
+                  return format(date, "MMMM").slice(0,3);
+                }}
               />
 
               <YAxis tickLine={false} axisLine={false} tickMargin={12} />
@@ -66,7 +60,7 @@ export function MonthlyEventDistribution() {
               <ChartTooltip content={<ChartTooltipContent />} />
 
               <Line
-                dataKey="eventCount"
+                dataKey="eventsCreated"
                 type="linear"
                 stroke="var(--color-eventCount)"
                 strokeWidth={2}

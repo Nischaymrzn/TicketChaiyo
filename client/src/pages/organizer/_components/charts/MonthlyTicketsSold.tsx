@@ -3,13 +3,7 @@ import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
-
-const chartData = [
-  { month: "January", movie: 186, concert: 80 },
-  { month: "February", movie: 305, concert: 200 },
-  { month: "March", movie: 237, concert: 120 },
-  { month: "April", movie: 73, concert: 190 },
-]
+import { format } from "date-fns"
 
 const chartConfig = {
   movie: {
@@ -22,7 +16,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-export function MonthlyTicketsSold() {
+export function MonthlyTicketsSold({chartData} : {chartData:any}) {
   return (
     <Card className="flex flex-col bg-[#13131A] border-[#2E2E3A] text-white">
       <CardHeader className="mb-4 md:mb-0">
@@ -39,7 +33,10 @@ export function MonthlyTicketsSold() {
                 tickLine={false}
                 tickMargin={10}
                 axisLine={false}
-                tickFormatter={(value) => value.slice(0, 3)}
+                tickFormatter={(value) => {
+                  const date = new Date(value + '-01'); 
+                  return format(date, "MMMM").slice(0,3);
+                }}
               />
               <YAxis
                 axisLine={false}
@@ -52,7 +49,7 @@ export function MonthlyTicketsSold() {
                 }}
               />
               <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="dashed" />} />
-              <Bar dataKey="movie" fill="var(--color-movie)" radius={[4, 4, 0, 0]} barSize={40} />
+              <Bar dataKey="ticketsSold" fill="var(--color-movie)" radius={[4, 4, 0, 0]} barSize={40} />
               <Bar dataKey="concert" fill="var(--color-concert)" radius={[4, 4, 0, 0]} barSize={40} />
             </BarChart>
           </ChartContainer>

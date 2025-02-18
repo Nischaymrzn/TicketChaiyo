@@ -5,13 +5,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 
-const chartData = [
-  { event: "Avatar 2", totalBookings: 100 },
-  { event: "Avenger", totalBookings: 80 },
-  { event: "The Elements", totalBookings: 75 },
-  { event: "Albatross Live", totalBookings: 70 },
-]
-
 const chartConfig = {
   totalBookings: {
     label: "Total Booking",
@@ -19,7 +12,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-export function MostBookedEvents() {
+export function MostBookedEvents({chartData} : {chartData : any}) {
   return (
     <Card className="flex flex-col bg-[#13131A] border-[#2E2E3A] text-white">
       <CardHeader className="mb-4 md:mb-0">

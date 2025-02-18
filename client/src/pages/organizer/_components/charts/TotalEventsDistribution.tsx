@@ -1,4 +1,3 @@
-import * as React from "react"
 import { Label, Pie, PieChart } from "recharts"
 
 import {
@@ -15,10 +14,6 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
-const chartData = [
-  { event: "movie", eventCount: 200, fill: "var(--color-movie)" },
-  { event: "concert", eventCount: 190, fill: "var(--color-concert)" }
-]
 
 const chartConfig = {
     eventCount: {
@@ -34,10 +29,12 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-export function TotalEventsDistribution() {
-  const totalEventsCount = React.useMemo(() => {
-    return chartData.reduce((acc, curr) => acc + curr.eventCount, 0)
-  }, [])
+export function TotalEventsDistribution({data} : {data:any}) {
+  const chartData = data?.map((item : any)=>{
+    return {...item, fill:`var(--color-${item?.event})`}
+  })
+
+  const totalEventsCount = chartData?.reduce((acc : any, curr : any) => acc + curr.eventCount, 0)
 
   return (
     <Card className="flex flex-col bg-[#13131A] border-[#2E2E3A] text-white xl:pb-5">

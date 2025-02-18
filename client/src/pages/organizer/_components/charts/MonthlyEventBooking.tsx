@@ -8,12 +8,12 @@ import { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } f
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
-const chartData = [
-  { month: "January", movie: 186, concert: 80, all: 266 },
-  { month: "February", movie: 305, concert: 200, all: 505 },
-  { month: "March", movie: 237, concert: 120, all: 357 },
-  { month: "April", movie: 73, concert: 190, all: 263 },
-]
+// const chartData = [
+//   { month: "January", movie: 186, concert: 80, all: 266 },
+//   { month: "February", movie: 305, concert: 200, all: 505 },
+//   { month: "March", movie: 237, concert: 120, all: 357 },
+//   { month: "April", movie: 73, concert: 190, all: 263 },
+// ]
 
 const chartConfig = {
   all: {
@@ -30,8 +30,8 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-export function MonthlyEventBooking() {
-  const [selectedCategory, setSelectedCategory] = useState<"all" | "movie" | "concert">("all")
+export function MonthlyEventBooking({chartData} : {chartData : any}) {
+  const [selectedCategory, setSelectedCategory] = useState<"all" | "MOVIE" | "CONCERT">("all")
 
   return (
     <Card className="flex flex-col bg-[#13131A] border-[#2E2E3A] text-white">
@@ -44,15 +44,15 @@ export function MonthlyEventBooking() {
       <div className="p-4">
           <Select
             value={selectedCategory}
-            onValueChange={(value) => setSelectedCategory(value as "all" | "movie" | "concert")}
+            onValueChange={(value) => setSelectedCategory(value as "all" | "MOVIE" | "CONCERT")}
           >
             <SelectTrigger className="w-[180px] bg-[#2E2E3A] border-[#2E2E3A] text-white">
               <SelectValue placeholder="Select category" />
             </SelectTrigger>
             <SelectContent className="bg-[#2E2E3A] border-[#2E2E3A] text-white">
               <SelectItem value="all">All</SelectItem>
-              <SelectItem value="movie">Movie</SelectItem>
-              <SelectItem value="concert">Concert</SelectItem>
+              <SelectItem value="MOVIE">Movie</SelectItem>
+              <SelectItem value="CONCERT">Concert</SelectItem>
             </SelectContent>
           </Select>
         </div>

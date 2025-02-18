@@ -14,16 +14,6 @@ import {
 } from "@/components/ui/chart";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
-const chartData = [
-    { month: "January", revenue: 2000 },
-    { month: "February", revenue: 3500 },
-    { month: "March", revenue: 3000 },
-    { month: "April", revenue: 4500 },
-    { month: "May", revenue: 3000 },
-    { month: "June", revenue: 4500 },
-  ]
-  
-
 const chartConfig: ChartConfig = {
   revenue: {
     label: "Revenue",
@@ -31,7 +21,7 @@ const chartConfig: ChartConfig = {
   },
 };
 
-export function MonthlyRevenue() {
+export function MonthlyRevenue({chartData} : {chartData:any}) {
   return (
     <Card className="flex flex-col bg-[#13131A] border-[#2E2E3A] text-white">
       <CardHeader>
