@@ -4,6 +4,7 @@ import eventRoutes from "../routes/event.routes.js"
 import bookingRoutes from "./booking.routes.js"
 import userRoutes from "./user.routes.js"
 import requestRoutes from "./request.route.js"
+import analyticsRoutes from "./analytics.route.js"
 
 const router = express.Router()
 
@@ -12,6 +13,7 @@ router.use("/events", eventRoutes)
 router.use("/bookings", bookingRoutes)
 router.use("/users",userRoutes)
 router.use("/requests",requestRoutes)
+router.use("/analytics",analyticsRoutes)
 
 export default router
 

@@ -80,6 +80,8 @@ model Booking {
   country   String?
   state     String?
   city      String?
+  normalTicketQty Int?
+  vipTicketQty Int?
 
   clientId  String
   eventId   String
