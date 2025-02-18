@@ -18,6 +18,7 @@ import { Separator } from "@/components/ui/separator"
 import { useGetMe, useLogout } from "@/hooks/useAuth"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { useUpdateUser } from "@/hooks/useUser"
 
 
 export const SettingsPage = () => {
@@ -28,7 +29,9 @@ export const SettingsPage = () => {
   const data = useGetMe()
   const userData = data?.data?.userData
 
-  const handlePasswordChange = () => {
+    const updateUser = useUpdateUser()
+
+  const handlePasswordChange = async () => {
     if (newPassword.length < 8) {
       setError("Password must be at least 8 characters long")
       return
@@ -37,8 +40,7 @@ export const SettingsPage = () => {
       setError("Passwords do not match")
       return
     }
-  
-    console.log("Password changed")
+    await updateUser.mutateAsync({userId : userData.id, userData : {"password" : newPassword}})
     setError("")
     setNewPassword("")
     setConfirmPassword("")

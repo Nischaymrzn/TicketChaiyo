@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { MapPin } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -11,6 +11,8 @@ import ClientNav from "./_components/ClientNav"
 import { Separator } from "@/components/ui/separator"
 import { useCheckout } from "@/state-stores/CheckoutContext"
 import { useGetEvent } from "@/hooks/useEvent"
+import { BookingData, useAddBooking } from "@/hooks/useBookings"
+import { useGetMe } from "@/hooks/useAuth"
 
 
 interface BillingForm {
@@ -35,7 +37,13 @@ export const EventCheckoutPage = () => {
   })
   const { id } = useParams()
   const { data } = useGetEvent(id as string)
+
+  const user = useGetMe()
+  const userId = user?.data?.userData?.id
+
   const eventData = data?.event ?? {}
+
+  const navigate = useNavigate()
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setBillingForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
@@ -45,9 +53,30 @@ export const EventCheckoutPage = () => {
     setBillingForm((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleConfirmAndPay = () => {
-    console.log(billingForm,paymentMethod)
-    // clearCheckoutData()
+  const  addBooking  = useAddBooking()
+
+  const handleConfirmAndPay = async () => {
+
+    const bookingData: BookingData = {
+      //@ts-ignore
+      quantity: checkoutData?.eventType == "CONCERT" ? checkoutData?.normalTickets + checkoutData?.vipTickets : checkoutData.selectedSeats?.length as number,
+      seats: checkoutData?.selectedSeats ?? [] as string[],
+      price: checkoutData?.totalAmount * 1.13,
+      name: billingForm?.fullName,
+      email: billingForm?.email,
+      country: billingForm?.country,
+      state: billingForm?.state,
+      city: billingForm?.city,
+      normalTicketQty : checkoutData?.normalTickets, 
+      vipTicketQty : checkoutData?.vipTickets,
+      clientId: userId,
+      eventId: id as string, 
+  }
+
+    const response = await addBooking.mutateAsync(bookingData)
+    console.log(response)
+    clearCheckoutData()
+    navigate(`/event/${id}/bookingConfirmed/${response?.id}`) 
   }
 
   return (
@@ -174,8 +203,8 @@ export const EventCheckoutPage = () => {
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="cod" id="cod" className="border-gray-600 text-gray-300" />
                     <Label htmlFor="cod" className="text-white">
-                      Cash on Delivery
-                      <p className="text-sm text-gray-400">Pay when you receive your tickets</p>
+                      Pay at Venue
+                      <p className="text-sm text-gray-400">Pay when collecting your tickets</p>
                     </Label>
                   </div>
                 </RadioGroup>

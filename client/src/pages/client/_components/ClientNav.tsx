@@ -29,7 +29,7 @@ const ClientNav: React.FC = () => {
   const isActive = (path: string): boolean => location.pathname === path;
 
   return (
-    <nav className="sticky top-0 left-0 z-10 pt-4 flex justify-between items-center border-b-[0.25px] border-gray-500 pb-3 sm:pb-3">
+    <nav className="sticky top-0 left-0 z-10 pt-4 flex justify-between items-center border-b-[0.25px] border-gray-700 pb-3 sm:pb-3">
       <Link to="/home">
         <h1 className="text-xl font-semibold pl-4 text-[#FFB89F] sm:text-3xl sm:pl-10">
           Ticket Chaiyo
@@ -49,7 +49,7 @@ const ClientNav: React.FC = () => {
           className={`cursor-pointer ${
             isActive("/event") ? "text-[#FFC987] border-b-2 border-[#FFC987]" : "text-white"
           }`}
-          onClick={() => navigate("/event")}
+          onClick={() => navigate("/")}
         >
           Events
         </li>
@@ -63,9 +63,9 @@ const ClientNav: React.FC = () => {
         </li>
         <li
           className={`cursor-pointer ${
-            isActive("/account/my-booking") ? "text-[#FFC987] border-b-2 border-[#FFC987]" : "text-white"
+            isActive("/profile/bookings") ? "text-[#FFC987] border-b-2 border-[#FFC987]" : "text-white"
           }`}
-          onClick={() => navigate("/account/my-booking")}
+          onClick={() => navigate("/profile/bookings")}
         >
           My Booking
         </li>
@@ -108,7 +108,7 @@ const ClientNav: React.FC = () => {
             <DropdownMenuContent className="w-56">
               <DropdownMenuLabel className="text-[16px]">My Account</DropdownMenuLabel>
               <DropdownMenuSeparator className="bg-gray-300"/>
-              <DropdownMenuItem className="cursor-pointer hover:bg-gray-200 text-[15px]">
+              <DropdownMenuItem className="cursor-pointer hover:bg-gray-200 text-[15px]" onClick={(()=> navigate("/profile/bookings"))}>
                 <span>
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-user">
                     <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
@@ -116,7 +116,7 @@ const ClientNav: React.FC = () => {
                 </span>
                 Profile
               </DropdownMenuItem>
-              <DropdownMenuItem className="cursor-pointer hover:bg-gray-200 text-[15px]">
+              <DropdownMenuItem className="cursor-pointer hover:bg-gray-200 text-[15px]" onClick={(()=> navigate("/profile/bookings"))}>
                 <span>
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-bookmark">
                     <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/>
@@ -124,7 +124,7 @@ const ClientNav: React.FC = () => {
                 </span>
                 My Booking
               </DropdownMenuItem>
-              <DropdownMenuItem className="cursor-pointer hover:bg-gray-200 text-[15px]">
+              <DropdownMenuItem className="cursor-pointer hover:bg-gray-200 text-[15px]" onClick={(()=> navigate("/profile/setting"))}>
                 <span>
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-settings">
                     <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
@@ -176,20 +176,12 @@ const ClientNav: React.FC = () => {
                 </Link>
               </li>
               <li className="text-white">
-                <Link to="/movies" onClick={() => setMobileMenuOpen(false)}>
-                  Movies
+                <Link to="/voting" onClick={() => setMobileMenuOpen(false)}>
+                  Voting
                 </Link>
               </li>
-              <li className="text-white">
-                <Link to="/events" onClick={() => setMobileMenuOpen(false)}>
-                  Events
-                </Link>
-              </li>
-              <li className="text-white">
-                <Link to="/concerts" onClick={() => setMobileMenuOpen(false)}>
-                  Concert
-                </Link>
-              </li>
+              
+              
               <li className="text-white">
                 <Link to="/my-booking" onClick={() => setMobileMenuOpen(false)}>
                   My Booking

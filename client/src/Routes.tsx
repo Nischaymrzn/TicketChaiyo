@@ -24,6 +24,11 @@ import RequestsPage from "./pages/admin/RequestsPage";
 import { AdminSettingsPage } from "./pages/admin/AdminSettingsPage";
 import { EventDetailPage } from "./pages/client/EventDetailPage";
 import { EventCheckoutPage } from "./pages/client/EventCheckoutPage";
+import EventConfirmationPage  from "./pages/client/EventConfirmationPage";
+import Invoice from "./pages/client/Invoice";
+import { ProfileLayout } from "./pages/client/ProfileLayout";
+import { Booking } from "./pages/client/Booking";
+import Setting  from "./pages/client/Setting";
 
 
 
@@ -39,6 +44,13 @@ return(
                         <Route path="/voting" element={<VotingPage />} />
                         <Route path="/event/:id" element={<EventDetailPage />} />
                         <Route path="/event/:id/checkout" element={<EventCheckoutPage />} />
+                        <Route path="/event/:id/bookingConfirmed/:id" element={<EventConfirmationPage />} />
+                        <Route path="/event/:id/bookingConfirmed/:id/invoice" element={<Invoice />} />
+
+                        <Route path="/profile" element={<ProfileLayout />}>
+                            <Route path="bookings" element={<Booking />}/>
+                            <Route path="setting" element={<Setting />}/>
+                        </Route>
                     </Route>
                 
                     <Route path="/organizer" element={<OrganizerLayout />}>

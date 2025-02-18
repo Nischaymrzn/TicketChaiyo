@@ -60,7 +60,7 @@ const SeatSelection = ({ totalSeats, onSeatSelect, ticketPriceNormal, ticketPric
 
       for (let j = 1; j <= seatsPerRow; j++) {
         const seatNumber = `${rowLetter}${j}`
-        const isBooked = totalSeats.includes(seatNumber.toLowerCase())
+        const isBooked = totalSeats.includes(seatNumber.toLowerCase()) || totalSeats.includes(seatNumber.toUpperCase())
         const isSelected = selectedSeats.includes(seatNumber)
         const isVip = isVipRow(rowLetter)
         const isAccessible = (rowLetter === "D" && j === 6) || (rowLetter === "G" && j === 3)

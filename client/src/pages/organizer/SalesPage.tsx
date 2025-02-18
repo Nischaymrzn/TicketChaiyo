@@ -4,8 +4,14 @@ import { TotalTicketsSold } from "./_components/charts/TotalTicketsSold"
 import { Calendar, DollarSign, Ticket, TicketCheck } from "lucide-react"
 import { MonthlyRevenue } from "./_components/charts/MonthlyRevenue"
 import { MostBookedEvents } from "./_components/charts/MostBookedEvents"
+import { useGetMe } from "@/hooks/useAuth"
+import { useGetOrganizerSalesAnalytics } from "@/hooks/useAnalytics"
 
 export const SalesPage = () => {
+    const {data : user } = useGetMe()
+    const userId = user?.userData
+    const {data:analytics} = useGetOrganizerSalesAnalytics(userId)
+
   return (
     <div className="text-gray-300 w-full flex flex-col">
       <div>
@@ -17,22 +23,22 @@ export const SalesPage = () => {
       <div className="grid-cols-1 mb-8 grid gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-10 mt-6">
         <CardDataStats
             title="Total Tickets Sold"
-            total="1,234"
+            total={analytics?.dataCards?.totalTicketsSold}
             icon={<Ticket className="h-4 w-4 text-green-500" />}
           />
           <CardDataStats
             title="Total Bookings"
-            total="5,678"
+            total={analytics?.dataCards?.totalBookings}
             icon={<TicketCheck className="h-4 w-4 text-blue-500" />}
           />
           <CardDataStats
             title="Total Revenue"
-            total="Rs. 12,345"
+            total={analytics?.dataCards?.totalRevenue}
             icon={<DollarSign className="h-4 w-4 text-yellow-500" />}
           />
           <CardDataStats
             title="Total Events"
-            total="42"
+            total={analytics?.dataCards?.totalEvents}
             icon={<Calendar className="h-4 w-4 text-purple-500" />}
           />
         </div>
@@ -43,15 +49,15 @@ export const SalesPage = () => {
           </div>
 
           <div className="mb-6 xl:col-span-5">
-            <MonthlyEventBooking />
+            <MonthlyEventBooking chartData={analytics?.analytics?.monthlyEventBookings}/>
           </div>
 
           <div className="mb-6 xl:col-span-4">
-            <MonthlyRevenue />
+            <MonthlyRevenue chartData={analytics?.analytics?.monthlyEventRevenue}/>
           </div>
 
           <div className="mb-6 xl:col-span-4">
-            <MostBookedEvents />
+            <MostBookedEvents chartData={analytics?.analytics?.topBookedEvents}/>
           </div>
           
         </div>

@@ -51,7 +51,7 @@ export const EventCard = ({ event, onEdit, onDelete } : EventCardProps) => {
         <div className="flex space-x-4">
           <div className="w-1/5 sm:max-w-[100px] md:max-w-[150px] sm:aspect-[3/4] relative flex-shrink-0">
             <img
-              src={event.cardImage || "/placeholder.svg"}
+              src={event.cardImage || ""}
               alt={event.title}
               className="rounded-lg w-full h-full object-cover z-0"
             />

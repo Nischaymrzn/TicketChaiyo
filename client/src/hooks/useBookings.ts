@@ -1,5 +1,5 @@
 import authenticatedApi from "@/api"
-import { useMutation, useQuery } from "@tanstack/react-query"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { toast } from "sonner"
 
 export interface BookingData {
@@ -38,5 +38,54 @@ export const useAddBooking = () => {
       },
       enabled: !!localStorage.getItem("accessToken"), 
       retry: false,
+    })
+  }
+
+  export const useGetUsersBookings = (id : string) => {
+    return useQuery({
+      queryKey: ["bookings"],
+      queryFn: async () => {
+        const response = await authenticatedApi.get(`/bookings/user/${id}`)
+        return response.data
+      },
+      enabled: !!localStorage.getItem("accessToken"), 
+      retry: false,
+    })
+  }
+
+  export const useUpdateBooking = () => {
+    const queryClient = useQueryClient()
+  
+    return useMutation({
+      mutationFn: async ({
+        bookingId,
+        formData,
+      }: {
+        bookingId: string
+        formData: any 
+      }) => {
+  
+        const response = await authenticatedApi.patch(`/bookings/${bookingId}`, formData)
+        return response.data
+      },
+      onSuccess: (response) => {
+        toast.success(response.success)
+        queryClient.invalidateQueries({ queryKey: ["bookings"] });
+      },
+    })
+  }
+  
+  export const useDeleteBooking = () => {
+    const queryClient = useQueryClient()
+  
+    return useMutation({
+      mutationFn: async (bookingId: string) => {
+        const response = await authenticatedApi.delete(`/bookings/${bookingId}`)
+        return response.data
+      },
+      onSuccess: (response) => {
+        toast.success(response.message)
+        queryClient.invalidateQueries({ queryKey: ["bookings"] });
+      },
     })
   }
