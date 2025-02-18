@@ -1,4 +1,3 @@
-import * as React from "react"
 import { Label, Pie, PieChart } from "recharts"
 
 import {
@@ -15,10 +14,6 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
-const chartData = [
-  { event: "customer", userCount: 200, fill: "var(--color-customer)" },
-  { event: "organizer", userCount: 100, fill: "var(--color-organizer)" }
-]
 
 const chartConfig = {
     userCount: {
@@ -34,10 +29,13 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-export function TotalUsers() {
-  const totalUserCount = React.useMemo(() => {
-    return chartData.reduce((acc, curr) => acc + curr.userCount, 0)
-  }, [])
+export function TotalUsers({data} : {data:any}) {
+  
+  const chartData = data.map((item : any)=>{
+    return {...item, fill:`var(--color-${item?.event})`}
+  })
+
+  const totalUserCount = chartData.reduce((acc : any, curr : any) => acc + curr.userCount, 0)
 
   return (
     <Card className="flex flex-col bg-[#13131A] border-[#2E2E3A] text-white xl:pb-5">
