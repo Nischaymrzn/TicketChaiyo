@@ -7,8 +7,8 @@ import { useGetAdminDashboardAnalytics } from "@/hooks/useAnalytics"
 
 const Dashboard = () => {
     const {data : user } = useGetMe()
-    const userId = user?.userData
-    const {data:analytics} = useGetAdminDashboardAnalytics(userId)
+    const adminId = user?.userData?.id
+    const {data:analytics} = useGetAdminDashboardAnalytics(adminId)
     
   return (
     <div className="text-gray-300 w-full flex flex-col">
@@ -21,23 +21,23 @@ const Dashboard = () => {
       <div className="grid-cols-1 mb-8 grid gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-10 mt-6">
       <CardDataStats
             title="Total Events"
-            total={analytics?.dataCards?.totalEvents ?? 0}
+            total={analytics?.totalEvents ?? 0}
             icon={<Calendar className="h-4 w-4 text-purple-500" />}
           />
 
           <CardDataStats
             title="Total Customers"
-            total={analytics?.dataCards?.totalCustomers ?? 0}
+            total={analytics?.totalCustomers ?? 0}
             icon={<Users className="h-4 w-4 text-blue-500" />}
           />
           <CardDataStats
             title="Total Organizers"
-            total={analytics?.dataCards?.totalOrganizers ?? 0}
+            total={analytics?.totalOrganizers ?? 0}
             icon={<User className="h-4 w-4 text-yellow-500" />}
           />
           <CardDataStats
             title="Total Bookings"
-            total={analytics?.dataCards?.totalBookings ?? 0}
+            total={analytics?.totalBookings ?? 0}
             icon={<Ticket className="h-4 w-4 text-green-500" />}
           />
 
@@ -45,11 +45,11 @@ const Dashboard = () => {
 
         <div className="2xl:grid xl:grid-cols-8 xl:gap-x-6 xl:grid">
           <div className="mb-6 xl:col-span-3">
-            <TotalUsers data={analytics?.analytics?.totalUserDistribution}/>
+            <TotalUsers data={analytics?.totalUserDistribution}/>
           </div>
 
           <div className="mb-6 xl:col-span-5">
-            <MostBookedEvents chartData={analytics?.analytics?.topBookedEvents}/>
+            <MostBookedEvents chartData={analytics?.topBookedEvents}/>
           </div>
         </div>
 

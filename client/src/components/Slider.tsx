@@ -13,13 +13,13 @@ interface SliderImage {
 // Slider images
 const images: SliderImage[] = [
   {
-    src: "https://bollywoodmascot.com/wp-content/uploads/maxresdefault-7.jpg",
-    movie: "Rocky aur Rani ki Prem Kahani",
+    src: "https://wallpapers.com/images/featured/spider-man-no-way-home-background-mcg8r3eg84os1zue.jpg",
+    movie: "Spider Man : No Way Home",
   },
-  // {
-  //   src: "https://akm-img-a-in.tosshub.com/indiatoday/images/story/202404/allu-arjun-072241749-16x9_0.jpg?VersionId=K_n8YW.C2E4R3xdcdF74eB_BV9dtRyed",
-  //   movie: "Pushpa 2",
-  // },
+  {
+    src: "https://thestreamable.com/media/pages/news/breaking-avatar-the-way-of-water-to-debut-on-max-and-disney-plus-next-month/962e3c3408-1684166914/avatar-hbo-max-disney-plus.jpeg",
+    movie: "Avatar: The Way of Water",
+  },
 ];
 
 const Slider: React.FC = () => {

@@ -7,8 +7,9 @@ import { useState } from 'react'
 import { cn } from '@/lib/utils'
 import { useGetEvents } from '@/hooks/useEvent'
 
-interface Movie {
+interface Event {
   id: number;
+  artist : string;
   title: string;
   type: string;
   released: string;
@@ -26,7 +27,7 @@ interface Movie {
 
 const HomePage = () => {
   const { data } = useGetEvents()
-  const movies = data?.events ?? []
+  const events = data?.events.filter((event : any) => event.isAccepted === true) ?? []
 
   const [filter, setFilter] = useState<string>('all');
 
@@ -34,8 +35,8 @@ const HomePage = () => {
     setFilter(type);
   };
 
-  const filteredMovies : Movie[] =
-    filter === 'all' ? movies : movies.filter((movie : any) => movie.type === filter);
+  const filteredEvents : Event[] =
+    filter === 'all' ? events : events.filter((movie : any) => movie.type === filter);
 
   
   return (
@@ -83,13 +84,13 @@ const HomePage = () => {
 
       </div>
       <section className="grid items-center justify-center w-full grid-cols-1 px-6 text-white sm:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-6 2xl:gap-5 mt-6 pb-14 lg:px-10 2xl:px-12">
-        {filteredMovies.map((movie) => (
+        {filteredEvents.map((movie) => (
           <MovieCard movie={movie} key={movie.id} isDetailed={false} />
         ))}
       </section>
 
       <section className="grid items-center justify-center w-full grid-cols-1 px-6 text-white sm:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-6 2xl:gap-5 mt-6 pb-14 lg:px-10 2xl:px-12">
-        {filteredMovies.map((movie) => (
+        {filteredEvents.map((movie) => (
           <MovieCard movie={movie} key={movie.id} isDetailed={false} />
         ))}
       </section>

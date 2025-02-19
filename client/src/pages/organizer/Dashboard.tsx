@@ -9,8 +9,8 @@ import { useGetOrganizerDashboardAnalytics } from "@/hooks/useAnalytics"
 const Dashboard = () => {
 
   const {data : user } = useGetMe()
-  const userId = user?.userData
-  const {data:analytics} = useGetOrganizerDashboardAnalytics(userId)
+  const organizerId = user?.userData?.id
+  const {data:analytics} = useGetOrganizerDashboardAnalytics(organizerId)
 
   return (
     <div className="text-gray-300 w-full flex flex-col">
@@ -23,23 +23,23 @@ const Dashboard = () => {
       <div className="grid-cols-1 mb-8 grid gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-10 mt-6">
       <CardDataStats
             title="Total Events"
-            total={analytics?.dataCards?.totalEvents}
+            total={analytics?.totalEvents}
             icon={<Calendar className="h-4 w-4 text-purple-500" />}
           />
 
           <CardDataStats
             title="Total Customers"
-            total={analytics?.dataCards?.totalCustomers}
+            total={analytics?.totalCustomers}
             icon={<Users className="h-4 w-4 text-blue-500" />}
           />
           <CardDataStats
             title="Total Revenue"
-            total={analytics?.dataCards?.totalRevenue}
+            total={analytics?.totalRevenue}
             icon={<DollarSign className="h-4 w-4 text-yellow-500" />}
           />
           <CardDataStats
             title="Total Tickets Sold"
-            total={analytics?.dataCards?.totalTicketsSold}
+            total={analytics?.totalTicketsSold}
             icon={<Ticket className="h-4 w-4 text-green-500" />}
           />
 
@@ -47,15 +47,15 @@ const Dashboard = () => {
 
         <div className="2xl:grid xl:grid-cols-8 xl:gap-x-6 xl:grid">
           <div className="mb-6 xl:col-span-3">
-              <TotalEventsDistribution data={analytics?.analytics?.totalEventsDistribution}/>
+              <TotalEventsDistribution data={analytics?.totalEventsDistribution}/>
           </div>
 
           <div className="mb-6 xl:col-span-5">
-              <MonthlyTicketsSold chartData={analytics?.analytics?.ticketsSoldPerMonth}/>
+              <MonthlyTicketsSold chartData={analytics?.ticketsSoldPerMonth}/>
           </div>
 
           <div className="mb-6 xl:col-span-4">
-              <MonthlyEventDistribution chartData={analytics?.analytics?.eventsCreatedPerMonth}/>
+              <MonthlyEventDistribution chartData={analytics?.eventsCreatedPerMonth}/>
         </div>
           
         </div>

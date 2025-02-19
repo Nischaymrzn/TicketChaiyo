@@ -1,9 +1,6 @@
-"use client"
-
-import timeIcon from "@/assets/hourglass.png"
 import { useState } from "react"
 import ReactPlayer from "react-player"
-import { Calendar } from "lucide-react"
+import { Calendar, Hourglass  } from "lucide-react"
 import { format, parseISO } from "date-fns"
 
 export const MovieDetailsCard = (event: any) => {
@@ -42,7 +39,7 @@ export const MovieDetailsCard = (event: any) => {
             <div className="flex flex-wrap items-center text-gray-300 mb-6">
               <div className="flex items-center gap-2 pr-4">
                 <span className="bg-green-500 text-black px-3 py-1 rounded-xl text-sm font-semibold">
-                  <img src={timeIcon || "/placeholder.svg"} alt="" className="w-[14px] xs:w-[17px" />
+                  <Hourglass className="w-[14px] xs:w-[17px" />
                 </span>
                 <span className="text-gray-400 rounded font-medium text-[15px]">{event?.duration}m</span>
               </div>
