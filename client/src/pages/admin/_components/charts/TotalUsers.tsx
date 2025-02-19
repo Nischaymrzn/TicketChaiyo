@@ -31,11 +31,11 @@ const chartConfig = {
 
 export function TotalUsers({data} : {data:any}) {
   
-  const chartData = data.map((item : any)=>{
+  const chartData = data?.map((item : any)=>{
     return {...item, fill:`var(--color-${item?.event})`}
   })
 
-  const totalUserCount = chartData.reduce((acc : any, curr : any) => acc + curr.userCount, 0)
+  const totalUserCount = chartData?.reduce((acc : any, curr : any) => acc + curr.userCount, 0)
 
   return (
     <Card className="flex flex-col bg-[#13131A] border-[#2E2E3A] text-white xl:pb-5">
