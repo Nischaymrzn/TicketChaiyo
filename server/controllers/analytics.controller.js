@@ -2,8 +2,8 @@ import { getOrganizerAnalyticsDashboard, getOrganizerSalesData, getAdminDashboar
 
 export const getAdminDashboardAnalytics = async (req, res) => {
     try {
-      const { id } = req.params;
-      const dashboardAnalyticsData = await getAdminDashboardAnalyticsData(id);
+      const { adminId } = req.params;
+      const dashboardAnalyticsData = await getAdminDashboardAnalyticsData(adminId);
       res.json(dashboardAnalyticsData);
     } catch (error) {
       console.error("Error fetching analytics data:", error);
@@ -13,8 +13,9 @@ export const getAdminDashboardAnalytics = async (req, res) => {
 
 export const getOrganizerDashboardAnalytics = async (req, res) => {
     try {
-      const { id } = req.params;
-      const dashboardAnalyticsData = await getOrganizerAnalyticsDashboard(id);
+      const { organizerId } = req.params;
+      console.log(organizerId)
+      const dashboardAnalyticsData = await getOrganizerAnalyticsDashboard(organizerId);
       res.json(dashboardAnalyticsData);
     } catch (error) {
       console.error("Error fetching analytics data:", error);
@@ -24,8 +25,8 @@ export const getOrganizerDashboardAnalytics = async (req, res) => {
 
   export const getOrganizerSalesAnalytics = async (req, res) => {
     try {
-      const { id } = req.params;
-      const dashboardAnalyticsData = await getOrganizerSalesData(id);
+      const { organizerId } = req.params;
+      const dashboardAnalyticsData = await getOrganizerSalesData(organizerId);
       res.json(dashboardAnalyticsData);
     } catch (error) {
       console.error("Error fetching analytics data:", error);
