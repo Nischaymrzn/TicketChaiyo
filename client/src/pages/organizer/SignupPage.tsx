@@ -9,27 +9,29 @@ const OrganizerSignupPage = () => {
 
   return (
     <div className="bg-[#F7F2EA] w-full h-full min-h-screen text-outfit relative">
-      {/* Content Wrapper */}
+      <img
+        src="https://images.pexels.com/photos/18413963/pexels-photo-18413963/free-photo-of-vintage-camera-and-typewriter.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        className="w-full h-full absolute object-cover"
+      />
+     
       <div className="relative z-10 flex flex-col gap-6 py-6">
-        {/* Navbar */}
-        <nav className="flex justify-between items-center border-b border-gray-300 pb-4 px-6 sm:px-10">
+       
+        <nav className="flex justify-between items-center border-b border-gray-300 pb-4 px-6 sm:px-10 text-[#FFC987]">
           <h1 className="text-xl font-semibold sm:text-3xl">Ticket Chaiyo</h1>
 
-          {/* Desktop Navigation */}
           <div className="hidden lg:flex gap-5">
             <Link to="/login">
-              <button className="p-2 rounded-xl px-4 font-medium border-[#FFC987] border transition hover:text-black">
+              <button className="p-2 rounded-xl px-4 font-medium border-[#FFC987] border transition text-white">
                 Login here
               </button>
             </Link>
             <Link to="/signup">
-              <button className="border p-2 bg-[#FFC987] rounded-xl px-4 font-medium transition hover:bg-[#FFB988]">
+              <button className="border p-2 bg-[#FFC987] rounded-xl px-4 font-medium transition hover:bg-[#FFB988] text-black">
                 Client Signup
               </button>
             </Link>
           </div>
 
-          {/* Mobile Menu Toggle */}
           <div className="lg:hidden">
             <button
               type="button"
@@ -42,7 +44,6 @@ const OrganizerSignupPage = () => {
           </div>
         </nav>
 
-        {/* Mobile Menu */}
         <Dialog
           as="div"
           className="lg:hidden"
@@ -82,7 +83,6 @@ const OrganizerSignupPage = () => {
           </Dialog.Panel>
         </Dialog>
 
-        {/* Main Content */}
         <main className="border min-h-[400px] w-[90%] mx-auto mt-6 bg-white/85 rounded-[50px] shadow-md flex flex-col items-center p-4 py-3 sm:w-[700px] sm:rounded-[25px]">
           <p className="text-2xl sm:text-3xl font-medium pt-6 sm:pt-8 text-center">
             Register as an Organizer
@@ -90,7 +90,7 @@ const OrganizerSignupPage = () => {
           <p className="text-gray-900/50 text-sm sm:text-base text-center px-4">
             Create your organizer account to start hosting events
           </p>
-          {/* Organizer Signup Form Component */}
+
           <OrganizerSignupForm />
         </main>
       </div>

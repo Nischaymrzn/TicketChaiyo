@@ -13,27 +13,23 @@ const SignupPage: React.FC<SignupPageProps> = () => {
 
   return (
     <div className="bg-[#F7F2EA] w-full h-full min-h-screen text-outfit relative">
-      {/* Background Image */}
-      {/* <img
+      <img
         src="https://images.pexels.com/photos/18413963/pexels-photo-18413963/free-photo-of-vintage-camera-and-typewriter.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
         className="w-full h-full absolute object-cover"
-        alt="Background"
-      /> */}
-
-      {/* Content Wrapper */}
+      />
       <div className="relative z-10 flex flex-col gap-6 py-6">
 
-        <nav className="flex justify-between items-center border-b border-gray-300 pb-4 px-10">
+        <nav className="flex justify-between items-center border-b border-gray-300 pb-4 px-10 text-[#FFC987]">
           <h1 className="text-xl font-semibold sm:text-3xl">Ticket Chaiyo</h1>
 
           <div className="hidden lg:flex gap-5">
             <Link to="/login">
-              <button className="p-2 rounded-xl px-4 font-medium border-[#FFC987] border transition hover:text-black">
+              <button className="p-2 rounded-xl px-4 font-medium border-[#FFC987] border transition text-white">
                 Login here
               </button>
             </Link>
             <Link to="/organizer-signup">
-              <button className="border p-2 bg-[#FFC987] rounded-xl px-4 font-medium transition hover:bg-[#FFB988]">
+              <button className="border p-2 bg-[#FFC987] rounded-xl px-4 font-medium transition hover:bg-[#FFB988] text-black">
                 Request Organizer
               </button>
             </Link>

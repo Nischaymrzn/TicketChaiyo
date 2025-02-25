@@ -24,7 +24,7 @@ export const ConcertDetailsCard = (event: any) => {
         </h2>
 
         <div className="flex 2xl:gap-10">
-          {/* Movie Info */}
+     
           <div className="flex-1 md:px-4 sm:pl-1 xl:pr-16">
 
 
@@ -87,7 +87,6 @@ export const ConcertDetailsCard = (event: any) => {
             </div>
           </div>
 
-          {/* Movie Sidebar */}
           <div className="text-gray-400 flex-col gap-12 2xl:-ml-11 hidden llg:flex">
   
             <div className="border-t border-gray-600">
@@ -102,7 +101,6 @@ export const ConcertDetailsCard = (event: any) => {
         </div>
       </div>
 
-      {/* Modal for Trailer */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center p-6">
           <div className="relative rounded-xl shadow-xl w-[90vw] sm:h-[90vh] h-[50vh] overflow-hidden pt-4 border border-gray-900">
@@ -124,7 +122,7 @@ export const ConcertDetailsCard = (event: any) => {
               </svg>
             </button>
             <ReactPlayer
-              url="https://youtu.be/o17MF9vnabg?si=NL6pU-0RnOL29B0Ys"
+              url={event?.videoUrl}
               controls
               width="100%"
               height="100%"

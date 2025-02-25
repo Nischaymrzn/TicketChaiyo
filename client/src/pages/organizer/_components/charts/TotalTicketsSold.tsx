@@ -1,4 +1,3 @@
-import * as React from "react"
 import { Label, Pie, PieChart } from "recharts"
 
 import {
@@ -15,29 +14,28 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
-const chartData = [
-  { event: "movie", ticketsSold: 250, fill: "var(--color-movie)" },
-  { event: "concert", ticketsSold: 500, fill: "var(--color-concert)" }
-]
 
 const chartConfig = {
     ticketsSold: {
     label: "Ticket Sold",
   },
-  movie: {
+  MOVIE: {
     label: "Movie",
     color: "hsl(var(--chart-6))",
   },
-  concert: {
+  CONCERT: {
     label: "Concert",
     color: "hsl(var(--chart-9))",
   },
 } satisfies ChartConfig
 
-export function TotalTicketsSold() {
-  const totalTicketsCount = React.useMemo(() => {
-    return chartData.reduce((acc, curr) => acc + curr.ticketsSold, 0)
-  }, [])
+export function TotalTicketsSold({data}:{data :any}) {
+  console.log(data)
+  const chartData = data?.map((item : any)=>{
+    return {...item, fill:`var(--color-${item?.event})`}
+  })
+  console.log(chartData)
+  const totalTicketsCount = chartData?.reduce((acc : any, curr : any) => acc + curr.eventCount, 0)
 
   return (
     <Card className="flex flex-col bg-[#13131A] border-[#2E2E3A] text-white xl:pb-5">
@@ -57,7 +55,7 @@ export function TotalTicketsSold() {
             />
             <Pie
               data={chartData}
-              dataKey="ticketsSold"
+              dataKey="eventCount"
               nameKey="event"
               innerRadius={80}
               outerRadius={130}
@@ -77,7 +75,7 @@ export function TotalTicketsSold() {
                           y={viewBox.cy}
                           className="text-3xl font-bold fill-white"
                         >
-                          {totalTicketsCount.toLocaleString()}
+                          {totalTicketsCount?.toLocaleString()}
                         </tspan>
                         <tspan
                           x={viewBox.cx}

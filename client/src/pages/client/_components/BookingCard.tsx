@@ -1,9 +1,10 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { CalendarIcon, Clock, MapPin, Users, Music, Film, Edit, Trash, MoreVertical, Ticket } from "lucide-react"
+import { CalendarIcon, Clock, MapPin, Users, Music, Film, Edit, Trash, MoreVertical, Ticket, Eye } from "lucide-react"
 import { Separator } from "@/components/ui/separator"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { useNavigate } from "react-router"
 
 type EventType = "MOVIE" | "CONCERT"
 
@@ -58,6 +59,8 @@ export const BookingCard = ({ booking, onEdit, onDelete }: BookingCardProps) => 
     onDelete(booking.id)
   }
 
+  const navigate = useNavigate()
+
   return (
     <Card className="w-full bg-[#1C1C24] border-[#2C2C35] text-gray-200 mb-6 z-0">
       <CardContent className="p-3 z-0">
@@ -84,7 +87,7 @@ export const BookingCard = ({ booking, onEdit, onDelete }: BookingCardProps) => 
                     {booking.event.type}
                   </Badge>
                 </div>
-                <DropdownMenu className="z-40">
+                <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" className="h-8 w-8 p-0">
                       <span className="sr-only">Open menu</span>
@@ -92,6 +95,10 @@ export const BookingCard = ({ booking, onEdit, onDelete }: BookingCardProps) => 
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="w-[160px] bg-[#1C1C24] border-[#2C2C35] text-gray-200">
+                  <DropdownMenuItem onClick={(()=> navigate(`/event/${booking.event.id}/bookingConfirmed/${booking.id}/invoice`))} className="cursor-pointer hover:bg-[#2C2C35]">
+                      <Eye className="mr-2 h-4 w-4" />
+                      <span>View</span>
+                    </DropdownMenuItem>
                     <DropdownMenuItem onClick={handleEdit} className="cursor-pointer hover:bg-[#2C2C35]">
                       <Edit className="mr-2 h-4 w-4" />
                       <span>Edit</span>

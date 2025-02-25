@@ -84,7 +84,6 @@ export default function EventConfirmationPage() {
           </div>
         </div>
 
-        {/* Action Buttons */}
         <div className="space-y-4">
         <Button className="p-2 w-full text-black bg-[#FFC987] rounded-lg px-4 font-medium transition hover:bg-[#FFB988]" onClick={handleViewTicket}>
             <span><TicketCheck className=""/></span>

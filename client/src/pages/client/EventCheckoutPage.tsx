@@ -61,7 +61,7 @@ export const EventCheckoutPage = () => {
       //@ts-ignore
       quantity: checkoutData?.eventType == "CONCERT" ? checkoutData?.normalTickets + checkoutData?.vipTickets : checkoutData.selectedSeats?.length as number,
       seats: checkoutData?.selectedSeats ?? [] as string[],
-      price: checkoutData?.totalAmount * 1.13,
+      price: checkoutData?.totalAmount * 1.075,
       name: billingForm?.fullName,
       email: billingForm?.email,
       country: billingForm?.country,
@@ -217,10 +217,10 @@ export const EventCheckoutPage = () => {
               <CardTitle className="text-white text-xl tracking-wide">Checkout Summary</CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
-              <div className="flex gap-4 bg-[#13131A] p-4 rounded-lg border border-gray-700">
+              <div className="flex gap-4 bg-[#13131A] p-4 rounded-lg border border-gray-800">
                 <div className="relative h-20 w-16 overflow-hidden rounded-lg">
                   <img
-                    src={eventData.poster || "/placeholder.svg"}
+                    src={eventData.cardImage || ""}
                     alt="Event poster"
                     className="object-cover w-full h-full"
                   />
@@ -251,12 +251,12 @@ export const EventCheckoutPage = () => {
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-400">Tax</span>
-                  <span className="text-white">रु {(checkoutData.totalAmount * 0.13).toFixed(2)}</span>
+                  <span className="text-white">रु {(checkoutData.totalAmount * 0.075).toFixed(2)}</span>
                 </div>
                 <Separator className="my-2 bg-gray-700" />
                 <div className="flex justify-between font-medium">
                   <span className="text-white">Total</span>
-                  <span className="text-white">रु {(checkoutData.totalAmount * 1.13).toFixed(2)}</span>
+                  <span className="text-white">रु {(checkoutData.totalAmount * 1.075).toFixed(2)}</span>
                 </div>
               </div>
 

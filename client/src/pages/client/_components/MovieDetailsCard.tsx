@@ -23,7 +23,7 @@ export const MovieDetailsCard = (event: any) => {
         </h2>
 
         <div className="flex 2xl:gap-10">
-          {/* Movie Info */}
+   
           <div className="flex-1 md:px-4 sm:pl-1 xl:pr-16">
             <div className="flex flex-wrap gap-2 mb-6">
               {event?.genre.split(",").map((genre: any) => (
@@ -39,14 +39,14 @@ export const MovieDetailsCard = (event: any) => {
             <div className="flex flex-wrap items-center text-gray-300 mb-6">
               <div className="flex items-center gap-2 pr-4">
                 <span className="bg-green-500 text-black px-3 py-1 rounded-xl text-sm font-semibold">
-                  <Hourglass className="w-[14px] xs:w-[17px" />
+                  <Hourglass className="w-4 xs:w-5" />
                 </span>
                 <span className="text-gray-400 rounded font-medium text-[15px]">{event?.duration}m</span>
               </div>
 
               <div className="flex items-center gap-2">
                 <span className="bg-blue-400 text-black px-3 py-1 rounded-xl text-sm font-semibold">
-                  <Calendar className="w-4 h-4" />
+                  <Calendar className="w-4 xs:w-5" />
                 </span>
                 <span className="text-gray-400 rounded font-medium text-[15px]">
                   {format(parseISO(event?.date), "yyyy-MM-dd")}
@@ -95,7 +95,6 @@ export const MovieDetailsCard = (event: any) => {
             </div>
           </div>
 
-          {/* Movie Sidebar */}
           <div className="text-gray-400 flex-col gap-12 2xl:-ml-11 hidden llg:flex">
             <div className="border-t border-gray-600">
               <h3 className="text-lg xl:text-lg 2xl:text-xl text-blue-300 mt-2 tracking-wider">Director</h3>
@@ -113,7 +112,6 @@ export const MovieDetailsCard = (event: any) => {
         </div>
       </div>
 
-      {/* Modal for Trailer */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center p-6">
           <div className="relative rounded-xl shadow-xl w-[90vw] sm:h-[90vh] h-[50vh] overflow-hidden pt-4 border border-gray-900">
@@ -135,7 +133,7 @@ export const MovieDetailsCard = (event: any) => {
               </svg>
             </button>
             <ReactPlayer
-              url="https://youtu.be/o17MF9vnabg?si=NL6pU-0RnOL29B0Ys"
+              url={event?.videoUrl}
               controls
               width="100%"
               height="100%"

@@ -26,7 +26,7 @@ interface MovieCardProps {
 const MovieCard = ({movie,isDetailed} : MovieCardProps) => {
   return (
     <div className="flex flex-col w-full gap-3 pb-8" key={movie.id}>
-      {/* Group container for hover effect */}
+
       <div className="relative w-full group">
         <img
           src={movie.cardImage}

@@ -13,20 +13,20 @@ const LoginPage: React.FC<LoginPageProps> = () => {
 
   return (
     <div className="bg-[#F7F2EA] min-h-[100vh] w-full overflow-hidden text-outfit">
-      {/* <img
+      <img
         src="https://images.pexels.com/photos/18413963/pexels-photo-18413963/free-photo-of-vintage-camera-and-typewriter.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
         className="w-full h-full z-0 absolute"
         // alt="background" text-[#FFB89F]
-      /> */}
+      />
       <div className="flex py-4 flex-col gap-4 relative z-10 sm:py-6 sm:gap-6">
         <nav className="flex justify-between items-center border-b-[0.25px] border-gray-300 pb-3 sm:pb-4">
-          <h1 className="text-xl font-semibold pl-4  sm:text-3xl sm:pl-10">
+          <h1 className="text-xl font-semibold pl-4  sm:text-3xl sm:pl-10 text-[#FFC987]">
             Ticket Chaiyo
           </h1>
-          {/* Desktop Actions */}
+
           <div className="hidden lg:flex gap-2 pr-4 sm:gap-5 sm:pr-10">
             <Link to="/signup">
-              <button className="text-sm sm:text-base p-2 rounded-lg px-3 font-medium border-[#FFC987] border text-black sm:rounded-xl sm:px-4">
+              <button className="text-sm sm:text-base p-2 rounded-lg px-3 font-medium border-[#FFC987] border text-white sm:rounded-xl sm:px-4">
                 Sign up
               </button>
             </Link>
@@ -36,7 +36,7 @@ const LoginPage: React.FC<LoginPageProps> = () => {
               </button>
             </Link>
           </div>
-          {/* Mobile Menu Toggle Button */}
+
           <div className="lg:hidden">
             <button
               type="button"
@@ -47,7 +47,6 @@ const LoginPage: React.FC<LoginPageProps> = () => {
               <AlignJustify className="w-6 h-6" aria-hidden="true" />
             </button>
           </div>
-          {/* Mobile Menu */}
           <Dialog
             as="div"
             className="lg:hidden"

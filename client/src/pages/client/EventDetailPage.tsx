@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { useParams } from "react-router"
 import ClientNav from "./_components/ClientNav"
-import { MovieDetailsCard } from "./_components/MovieDetailCard"
+import { MovieDetailsCard } from "./_components/MovieDetailsCard"
 import { useGetEvent } from "@/hooks/useEvent"
 import { ConcertDetailsCard } from "./_components/ConcertDetailCard"
 import SeatSelection from "./_components/SeatSelection"

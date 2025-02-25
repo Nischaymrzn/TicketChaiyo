@@ -11,9 +11,7 @@ const navigations = [
     { name: "Faqs", href: "#faq" },
     {
       name: "Community",
-      // href: "https://www.facebook.com/groups/846181496988189/",
       href: "#",
-      // target: "_blank",
     },
     {
       name: "Contact Us",
@@ -26,7 +24,7 @@ const LandingPage = () => {
 
   return (
     <div className="bg-white">
-      {/* Header */}
+
       <header className="absolute inset-x-0 top-0 z-50">
         <nav
           className="flex items-center justify-between p-6 lg:px-8"
@@ -85,7 +83,7 @@ const LandingPage = () => {
           <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full px-6 py-6 overflow-y-auto bg-white sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
               <a href="#" className="-m-1.5 p-1.5">
-                <span className="sr-only">InnoVisionX</span>
+                <span className="sr-only">Ticket Chaiyo</span>
               </a>
 
               <button
@@ -127,7 +125,6 @@ const LandingPage = () => {
       </header>
 
       <main>
-        {/* Hero section */}
         <div className="relative h-full pb-16 overflow-hidden bg-gray-900 isolate pt-14 sm:pb-20">
           <img
             src="https://images.unsplash.com/photo-1485095329183-d0797cdc5676?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1&blend=555555&sat=-50&exp=0&blend-mode=multiply"
@@ -156,7 +153,7 @@ const LandingPage = () => {
                 </h1>
 
                 <p className="mt-6 text-lg leading-8 text-gray-300 font-md">
-                Welcome to Chalchitra, where we simplify event management. Our platform efficiently handles all types of events, from concerts and conferences to community gatherings, ensuring a smooth experience for organizers and attendees alike.
+                Welcome to TicketChaiyo, where we simplify event management. Our platform efficiently handles all types of events, from concerts and conferences to community gatherings, ensuring a smooth experience for organizers and attendees alike.
                 </p>
               </div>
             </div>
@@ -178,10 +175,9 @@ const LandingPage = () => {
           </div>
         </div>
 
-        {/* About Section */}
         <div id="about-us"></div>
         <div className="mt-20">
-          {/* Feature section */}
+ 
           <div className="mt-20 sm:mt-38">
             <div className="px-6 mx-auto max-w-8xl lg:px-8">
               <div className="max-w-3xl mx-auto sm:text-center">
@@ -190,7 +186,7 @@ const LandingPage = () => {
                 </h1>
 
                 <p className="mt-6 text-lg leading-8 text-gray-600">
-                Our platform offers a secure, anonymous space for students to share valuable feedback, helping teachers refine their methods. This fosters a positive, collaborative learning environment focused on continuous growth and improvement.
+                  Our platform offers a secure, comprehensive space for organizers to collect valuable feedback, helping planners enhance their events. This fosters a positive, collaborative event environment focused on continuous improvement and attendee satisfaction.
                 </p>
               </div>
             </div>
@@ -209,12 +205,8 @@ const LandingPage = () => {
               </div>
             </div>
           </div>
-
-         
-          
         </div>
 
-        {/* FAQ section */}
         <div className="px-6 mx-auto mt-20 max-w-7xl sm:mt-38 lg:px-8" id="faq">
           <div className="max-w-4xl mx-auto divide-y divide-gray-900/10">
             <h2 className="text-2xl font-bold leading-10 tracking-tight text-gray-900">
@@ -255,7 +247,6 @@ const LandingPage = () => {
         </div>
       </main>
 
-      {/* Footer */}
       <footer
         className="mt-24 bg-gray-900 sm:mt-56"
         aria-labelledby="footer-heading"

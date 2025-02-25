@@ -9,11 +9,9 @@ const Footer = () => {
         <p className="text-sm">
           by{" "}
           <a
-            // href="https://innovisionx-tech.vercel.app/"
-            // target="_blank"
             className="font-semibold cursor-pointer hover:underline text-accent_secondary"
           >
-            ChalchitraX
+            TicketChaiyo
           </a>
         </p>
       </div>
@@ -23,11 +21,9 @@ const Footer = () => {
 
         <span>
           <a
-            // href="https://innovisionx-tech.vercel.app/"
-            // target="_blank"
             className="font-semibold underline cursor-pointer hover:no-underline"
           >
-            ChalchitraX
+            TicketChaiyo
           </a>
           <span className="hidden sm:inline"> - All rights reserved.</span>
         </span>

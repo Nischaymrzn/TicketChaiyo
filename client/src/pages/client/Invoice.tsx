@@ -14,15 +14,15 @@ const Invoice = () => {
     const eventId = booking?.eventId
     const { data : event } = useGetEvent(eventId)
     const eventData = event?.event ?? {}
-    console.log(booking)
+    console.log("hello",booking)
     console.log(eventData)
 
   const { toPDF, targetRef } = usePDF({ filename: "invoice.pdf" });
 
   return (
-    <div className="flex flex-col items-center w-full my-4">
-      {booking ? (
-        <div className="pb-6 bg-secondary w-full sm:w-[850px] flex flex-col justify-center items-center border rounded-sm">
+    <div className="flex flex-col items-center w-full bg-[#1c1c24] overflow-hidden">
+      {booking? (
+        <div className="pb-6 bg-gray-300 w-full sm:w-[900px] flex flex-col justify-center items-center border border-gray-400 rounded-sm my-2">
           <div
             className=" min-h-[29.7cm] w-full sm:w-[850px] overflow-hidden"
             ref={targetRef}
@@ -98,13 +98,13 @@ const Invoice = () => {
 
                         <div className="flex items-center gap-2">
                           <TicketIcon className="text-red-500 w-5" />
-                          <p className="font-semibold text-red-500">x{booking.normalTicketQty} VIP</p>
+                          <p className="font-semibold text-red-500">x{booking.normalTicketQty} Normal</p>
                         </div>
 
                         <p className="">
                           Total:{" "}
                           <span className="font-semibold text-black">
-                          {(booking.normalTicketQty * eventData?.ticketPriceNormal * 1.13).toFixed(2)}
+                          {(booking.normalTicketQty * eventData?.ticketPriceNormal * 1.075).toFixed(2)}
                           </span>
                         </p>
                       </div>
@@ -140,13 +140,13 @@ const Invoice = () => {
 
                         <div className="flex items-center gap-2 text-blue-500">
                           <TicketIcon className="w-5" />
-                          <p className="font-semibold">x{booking.vipTicketQty}</p>
+                          <p className="font-semibold">x{booking.vipTicketQty} Vip</p>
                         </div>
 
                         <p className="">
                           Total:{" "}
                           <span className="font-semibold text-black">
-                          {(booking.vipTicketQty * eventData?.ticketPriceVip * 1.13).toFixed(2)}
+                          {(booking.vipTicketQty * eventData?.ticketPriceVip * 1.075).toFixed(2)}
                           </span>
                         </p>
                       </div>

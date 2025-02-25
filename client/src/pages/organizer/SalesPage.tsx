@@ -45,7 +45,7 @@ export const SalesPage = () => {
 
         <div className="2xl:grid xl:grid-cols-8 xl:gap-x-6 xl:grid">
           <div className="mb-6 xl:col-span-3">
-            <TotalTicketsSold />
+            <TotalTicketsSold data={analytics?.totalTicketsSoldChart}/>
           </div>
 
           <div className="mb-6 xl:col-span-5">

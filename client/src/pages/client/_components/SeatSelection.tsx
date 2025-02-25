@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { Accessibility, Square } from "lucide-react"
+import { Square } from "lucide-react"
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 import { useCheckout } from "@/state-stores/CheckoutContext"
 
@@ -34,6 +34,8 @@ const SeatSelection = ({ totalSeats, onSeatSelect, ticketPriceNormal, ticketPric
 
     setCheckoutData((prev) => ({
       ...prev,
+      normalTickets : normalSeatsCount,
+      vipTickets : vipSeatsCount,
       selectedSeats,
       totalAmount,
     }))
@@ -63,7 +65,6 @@ const SeatSelection = ({ totalSeats, onSeatSelect, ticketPriceNormal, ticketPric
         const isBooked = totalSeats.includes(seatNumber.toLowerCase()) || totalSeats.includes(seatNumber.toUpperCase())
         const isSelected = selectedSeats.includes(seatNumber)
         const isVip = isVipRow(rowLetter)
-        const isAccessible = (rowLetter === "D" && j === 6) || (rowLetter === "G" && j === 3)
 
         if (j === Math.floor(seatsPerRow / 3) || j === Math.floor((2 * seatsPerRow) / 3)) {
           seats.push(<div key={`gap-${rowLetter}-${j}`} className="w-8" />)
@@ -87,7 +88,7 @@ const SeatSelection = ({ totalSeats, onSeatSelect, ticketPriceNormal, ticketPric
             disabled={isBooked}
             title={`Seat ${seatNumber}${isVip ? " (VIP)" : ""}`}
           >
-            {isAccessible ? <Accessibility className="w-4 h-4 text-gray-300" /> : seatNumber}
+            {seatNumber}
           </button>,
         )
       }
@@ -109,7 +110,7 @@ const SeatSelection = ({ totalSeats, onSeatSelect, ticketPriceNormal, ticketPric
 
   return (
     <div className="w-full max-w-7xl mx-auto p-8 bg-[#1c1d20] rounded-lg">
-      {/* Legend */}
+  
       <div className="flex items-center justify-center gap-6 mb-8">
         <div className="flex items-center gap-2">
           <Square className="w-4 h-4 fill-gray-600" />

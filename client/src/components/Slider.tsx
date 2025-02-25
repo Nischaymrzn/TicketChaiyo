@@ -24,7 +24,7 @@ const images: SliderImage[] = [
 
 const Slider: React.FC = () => {
     return (
-        <div className="relative w-full h-[725px] px-4 pt-3"> {/* Container for slider */}
+        <div className="relative w-full h-[725px] px-4 pt-3">
           <Swiper
             spaceBetween={30}
             centeredSlides={true}
