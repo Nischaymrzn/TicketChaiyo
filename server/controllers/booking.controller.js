@@ -16,7 +16,6 @@ export const createBookingController = async (req, res) => {
 
     res.status(201).json({ success: true, booking })
   } catch (err) {
-    console.error("Error creating booking:", err)
     res.status(500).json({ error: "Internal error" })
   }
 }
@@ -53,7 +52,6 @@ export const cancelBookingController = async (req, res) => {
 
     res.status(200).json({ success: true, message: "Booking cancelled successfully" })
   } catch (err) {
-    console.error("Error cancelling booking:", err)
     res.status(500).json({ error: "Internal error" })
   }
 }
@@ -65,7 +63,6 @@ export const getUserBookingsController = async (req, res) => {
     const bookings = await getBookingsByUser(userId)
     res.status(200).json({ success: true, bookings })
   } catch (err) {
-    console.error("Error fetching user bookings:", err)
     res.status(500).json({ error: "Internal error" })
   }
 }
@@ -77,7 +74,6 @@ export const getEventBookingsController = async (req, res) => {
     const bookings = await getBookingsByEvent(eventId)
     res.status(200).json({ success: true, bookings })
   } catch (err) {
-    console.error("Error fetching event bookings:", err)
     res.status(500).json({ error: "Internal error" })
   }
 }
@@ -88,7 +84,6 @@ export const getEventBookingById = async (req, res) => {
     const bookings = await getBookingById(id)
     res.status(200).json({ success: true, bookings })
   } catch (err) {
-    console.error("Error fetching event bookings:", err)
     res.status(500).json({ error: "Internal error" })
   }
 }

@@ -62,7 +62,6 @@ export const getCustomers = async (req, res) => {
       const user = await createUser({ fullName, email, userName, password, userRole, isAccepted })
       res.status(201).json({ success: "Organizer created successfully" })
     } catch (err) {
-      console.error("Error creating Organizer:", err)
       res.status(500).json({ error: "Internal error" })
     }
   }

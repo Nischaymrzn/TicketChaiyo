@@ -7,7 +7,6 @@ export const getAllRequests = async (req, res) => {
     const requests = await fetchAllRequests()
     res.status(200).json({ requests })
   } catch (error) {
-    console.error("Error fetching requests:", error)
     res.status(500).json({ message: "Internal server error" })
   }
 }
