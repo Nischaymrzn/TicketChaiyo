@@ -29,6 +29,7 @@ import Invoice from "./pages/client/Invoice";
 import { ProfileLayout } from "./pages/client/ProfileLayout";
 import { Booking } from "./pages/client/Booking";
 import Setting  from "./pages/client/Setting";
+import ErrorPage from "./pages/ErrorPage";
 
 
 
@@ -79,6 +80,8 @@ return(
                 </Route>
 
             </Route>
+
+            <Route path="*" element={<ErrorPage />}/>
 
 
         </Routes>
