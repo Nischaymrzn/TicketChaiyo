@@ -34,8 +34,6 @@ interface Event {
 
 export const AdminEventsPage = () => {
   const { data, isLoading, error } = useGetEvents()
-  
-  console.log(data)
   const createEventMutation = useCreateEvent()
   const updateEventMutation = useUpdateEvent()
   const deleteEventMutation = useDeleteEvent()

@@ -1,14 +1,10 @@
 import LoginForm from '@/components/LoginForm';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Dialog, DialogPanel } from '@headlessui/react';
 import { AlignJustify, X } from 'react-feather';
 
-interface LoginPageProps {
-  
-}
-
-const LoginPage: React.FC<LoginPageProps> = () => {
+const LoginPage = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
 
   return (

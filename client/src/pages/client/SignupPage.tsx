@@ -1,14 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Dialog } from "@headlessui/react";
 import { AlignJustify, X } from "react-feather";
 import SignupForm from "./_components/SignupForm";
 
-interface SignupPageProps {
- 
-}
-
-const SignupPage: React.FC<SignupPageProps> = () => {
+const SignupPage = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
 
   return (

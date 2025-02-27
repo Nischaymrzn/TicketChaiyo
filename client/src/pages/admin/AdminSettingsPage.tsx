@@ -1,5 +1,3 @@
-"use client"
-
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -46,9 +44,7 @@ export const AdminSettingsPage = () => {
     setConfirmPassword("")
     setIsDialogOpen(false)
   }
-
     const { logout } = useLogout();
-  
     const handleLogout = () =>{
       logout()
     }
@@ -60,7 +56,6 @@ export const AdminSettingsPage = () => {
           <p className="text-2xl font-bold">Settings</p>
 
           <p className="text-sm md:text-base px-1">Monitor all your profile details here</p>
-
         </div>
 
         <div>
@@ -85,7 +80,6 @@ export const AdminSettingsPage = () => {
           </DropdownMenu>
         </div>
       </div>
-
     
       <Card className="w-full max-w-2xl bg-[#1c1c24] border border-[#2a2a35] rounded-lg overflow-hidden py-1 pb-3">
 

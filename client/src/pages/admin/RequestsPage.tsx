@@ -1,5 +1,3 @@
-"use client"
-
 import { useEffect, useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -40,7 +38,6 @@ const RequestsPage = () => {
     } else if (requestType === "organizer") {
       await acceptUser.mutateAsync({ userId: eventId, userData: { isAccepted: true } })
     }
-    // Optionally, you can refetch the requests or update the local state here
   }
 
   const handleReject = async (id: string, requestType: "event" | "organizer") => {
@@ -49,7 +46,6 @@ const RequestsPage = () => {
     } else if (requestType === "organizer") {
       await rejectUser.mutateAsync(id)
     }
-    // Optionally, you can refetch the requests or update the local state here
   }
 
   return (

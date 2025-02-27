@@ -1,5 +1,3 @@
-"use client"
-
 import { useState } from "react"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { useDeleteUser, useGetOrganizers, useUpdateUser } from "@/hooks/useUser"
@@ -12,15 +10,13 @@ import { AddOrganizerModal } from "./_components/AddOrganizerModal"
 
 export const OrganizersPage = () => {
   const { data: organizers } = useGetOrganizers()
-  const organizerData = organizers?.users ?? []
+  const organizerData = organizers?.users?.filter((data : any)=> data?.isAccepted == true) ?? []
   const [editingOrganizer, setEditingOrganizer] = useState<any | null>(null)
 
   const handleEdit = (organizer: any) => {
     setEditingOrganizer(organizer)
   }
-
   const deleteUser = useDeleteUser()
-
   const handleRemove = async (organizerId: string) => {
     try{
       await deleteUser.mutateAsync(organizerId)
@@ -28,7 +24,6 @@ export const OrganizersPage = () => {
       console.log(error)
     }
   }
-
   const updateUser = useUpdateUser()
 
   const handleSave = async (userId : string ,userData: any) => {

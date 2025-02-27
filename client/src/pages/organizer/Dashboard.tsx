@@ -26,7 +26,6 @@ const Dashboard = () => {
             total={analytics?.totalEvents}
             icon={<Calendar className="h-4 w-4 text-purple-500" />}
           />
-
           <CardDataStats
             title="Total Customers"
             total={analytics?.totalCustomers}
@@ -42,7 +41,6 @@ const Dashboard = () => {
             total={analytics?.totalTicketsSold}
             icon={<Ticket className="h-4 w-4 text-green-500" />}
           />
-
         </div>
 
         <div className="2xl:grid xl:grid-cols-8 xl:gap-x-6 xl:grid">

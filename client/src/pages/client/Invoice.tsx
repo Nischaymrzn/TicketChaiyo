@@ -38,12 +38,8 @@ const Invoice = () => {
             Download
           </button>
           </div>
-
-            
-
             <div className="flex flex-col items-start p-6">
               <p className="text-lg font-semibold text-black">Invoice</p>
-
               <div className="flex items-start justify-between w-full mt-4">
                 <div className="flex flex-col gap-2">
                   <p>Invoice to {booking?.name}</p>

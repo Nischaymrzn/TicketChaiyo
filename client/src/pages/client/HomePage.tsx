@@ -63,7 +63,7 @@ const HomePage = () => {
         <Button
               className={cn(
                 'px-6 py-5 font-medium text-lg border border-gray-500',
-                filter === 'movie' ? 'bg-[#FFC987] hover:bg-[#f1c692] text-black border-transparent' : 'border-gray-500'
+                filter === 'MOVIE' ? 'bg-[#FFC987] hover:bg-[#f1c692] text-black border-transparent' : 'border-gray-500'
               )}
               onClick={() => handleFilterChange('MOVIE')}
             >
@@ -72,7 +72,7 @@ const HomePage = () => {
             <Button
               className={cn(
                 'px-6 py-5 font-medium text-lg border border-gray-500',
-                filter === 'concert' ? 'bg-[#FFC987] hover:bg-[#f1c692] text-black border-transparent' : 'border-gray-500'
+                filter === 'CONCERT' ? 'bg-[#FFC987] hover:bg-[#f1c692] text-black border-transparent' : 'border-gray-500'
               )}
               onClick={() => handleFilterChange('CONCERT')}
             >

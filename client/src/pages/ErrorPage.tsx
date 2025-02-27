@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import errorImage from "@/assets/error.svg";
+import errorImage from "@/assets/error.png";
 
 const ErrorPage = () => {
   return (
@@ -7,7 +7,7 @@ const ErrorPage = () => {
       <img
         src={errorImage}
         alt="error loading image"
-        className="w-[20rem]"
+        className="w-[40rem]"
       />
 
       <div className="flex flex-col justify-center items-center lg:w-[32rem] min-h-[7rem] pt-[2rem] gap-[4px] mx-3">
