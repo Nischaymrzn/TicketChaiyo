@@ -35,16 +35,13 @@ export const EventCheckoutPage = () => {
     city: "",
     zipCode: "",
   })
+
   const { id } = useParams()
   const { data } = useGetEvent(id as string)
-
   const user = useGetMe()
   const userId = user?.data?.userData?.id
-
   const eventData = data?.event ?? {}
-
   const navigate = useNavigate()
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setBillingForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
@@ -52,12 +49,10 @@ export const EventCheckoutPage = () => {
   const handleSelectChange = (name: string, value: string) => {
     setBillingForm((prev) => ({ ...prev, [name]: value }))
   }
-
   const  addBooking  = useAddBooking()
-
   const handleConfirmAndPay = async () => {
 
-    const bookingData: BookingData = {
+  const bookingData: BookingData = {
       //@ts-ignore
       quantity: checkoutData?.eventType == "CONCERT" ? checkoutData?.normalTickets + checkoutData?.vipTickets : checkoutData.selectedSeats?.length as number,
       seats: checkoutData?.selectedSeats ?? [] as string[],
@@ -74,7 +69,6 @@ export const EventCheckoutPage = () => {
   }
 
     const response = await addBooking.mutateAsync(bookingData)
-    console.log(response)
     clearCheckoutData()
     navigate(`/event/${id}/bookingConfirmed/${response?.id}`) 
   }

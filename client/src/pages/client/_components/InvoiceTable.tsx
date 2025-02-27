@@ -9,9 +9,7 @@ import {
   } from "@/components/ui/table";
   
   const InvoiceTable = ({eventDetails ,bookingDetails} : {eventDetails : any ,bookingDetails : any}) => {
-    console.log(bookingDetails)
 
-    console.log(eventDetails)
     return (
       <Table className="mt-6 bg-white border rounded-md border-border">
         <TableHeader>

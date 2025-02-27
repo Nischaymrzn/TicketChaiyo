@@ -5,12 +5,10 @@ import { updateEventSeats } from "../services/event.service.js"
 export const createBookingController = async (req, res) => {
   try {
     const { clientId, eventId, seats, price, quantity, name, email, country, state, city,normalTicketQty, vipTicketQty } = req.body
-
     const validationError = validateBooking(clientId, eventId, seats, price)
     if (validationError) {
       return res.status(400).json({ error: validationError })
     }
-
     const booking = await createBooking({ clientId, eventId, seats, price, quantity, name, email, country, state, city, normalTicketQty, vipTicketQty })
     await updateEventSeats(eventId, seats, quantity, "add")
 
@@ -23,7 +21,6 @@ export const createBookingController = async (req, res) => {
 export const updateBookingById = async (req, res) => {
   try {
     const bookingData = req.body;
-
     const event = await updateBooking(req.params.id, bookingData);
     if (!event) {
       return res.status(404).json({ error: "Booking not found" });
@@ -41,7 +38,6 @@ export const updateBookingById = async (req, res) => {
 export const cancelBookingController = async (req, res) => {
   try {
     const { id } = req.params
-
     const booking = await getBookingById(id)
     if (!booking) {
       return res.status(404).json({ error: "Booking not found" })

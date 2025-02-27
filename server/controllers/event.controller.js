@@ -10,7 +10,6 @@ export const createNewEvent = async (req, res) => {
     if (validationError) {
       return res.status(400).json({ error: validationError });
     }
-
     if (req.files) {
       if (req.files.poster) {
         const posterResult = await uploadToCloudinary(req.files.poster[0].path);
@@ -21,7 +20,6 @@ export const createNewEvent = async (req, res) => {
         eventData.cardImage = cardImageResult.secure_url;
       }
     }
-
     eventData.organizerId = req.user.id;
     const event = await createEvent(eventData);
     res.status(201).json({ success: "Event created successfully", event });
@@ -30,11 +28,9 @@ export const createNewEvent = async (req, res) => {
   }
 };
 
-
 export const getEvents = async (req, res) => {
   const id = req.user.id;
   const user = await findUserById(id)
-
   try {
     const events = await getAllEvents(user.userRole,user.id)
     res.status(200).json({ events })

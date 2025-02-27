@@ -51,7 +51,7 @@ export const useLogin = () => {
       return response.data
     },
     onSuccess: (data) => {
-      setAuthToken(data.accessToken) // Use the new setAuthToken function
+      setAuthToken(data.accessToken)
       handleSetAccessToken(data.accessToken)
       setUser(data.user)
       toast.success("Login successful")
@@ -84,7 +84,8 @@ export const useLogout = () => {
   const navigate = useNavigate()
 
   const logout = () => {
-    setAuthToken("") // Clear the token
+    setAuthToken("") 
+    navigate('/login', { replace: true, state: {} });
     navigate(0)
   }
 
@@ -98,7 +99,7 @@ export const useGetMe = () => {
       const response = await authenticatedApi.get("/auth/getMe")
       return response.data
     },
-    enabled: !!localStorage.getItem("accessToken"), // Only run query if token exists
+    enabled: !!localStorage.getItem("accessToken"), 
     retry: false,
   })
 }

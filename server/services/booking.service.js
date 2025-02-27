@@ -26,7 +26,6 @@ export const updateBooking = async (id, bookingData) => {
   })
 }
 
-
 export const cancelBooking = async (id) => {
   return await prisma.booking.delete({
     where: { id },

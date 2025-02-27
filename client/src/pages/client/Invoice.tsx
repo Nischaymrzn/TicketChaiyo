@@ -8,14 +8,13 @@ import { useGetBooking } from "@/hooks/useBookings";
 import { useGetEvent } from "@/hooks/useEvent";
 
 const Invoice = () => {
-    const {id} = useParams()
-    const { data } = useGetBooking(id as string)
-    const booking = data?.bookings ?? {}
-    const eventId = booking?.eventId
-    const { data : event } = useGetEvent(eventId)
-    const eventData = event?.event ?? {}
-    console.log("hello",booking)
-    console.log(eventData)
+  const {id} = useParams()
+  const { data } = useGetBooking(id as string)
+  const booking = data?.bookings ?? {}
+  const eventId = booking?.eventId
+  const { data : event } = useGetEvent(eventId)
+  const eventData = event?.event ?? {}
+  console.log("hello",booking)
 
   const { toPDF, targetRef } = usePDF({ filename: "invoice.pdf" });
 
@@ -23,18 +22,12 @@ const Invoice = () => {
     <div className="flex flex-col items-center w-full bg-[#1c1c24] overflow-hidden">
       {booking? (
         <div className="pb-6 bg-gray-300 w-full sm:w-[900px] flex flex-col justify-center items-center border border-gray-400 rounded-sm my-2">
-          <div
-            className=" min-h-[29.7cm] w-full sm:w-[850px] overflow-hidden"
-            ref={targetRef}
-          >
+          <div className=" min-h-[29.7cm] w-full sm:w-[850px] overflow-hidden" ref={targetRef}>
             <div className="flex items-center justify-between">
             <div className="z-10 w-full px-6 py-6 text-xl font-semibold text-black">
               TicketChayo.com
             </div>
-            <button
-            className="p-2 text-black bg-[#FFC987] rounded-lg px-8 font-medium transition hover:bg-[#FFB988] mr-4"
-            onClick={() => toPDF()}
-          >
+            <button className="p-2 text-black bg-[#FFC987] rounded-lg px-8 font-medium transition hover:bg-[#FFB988] mr-4"onClick={() => toPDF()}>
             Download
           </button>
           </div>
@@ -43,24 +36,20 @@ const Invoice = () => {
               <div className="flex items-start justify-between w-full mt-4">
                 <div className="flex flex-col gap-2">
                   <p>Invoice to {booking?.name}</p>
-
                   <p>
-                    {booking?.country}
-                    {", "}
-                    {booking?.city}
+                    {booking?.country}{", "}{booking?.city}
                   </p>
-
                   <p>
-                    {booking?.state}
-                    {", "}
-                    {booking?.country}
+                    {booking?.state}{", "}{booking?.country}
                   </p>
                 </div>
 
                 <div className="flex flex-col gap-2">
                   <p>ID: {booking?.id}</p>
-
                   <p>Date: {format(new Date(), "dd MMMM yyyy")}</p>
+                  {booking?.seats?.length > 0 &&
+                  <p>Seats: {booking?.seats?.join(",")}</p>
+                  }
                 </div>
               </div>
 
@@ -151,8 +140,6 @@ const Invoice = () => {
                 }
             </div>
           </div>
-
-          
         </div>
       ) : null}
     </div>

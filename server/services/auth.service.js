@@ -9,7 +9,7 @@ export const comparePasswords = async (password, hash) => {
 }
 
 export const createToken = (id) => {
-  return jwt.sign({ id }, process.env.SECRET_KEY, { expiresIn: "3d" })
+  return jwt.sign({ id }, process.env.SECRET_KEY, { expiresIn: "1d" })
 }
 
 export const verifyToken = (token) => {

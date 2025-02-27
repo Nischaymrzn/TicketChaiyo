@@ -1,7 +1,6 @@
 import { createUser, findUserByEmail, findUserById } from "../services/user.service.js"
 import { validateSignup, validateLogin } from "../utils/validation.js"
 import { comparePasswords, createToken } from "../services/auth.service.js"
-import { UserRole } from "@prisma/client"
 
 export const signup = async (req, res) => {
   try {

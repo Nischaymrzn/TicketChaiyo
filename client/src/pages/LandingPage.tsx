@@ -24,7 +24,6 @@ const LandingPage = () => {
 
   return (
     <div className="bg-white">
-
       <header className="absolute inset-x-0 top-0 z-50">
         <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
           <div className="flex lg:flex-1">
@@ -49,12 +48,7 @@ const LandingPage = () => {
 
           <div className="hidden lg:flex lg:gap-x-12">
             {navigations.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                
-                className="font-semibold leading-6 text-white text-m"
-              >
+              <a key={item.name} href={item.href} className="font-semibold leading-6 text-white text-m">
                 {item.name}
               </a>
             ))}

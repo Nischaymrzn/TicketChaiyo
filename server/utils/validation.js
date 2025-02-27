@@ -27,11 +27,9 @@ export const validateEvent = (eventData) => {
     if (!title || !type || !ticketPriceNormal) {
       return "Title, type, and ticket prices are required"
     }
-  
     if (!["MOVIE", "CONCERT", "OTHERS"].includes(type)) {
       return "Invalid event type"
     }
-  
     return null
   }
   
@@ -39,9 +37,6 @@ export const validateEvent = (eventData) => {
     if (!clientId || !eventId || !price) {
       return "All fields must be filled"
     }
-    // if (!Array.isArray(seats) || seats.length === 0) {
-    //   return "Seats must be a non-empty array"
-    // }
     if (!validator.isUUID(clientId) || !validator.isUUID(eventId)) {
       return "Invalid client or event ID"
     }

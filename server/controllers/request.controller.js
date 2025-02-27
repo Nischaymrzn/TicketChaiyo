@@ -14,10 +14,9 @@ export const getAllRequests = async (req, res) => {
 export const acceptUser = async (req, res) => {
   try {
     const {isAccepted } = req.body;
-
     const acceptedStatus = isAccepted === "true" || isAccepted === true;
-
     const user = await updateUserById(req.params.id, {isAccepted : acceptedStatus });
+    
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
@@ -33,10 +32,9 @@ export const acceptUser = async (req, res) => {
 export const acceptEvent = async (req, res) => {
   try {
     const {isAccepted } = req.body;
-
     const acceptedStatus = isAccepted === "true" || isAccepted === true;
-
     const user = await updateEvent(req.params.id, {isAccepted : acceptedStatus });
+
     if (!user) {
       return res.status(404).json({ error: "Event not found" });
     }
