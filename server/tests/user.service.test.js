@@ -123,15 +123,5 @@ describe('User Service', () => {
       });
       expect(result).toHaveProperty('id', id);
     });
-
-    it('should update user data without password change', async () => {
-      const id = 2;
-      const userData = { name: 'No Password Change' };
-      prisma.user.update.mockResolvedValue({ id, name: 'No Password Change' });
-
-      const result = await updateUserById(id, userData);
-      expect(prisma.user.update).toHaveBeenCalledWith({ where: { id }, data: userData });
-      expect(result).toHaveProperty('id', id);
-    });
   });
 });

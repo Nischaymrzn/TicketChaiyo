@@ -20,7 +20,6 @@ export const signup = async (req, res) => {
     }
 
     const isAccepted = userRole?.toLowerCase() === "client";
-    console.log(userRole,isAccepted)
     
     const user = await createUser({ fullName, email, userName, password, userRole, isAccepted })
     res.status(201).json({ success: "User created successfully" })

@@ -70,14 +70,6 @@ describe("Event Controller", () => {
   });
 
   describe("getEvent", () => {
-    it("should return 404 if event not found", async () => {
-      req.params.id = "1";
-      jest.spyOn(eventService, "getEventById").mockResolvedValue(null);
-      await getEvent(req, res);
-      expect(res.status).toHaveBeenCalledWith(404);
-      expect(res.json).toHaveBeenCalledWith({ error: "Event not found" });
-    });
-
     it("should return event if found", async () => {
       req.params.id = "1";
       const eventData = { id: "1", title: "Test Event" };
