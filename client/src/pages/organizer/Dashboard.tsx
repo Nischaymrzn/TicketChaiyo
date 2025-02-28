@@ -7,7 +7,6 @@ import { useGetMe } from "@/hooks/useAuth"
 import { useGetOrganizerDashboardAnalytics } from "@/hooks/useAnalytics"
 
 const Dashboard = () => {
-
   const {data : user } = useGetMe()
   const organizerId = user?.userData?.id
   const {data:analytics} = useGetOrganizerDashboardAnalytics(organizerId)

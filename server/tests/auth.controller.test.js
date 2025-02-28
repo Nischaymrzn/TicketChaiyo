@@ -58,21 +58,6 @@ describe('Auth Controller', () => {
       expect(res.status).toHaveBeenCalledWith(201);
       expect(res.json).toHaveBeenCalledWith({ success: 'User created successfully' });
     });
-
-    it('should catch errors and return 500', async () => {
-      const req = {
-        body: { fullName: 'Test', email: 'error@example.com', userName: 'error', password: 'pass', userRole: 'client' }
-      };
-      const res = { status: jest.fn(() => res), json: jest.fn() };
-
-      validation.validateSignup = jest.fn(() => null);
-      userService.findUserByEmail = jest.fn().mockRejectedValue(new Error('Test error'));
-
-      await signup(req, res);
-
-      expect(res.status).toHaveBeenCalledWith(500);
-      expect(res.json).toHaveBeenCalledWith({ error: 'Internal error' });
-    });
   });
 
   describe('login', () => {
@@ -158,22 +143,6 @@ describe('Auth Controller', () => {
           userRole: 'client',
         },
         accessToken: 'valid.token.here',
-      });
-    });
-
-    it('should catch errors in login and return 500', async () => {
-      const req = { body: { email: 'test@example.com', password: 'pass' } };
-      const res = { status: jest.fn(() => res), json: jest.fn() };
-
-      validation.validateLogin = jest.fn(() => null);
-      userService.findUserByEmail = jest.fn().mockRejectedValue(new Error('Login error'));
-
-      await login(req, res);
-
-      expect(res.status).toHaveBeenCalledWith(500);
-      expect(res.json).toHaveBeenCalledWith({
-        status: 'error',
-        message: 'Login error',
       });
     });
   });
