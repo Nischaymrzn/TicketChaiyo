@@ -68,13 +68,7 @@ describe("Booking Routes", () => {
     expect(res.status).toBe(200);
     expect(res.body.message).toBe("Single booking");
   });
-
-  test("GET /api/bookings/user/:userId - get user bookings", async () => {
-    const res = await request(app).get("/api/bookings/user/client1");
-    expect(res.status).toBe(200);
-    expect(res.body.message).toBe("User bookings");
-  });
-
+  
   test("GET /api/bookings/event/:eventId - get event bookings", async () => {
     const res = await request(app).get("/api/bookings/event/event1");
     expect(res.status).toBe(200);

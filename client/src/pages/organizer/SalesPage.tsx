@@ -16,12 +16,11 @@ export const SalesPage = () => {
     <div className="text-gray-300 w-full flex flex-col">
       <div>
         <p className="text-2xl font-bold">Sales</p>
-
         <p className="text-sm md:text-base px-1">Monitor all your event sales here</p>
       </div>
 
       <div className="grid-cols-1 mb-8 grid gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-10 mt-6">
-        <CardDataStats
+          <CardDataStats
             title="Total Tickets Sold"
             total={analytics?.totalTicketsSold}
             icon={<Ticket className="h-4 w-4 text-green-500" />}

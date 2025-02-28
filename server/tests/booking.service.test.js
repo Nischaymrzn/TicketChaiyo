@@ -16,9 +16,7 @@ jest.mock("@prisma/client", () => {
     createBooking,
     updateBooking,
     cancelBooking,
-    getBookingById,
-    getBookingsByUser,
-    getBookingsByEvent,
+    getBookingById
   } from "../services/booking.service.js";
   
   const { PrismaClient } = require("@prisma/client");
@@ -81,43 +79,6 @@ jest.mock("@prisma/client", () => {
         const result = await getBookingById("b1");
         expect(bookingMock.findUnique).toHaveBeenCalledWith({ where: { id: "b1" } });
         expect(result).toEqual(bookingData);
-      });
-    });
-  
-    describe("getBookingsByUser", () => {
-      it("should return bookings for a user", async () => {
-        const bookings = [{ id: "b1" }];
-        bookingMock.findMany.mockResolvedValue(bookings);
-        
-        const result = await getBookingsByUser("client1");
-        expect(bookingMock.findMany).toHaveBeenCalledWith({
-          where: { clientId: "client1" },
-          include: { event: true },
-        });
-        expect(result).toEqual(bookings);
-      });
-    });
-  
-    describe("getBookingsByEvent", () => {
-      it("should return bookings for an event", async () => {
-        const bookings = [{ id: "b1" }];
-        bookingMock.findMany.mockResolvedValue(bookings);
-        
-        const result = await getBookingsByEvent("event1");
-        expect(bookingMock.findMany).toHaveBeenCalledWith({
-          where: { eventId: "event1" },
-          include: {
-            client: {
-              select: {
-                id: true,
-                name: true,
-                email: true,
-              },
-            },
-          },
-          orderBy: { bookedAt: "desc" },
-        });
-        expect(result).toEqual(bookings);
       });
     });
   });

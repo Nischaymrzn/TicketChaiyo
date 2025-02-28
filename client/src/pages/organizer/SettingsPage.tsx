@@ -46,7 +46,6 @@ export const SettingsPage = () => {
   }
 
   const { logout } = useLogout();
-
   const handleLogout = () =>{
     logout()
   }
@@ -56,10 +55,8 @@ export const SettingsPage = () => {
       <div className="flex justify-between">
         <div>
           <p className="text-2xl font-bold">Settings</p>
-
           <p className="text-sm md:text-base px-1">Monitor all your profile details here</p>
         </div>
-
         <div>
           <DropdownMenu>
             <DropdownMenuTrigger>              

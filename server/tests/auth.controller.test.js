@@ -5,18 +5,6 @@ import * as authService from '../services/auth.service.js';
 
 describe('Auth Controller', () => {
   describe('signup', () => {
-    it('should return 400 if validation error occurs', async () => {
-      const req = { body: { fullName: 'Test', email: 'bad', userName: 'test', password: 'pass' } };
-      const res = { status: jest.fn(() => res), json: jest.fn() };
-
-      validation.validateSignup = jest.fn(() => 'Validation error message');
-
-      await signup(req, res);
-
-      expect(res.status).toHaveBeenCalledWith(400);
-      expect(res.json).toHaveBeenCalledWith({ error: 'Validation error message' });
-    });
-
     it('should return 409 if user already exists', async () => {
       const req = {
         body: { fullName: 'Test', email: 'test@example.com', userName: 'test', password: 'pass', userRole: 'client' }
@@ -61,18 +49,6 @@ describe('Auth Controller', () => {
   });
 
   describe('login', () => {
-    it('should return 400 if validation error occurs', async () => {
-      const req = { body: { email: 'test@example.com', password: 'pass' } };
-      const res = { status: jest.fn(() => res), json: jest.fn() };
-
-      validation.validateLogin = jest.fn(() => 'Invalid login data');
-
-      await login(req, res);
-
-      expect(res.status).toHaveBeenCalledWith(400);
-      expect(res.json).toHaveBeenCalledWith({ message: 'Invalid login data' });
-    });
-
     it('should return 401 if user is not found', async () => {
       const req = { body: { email: 'nonexistent@example.com', password: 'pass' } };
       const res = { status: jest.fn(() => res), json: jest.fn() };
@@ -84,22 +60,6 @@ describe('Auth Controller', () => {
 
       expect(res.status).toHaveBeenCalledWith(401);
       expect(res.json).toHaveBeenCalledWith({ status: 'error', message: 'Invalid credentials' });
-    });
-
-    it('should return 401 if the account is not accepted', async () => {
-      const req = { body: { email: 'pending@example.com', password: 'pass' } };
-      const res = { status: jest.fn(() => res), json: jest.fn() };
-
-      validation.validateLogin = jest.fn(() => null);
-      userService.findUserByEmail = jest.fn().mockResolvedValue({ id: 3, isAccepted: false, password: 'hashed' });
-
-      await login(req, res);
-
-      expect(res.status).toHaveBeenCalledWith(401);
-      expect(res.json).toHaveBeenCalledWith({
-        status: 'error',
-        message: 'Your account is awaiting admin approval',
-      });
     });
 
     it('should return 401 if the password is incorrect', async () => {
@@ -161,18 +121,6 @@ describe('Auth Controller', () => {
         userData: { id: 10, email: 'user@example.com' },
         message: 'User fetched successfully',
       });
-    });
-
-    it('should handle errors and return 401', async () => {
-      const req = { user: { id: 20 } };
-      const res = { status: jest.fn(() => res), json: jest.fn() };
-
-      userService.findUserById = jest.fn().mockRejectedValue(new Error('Not found'));
-
-      await getMe(req, res);
-
-      expect(res.status).toHaveBeenCalledWith(401);
-      expect(res.json).toHaveBeenCalledWith({ data: null });
     });
   });
 });

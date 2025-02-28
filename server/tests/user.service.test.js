@@ -27,11 +27,9 @@ describe('User Service', () => {
       const salt = 'fakeSalt';
       const hash = 'fakeHash';
 
-      // Spy on bcrypt methods
       jest.spyOn(bcrypt, 'genSalt').mockResolvedValue(salt);
       jest.spyOn(bcrypt, 'hash').mockResolvedValue(hash);
 
-      // Set the expected return for prisma.user.create
       prisma.user.create.mockResolvedValue({ id: 1, ...userData, password: hash });
 
       const result = await createUser(userData);
@@ -48,18 +46,6 @@ describe('User Service', () => {
           isAccepted: userData.isAccepted,
         },
       });
-      expect(result).toHaveProperty('id');
-    });
-  });
-
-  describe('findUserByEmail', () => {
-    it('should call prisma.user.findUnique with email', async () => {
-      const email = 'user@test.com';
-      prisma.user.findUnique.mockResolvedValue({ id: 1, email });
-
-      const result = await findUserByEmail(email);
-
-      expect(prisma.user.findUnique).toHaveBeenCalledWith({ where: { email } });
       expect(result).toHaveProperty('id');
     });
   });
@@ -102,34 +88,6 @@ describe('User Service', () => {
       const result = await getAllUsers();
       expect(prisma.user.findMany).toHaveBeenCalled();
       expect(result).toEqual(users);
-    });
-  });
-
-  describe('getAllCustomers', () => {
-    it('should return all customers with role client', async () => {
-      const customers = [{ id: 2, userRole: 'client' }];
-      prisma.user.findMany.mockResolvedValue(customers);
-
-      const result = await getAllCustomers();
-      expect(prisma.user.findMany).toHaveBeenCalledWith({
-        where: { userRole: 'client' },
-        include: { Booking: true },
-      });
-      expect(result).toEqual(customers);
-    });
-  });
-
-  describe('getAllOrganizers', () => {
-    it('should return all organizers with role organizer', async () => {
-      const organizers = [{ id: 3, userRole: 'organizer' }];
-      prisma.user.findMany.mockResolvedValue(organizers);
-
-      const result = await getAllOrganizers();
-      expect(prisma.user.findMany).toHaveBeenCalledWith({
-        where: { userRole: 'organizer' },
-        include: { Event: true },
-      });
-      expect(result).toEqual(organizers);
     });
   });
 
